@@ -35,14 +35,20 @@ get.package <- function(package){
 }
 
 # exec
-get.package(c("png", "jpeg", "tabulizer", "pdftools", "raster", "rgdal", "sp"))
+get.package(c("png", "jpeg", "tabulizer", "pdftools", "raster", "rgdal", "sp", 
+              "cluster"))
 
-# since I will use Map() alot for plotting I will wrap it in invisible()
+# since I will use Map() / lapply() alot for plotting I will wrap them in invisible()
 invis.Map <- function(f, ...) invisible(Map(f, ...))
+invis.lapply <- function(x, f, ...) invisible(lapply(x, f, ...))
 ```
 
+## Import KIDs
 
-```{r, fig.height = 7, fig.width = 5}
+```{r}
+# set 
+setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
+
 # all PDF files in the current directory
 file_names <- list.files(pattern = ".pdf")
 
@@ -58,47 +64,161 @@ lapply(file_names, function(x){
 lapply(file_names, function(x){
 
   # convert first page of pdf to bitmap
-  pdftools::pdf_render_page(x, page = 1, dpi = 100)
+  pdftools::pdf_render_page(x, page = 1, dpi = 50)
 
 }) -> bitmap.list
-
-# test by writing to png
-png::writePNG(bitmap.list[[1]], "test.png")
 
 # to JPG
 jpeg::writeJPEG(bitmap.list[[1]], "test.jpeg")
 
-# further analyze bitmap to obtain shading, unsure whether to use bitmap or png / jpeg
+# JPEG
 imt <- jpeg::readJPEG("test.jpeg")
+```
 
+## Extract SSRI
+
+```{r, fig.height = 7, fig.width = 5}
 # convert by alpha value in this case 255
 imt <- imt * 255
 
 # coordinates
-tmp <- which(imt[,, 1] == 166 & imt[,, 2] == 166 & imt[,, 3] == 166, arr.ind = T)
+    # coo <- which((0 < imt[,, 1]  & imt[,, 1] < 10) & 
+    #              (75 < imt[,, 2] & imt[,, 2] < 85) & 
+    #              (130 < imt[,, 3] & imt[,, 3] < 150), arr.ind = T)
+
+coo <- which(imt[,,1] == 166 & imt[,,2] == 166 & imt[,,3] == 166, arr.ind = T)
 
 # Pixel / Coordinateplot
 {
-plot(tmp[,2], tmp[, 1], main = "Pixels: r = 166, g = 166, b = 166", pch = 19, cex = 0.3)
-abline(v = median(tmp[, 1]), col = "red")
-abline(v = mean(tmp[, 1]), col = "green")
+plot(coo[,2], coo[, 1], main = "Pixels: r = 166, g = 166, b = 166", pch = 19, cex = 0.3)
+abline(v = median(coo[, 1]), col = "red")
+abline(v = mean(coo[, 1]), col = "green")
 }
+
+
 ```
 
-```{r}
-# # Plug it into a stack object
-    # duck <- readJPEG("duck.jpg")
-    # duck.raster <- stack(duck)
-    # 
-    # names(duck.raster) <- c('r','g','b')
-    # #Look at it 
-    # plotRGB(duck.raster)
-    # 
-    # duck.yellow<-duck.raster
-    # 
-    # duck.yellow$Yellow_spots<-0
-    # duck.yellow$Yellow_spots[duck.yellow$r<250&duck.yellow$g<250&duck.yellow$b>5]<-1
-    # plot(duck.yellow$Yellow_spots)
+### Classify utilizing k-means.
+
+```{r, fig.height = 10, fig.width = 8}
+# Classify with different amount of groups then check for sil coef
+
+# amt of groups
+p <- 2:5
+
+# estimate
+lapply(p, function(x){
+  
+  # merge cluster into df
+  dat <- cbind(coo, kmeans(coo, x)$cluster)
+  
+  # silhouette 
+  tmp1 <- cluster::silhouette(dat[, ncol(dat)], dist(coo))
+  
+  # return SC and Data
+  list(
+  "SC" = max(tapply(tmp1[, "sil_width"], tmp1[, "cluster"], mean)),
+  "dat" = dat)
+  
+}) -> dat.kmeans
+
+# sil coef
+sapply(dat.kmeans, "[[", 1)
+
+# data.frames with the classification of different amt. of groups
+# arrange
+par(mfrow = c(2, 2))
+
+# plot
+invis.Map(function(x, y){
+  
+  plot(y[, 2], y[, 1], col = y[, ncol(y)], pch = 19, main = paste("P =", x))
+  
+}, p, lapply(dat.kmeans, "[[", 2))
 ```
+
+
+### Classify utilizing hierarchical clustering
+
+```{r, fig.height = 30, fig.width = 8}
+# methods
+meth <- c("single", "average", "complete")
+
+# ramp up p
+p <- 2:5
+
+# estimate
+# over methods
+lapply(meth, function(x){
+  
+  # over p
+  lapply(p, function(y){
+    
+    # get grouping
+    tmp1 <- agnes(coo, method = x, diss = F)
+    
+    # restrict amnt of groups
+    tmp2 <- cutree(tmp1, k = y)
+    
+    # bind
+    tmp3 <- cbind(coo, tmp2)
+    
+    # calculate coefficients
+    tmp4 <- silhouette(tmp3[, ncol(tmp3)], dist(tmp3[, 2:3]))
+    
+    # SC
+    SC <- max(tapply(tmp4[, "sil_width"], tmp4[, "cluster"], mean))
+    
+    # return
+    list("Data" = tmp3,
+    "SC" = SC,
+    "tmp.plot.silhouette" = tmp4)
+    
+  }) |> setNames(nm = paste("P =", p))
+  
+}) |> setNames(nm = meth) -> Group.list
+
+# SC
+lapply(Group.list, \(x){
+  sapply(x, "[[", "SC")
+})
+
+# plot
+# arrange
+par(mfrow = c(14, 3))
+
+# plot
+# over methods
+invis.lapply(meth, \(x){
+  
+  # over p
+  invis.lapply(paste("P =", p), \(y){
+    
+    # Data
+    tmp.plot <- Group.list[[x]][[y]][["Data"]]
+    
+    # plot
+    plot(tmp.plot[, 2], tmp.plot[, 1], col = tmp.plot[, ncol(tmp.plot)], pch = 19,
+    main = paste("Method:", x, ",", y))
+    
+  })
+})
+
+invis.lapply(paste("P =", p), \(x){
+  
+  # over p
+  invis.lapply(meth, \(y){
+    
+    # Data
+    tmp.plot <- Group.list[[y]][[x]][["Data"]]
+    
+    # plot
+    plot(tmp.plot[, 2], tmp.plot[, 1], col = tmp.plot[, ncol(tmp.plot)], pch = 19,
+    main = paste("Method:", y, ",", x))
+    
+  })
+})
+```
+
 
 
