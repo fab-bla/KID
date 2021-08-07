@@ -1,0 +1,104 @@
+---
+title: |
+    | KID
+    | Shade Extraction
+      
+author: "Fabian Blasch"
+date: "`r format(Sys.Date(), format = '%d.%m.%Y')`"
+output: pdf_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      # cache = TRUE ,
+                      fig.width = 4,
+                      fig.height = 3, 
+                      fig.align = "center")
+```
+
+## Packages
+
+```{r, results = "hide"}
+# Packages
+get.package <- function(package){
+  
+  lapply(package, \(x){
+    # check if packages are installed and if not install them
+    if(!require(x, character.only = T)){
+       install.packages(x)
+    }
+    # call package
+    library(x, character.only = T)
+  })
+    
+}
+
+# exec
+get.package(c("png", "jpeg", "tabulizer", "pdftools", "raster", "rgdal", "sp"))
+
+# since I will use Map() alot for plotting I will wrap it in invisible()
+invis.Map <- function(f, ...) invisible(Map(f, ...))
+```
+
+
+```{r, fig.height = 7, fig.width = 5}
+# all PDF files in the current directory
+file_names <- list.files(pattern = ".pdf")
+
+# extract text split by linebreak
+lapply(file_names, function(x){
+
+  # split by line break and extract text   
+  strsplit(pdftools::pdf_text(x), "\n") 
+
+}) -> pdf.text.list
+
+# import PDF and convert to Png
+lapply(file_names, function(x){
+
+  # convert first page of pdf to bitmap
+  pdftools::pdf_render_page(x, page = 1, dpi = 100)
+
+}) -> bitmap.list
+
+# test by writing to png
+png::writePNG(bitmap.list[[1]], "test.png")
+
+# to JPG
+jpeg::writeJPEG(bitmap.list[[1]], "test.jpeg")
+
+# further analyze bitmap to obtain shading, unsure whether to use bitmap or png / jpeg
+imt <- jpeg::readJPEG("test.jpeg")
+
+# convert by alpha value in this case 255
+imt <- imt * 255
+
+# coordinates
+tmp <- which(imt[,, 1] == 166 & imt[,, 2] == 166 & imt[,, 3] == 166, arr.ind = T)
+
+# Pixel / Coordinateplot
+{
+plot(tmp[,2], tmp[, 1], main = "Pixels: r = 166, g = 166, b = 166", pch = 19, cex = 0.3)
+abline(v = median(tmp[, 1]), col = "red")
+abline(v = mean(tmp[, 1]), col = "green")
+}
+```
+
+```{r}
+# # Plug it into a stack object
+    # duck <- readJPEG("duck.jpg")
+    # duck.raster <- stack(duck)
+    # 
+    # names(duck.raster) <- c('r','g','b')
+    # #Look at it 
+    # plotRGB(duck.raster)
+    # 
+    # duck.yellow<-duck.raster
+    # 
+    # duck.yellow$Yellow_spots<-0
+    # duck.yellow$Yellow_spots[duck.yellow$r<250&duck.yellow$g<250&duck.yellow$b>5]<-1
+    # plot(duck.yellow$Yellow_spots)
+```
+
+
