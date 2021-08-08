@@ -69,7 +69,7 @@ lapply(file_names, function(x){
 }) -> bitmap.list
 
 # to JPG
-jpeg::writeJPEG(bitmap.list[[1]], "test.jpeg")
+ jpeg::writeJPEG(bitmap.list[[1]], "test1.jpeg")
 
 # JPEG
 imt <- jpeg::readJPEG("test.jpeg")
@@ -87,15 +87,31 @@ bitmp1 <- bitmap.list[[1]]
 # bitmp1[,587, 690]
 
 # coordinates
-coo <- which(bitmp1[1,,] == "a6" & bitmp1[2,,] == "a6" & bitmp1[3,,] == "a6" & 
+coo1 <- which(bitmp1[1,,] == "a6" & bitmp1[2,,] == "a6" & bitmp1[3,,] == "a6" & 
              bitmp1[4,,] == "ff", arr.ind = T)
 
 # plot
 {
-plot(coo[,1], coo[, 2], main = "Pixels: a6a6a6ff", pch = 19, cex = 0.3)
-abline(v = median(coo[, 1]), col = "red")
-abline(v = mean(coo[, 1]), col = "green")
+plot(coo1[,1], coo1[, 2], main = "Pixels: a6a6a6ff", pch = 19, cex = 0.3)
+abline(v = median(coo1[, 1]), col = "red")
+abline(v = mean(coo1[, 1]), col = "green")
 }
+
+# find page margin for now use same color later should be switched to black
+# left side margin
+lsm <- min(coo1[, 1])
+rsm <- max(coo1[, 1])
+
+# scale
+int_leng <- (rsm - lsm) / 7
+
+# midpoints
+scale <- setNames(cumsum(c(lsm + int_leng / 2, rep(int_leng, 6))), 1:7)
+
+# only using the median to predict SSRI
+which.min(abs(median(coo1[, 1]) - scale))
+
+# in this case we correctly predict the SSRI, without further classification!
 ```
 
 ### JPEG
@@ -121,7 +137,7 @@ abline(v = mean(coo[, 1]), col = "green")
 
 ### Classify utilizing k-means.
 
-```{r, fig.height = 10, fig.width = 8}
+```{r, fig.height = 10, fig.width = 7}
 # Classify with different amount of groups then check for sil coef
 
 # amt of groups
@@ -131,10 +147,10 @@ p <- 2:5
 lapply(p, function(x){
   
   # merge cluster into df
-  dat <- cbind(coo, kmeans(coo, x)$cluster)
+  dat <- cbind(coo1, kmeans(coo1, x)$cluster) # try specifying centers as closest to median most top left most bottom left
   
   # silhouette 
-  tmp1 <- cluster::silhouette(dat[, ncol(dat)], dist(coo))
+  tmp1 <- cluster::silhouette(dat[, ncol(dat)], dist(coo1))
   
   # return SC and Data
   list(
@@ -153,7 +169,7 @@ par(mfrow = c(2, 2))
 # plot
 invis.Map(function(x, y){
   
-  plot(y[, 2], y[, 1], col = y[, ncol(y)], pch = 19, main = paste("P =", x))
+  plot(y[, 1], y[, 2], col = y[, ncol(y)], pch = 19, main = paste("P =", x))
   
 }, p, lapply(dat.kmeans, "[[", 2))
 ```
@@ -161,7 +177,7 @@ invis.Map(function(x, y){
 
 ### Classify utilizing hierarchical clustering
 
-```{r, fig.height = 30, fig.width = 8}
+```{r, fig.height = 10, fig.width = 7}
 # methods
 meth <- c("single", "average", "complete")
 
@@ -176,13 +192,13 @@ lapply(meth, function(x){
   lapply(p, function(y){
     
     # get grouping
-    tmp1 <- agnes(coo, method = x, diss = F)
+    tmp1 <- agnes(coo1, method = x, diss = F)
     
     # restrict amnt of groups
     tmp2 <- cutree(tmp1, k = y)
     
     # bind
-    tmp3 <- cbind(coo, tmp2)
+    tmp3 <- cbind(coo1, tmp2)
     
     # calculate coefficients
     tmp4 <- silhouette(tmp3[, ncol(tmp3)], dist(tmp3[, 2:3]))
@@ -206,24 +222,7 @@ lapply(Group.list, \(x){
 
 # plot
 # arrange
-par(mfrow = c(14, 3))
-
-# plot
-# over methods
-invis.lapply(meth, \(x){
-  
-  # over p
-  invis.lapply(paste("P =", p), \(y){
-    
-    # Data
-    tmp.plot <- Group.list[[x]][[y]][["Data"]]
-    
-    # plot
-    plot(tmp.plot[, 2], tmp.plot[, 1], col = tmp.plot[, ncol(tmp.plot)], pch = 19,
-    main = paste("Method:", x, ",", y))
-    
-  })
-})
+par(mfrow = c(4, 3))
 
 invis.lapply(paste("P =", p), \(x){
   
@@ -234,7 +233,7 @@ invis.lapply(paste("P =", p), \(x){
     tmp.plot <- Group.list[[y]][[x]][["Data"]]
     
     # plot
-    plot(tmp.plot[, 2], tmp.plot[, 1], col = tmp.plot[, ncol(tmp.plot)], pch = 19,
+    plot(tmp.plot[, 1], tmp.plot[, 2], col = tmp.plot[, ncol(tmp.plot)], pch = 19,
     main = paste("Method:", y, ",", x))
     
   })
