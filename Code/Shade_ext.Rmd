@@ -77,6 +77,29 @@ imt <- jpeg::readJPEG("test.jpeg")
 
 ## Extract SSRI
 
+### Bitmap
+
+```{r, fig.height = 7, fig.width = 5}
+# bitmap of first fund
+bitmp1 <- bitmap.list[[1]]
+
+# col 
+# bitmp1[,587, 690]
+
+# coordinates
+coo <- which(bitmp1[1,,] == "a6" & bitmp1[2,,] == "a6" & bitmp1[3,,] == "a6" & 
+             bitmp1[4,,] == "ff", arr.ind = T)
+
+# plot
+{
+plot(coo[,1], coo[, 2], main = "Pixels: a6a6a6ff", pch = 19, cex = 0.3)
+abline(v = median(coo[, 1]), col = "red")
+abline(v = mean(coo[, 1]), col = "green")
+}
+```
+
+### JPEG
+
 ```{r, fig.height = 7, fig.width = 5}
 # convert by alpha value in this case 255
 imt <- imt * 255
@@ -94,8 +117,6 @@ plot(coo[,2], coo[, 1], main = "Pixels: r = 166, g = 166, b = 166", pch = 19, ce
 abline(v = median(coo[, 1]), col = "red")
 abline(v = mean(coo[, 1]), col = "green")
 }
-
-
 ```
 
 ### Classify utilizing k-means.
