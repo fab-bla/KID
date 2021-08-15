@@ -20,6 +20,10 @@ knitr::opts_chunk$set(echo = TRUE,
 ## Packages
 
 ```{r, results = "hide"}
+
+# git install opencv 
+# devtools::install_github("ropenscilabs/opencv", force = T)
+
 # Packages
 get.package <- function(package){
   
@@ -37,6 +41,9 @@ get.package <- function(package){
 # exec
 get.package(c("png", "jpeg", "tabulizer", "pdftools", "raster", "rgdal", "sp", 
               "cluster"))
+
+
+
 
 # since I will use Map() / lapply() alot for plotting I will wrap them in invisible()
 invis.Map <- function(f, ...) invisible(Map(f, ...))
@@ -60,16 +67,45 @@ lapply(file_names, function(x){
 
 }) -> pdf.text.list
 
+# identofy line that contains "Risiko- und Ertragsprofil"
+lapply(pdf.text.list, function(x){
+  
+  # obtain relative line on page
+  sapply(x, function(y){
+    # id
+    tmp1 <- grep("Risiko- und Ertragsprofil", y) / length(y) 
+    
+    # return
+    if(length(tmp1) == 0){
+      return(NA)
+    } else {
+      return(tmp1)
+    }
+  }) 
+  
+}) -> pos.list
+
+# find page that contains desired text
+sapply(pos.list, function(x) which(!is.na(x))) -> page.oi
+
 # import PDF and convert to Png
-lapply(file_names, function(x){
+Map(function(x, y, z){
 
   # convert first page of pdf to bitmap
-  pdftools::pdf_render_page(x, page = 1, dpi = 50)
+  tmp1 <- pdftools::pdf_render_page(x, page = y, dpi = 50)
 
-}) -> bitmap.list
+  # subset array
+  tmp2 <- round(dim(tmp1)[3] * z)
+
+  # return
+  tmp1[ , , -c(tmp2:1)]
+
+}, file_names, page.oi, sapply(pos.list, "[", 1)) -> bitmap.list
+
+# import PDF and convert to Png
 
 # to JPG
- jpeg::writeJPEG(bitmap.list[[1]], "test1.jpeg")
+jpeg::writeJPEG(bitmap.list[[1]], "test1.jpeg")
 
 # JPEG
 imt <- jpeg::readJPEG("test.jpeg")
@@ -113,6 +149,23 @@ which.min(abs(median(coo1[, 1]) - scale))
 
 # in this case we correctly predict the SSRI, without further classification!
 ```
+```{r}
+# check if page is flipped upside down 
+
+# coordinates
+coob <- which(bitmp1[1,,] == "00" & bitmp1[2,,] == "00" & bitmp1[3,,] == "00", 
+              arr.ind = T)
+
+# plot
+{
+plot(coob[,1], coob[, 2], main = "Pixels: #005290", pch = 19, cex = 0.3)
+abline(v = median(coob[, 1]), col = "red")
+abline(v = mean(coob[, 1]), col = "green")
+}
+
+# We realize the page is upside down in the bitmap but not mirrored!
+```
+
 
 ### JPEG
 
@@ -238,6 +291,36 @@ invis.lapply(paste("P =", p), \(x){
     
   })
 })
+```
+## Identifying the cluster and estimating SSRI
+
+```{r}
+# identify cluster by summed up variance over 
+dat.p5.ave <- as.data.frame(Group.list[["average"]][["P = 5"]][["Data"]])
+
+# aggregate 
+which.min(rowSums(aggregate(dat.p5.ave[, 1:2], by = dat.p5.ave[, 3, drop = F], 
+                            var))) -> rect.grp
+
+med.rect.grp <- median(dat.p5.ave[, 1][which(dat.p5.ave[, 3] == rect.grp)])
+
+# calculate median 
+{
+  plot(dat.p5.ave[, 1], dat.p5.ave[, 2], col = dat.p5.ave[, 3], pch = 19)
+  abline(v = med.rect.grp,col = "red")
+}
+
+# classify 
+dif <- abs(med.rect.grp - scale)
+
+# amt pixels off
+dif
+
+# which grp
+which.min(dif)
+
+
+
 ```
 
 
