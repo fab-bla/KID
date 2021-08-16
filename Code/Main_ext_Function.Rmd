@@ -1,0 +1,51 @@
+---
+title: |
+    | KID
+    | Function
+      
+author: "Fabian Blasch"
+date: "`r format(Sys.Date(), format = '%d.%m.%Y')`"
+output: pdf_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      # cache = TRUE ,
+                      fig.width = 4,
+                      fig.height = 3, 
+                      fig.align = "center")
+```
+
+## Packages
+
+```{r, results = "hide"}
+
+# git install opencv 
+# devtools::install_github("ropenscilabs/opencv", force = T)
+
+# Packages
+get.package <- function(package){
+  
+  lapply(package, \(x){
+    # check if packages are installed and if not install them
+    if(!require(x, character.only = T)){
+       install.packages(x)
+    }
+    # call package
+    library(x, character.only = T)
+  })
+    
+}
+
+# exec
+get.package(c("png", "jpeg", "tabulizer", "pdftools", "raster", "rgdal", "sp", 
+              "cluster"))
+
+
+
+
+# since I will use Map() / lapply() alot for plotting I will wrap them in invisible()
+invis.Map <- function(f, ...) invisible(Map(f, ...))
+invis.lapply <- function(x, f, ...) invisible(lapply(x, f, ...))
+```
