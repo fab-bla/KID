@@ -49,3 +49,59 @@ get.package(c("png", "jpeg", "tabulizer", "pdftools", "raster", "rgdal", "sp",
 invis.Map <- function(f, ...) invisible(Map(f, ...))
 invis.lapply <- function(x, f, ...) invisible(lapply(x, f, ...))
 ```
+
+## Actual SSRI 
+
+We can obtain the actual SSRI from the file name. Later this data can then be used to evaluate 
+the classification accuracy of our methods.
+
+```{r, fig.height = 5, fig.width = 7}
+# set
+setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
+
+# files
+file_names <- list.files(pattern = ".pdf", recursive = T)
+
+# create df
+dat.valid.SSRI <- cbind("KID" = file_names,
+                        "SSRI" = sapply(strsplit(sapply(strsplit(file_names, "_", fixed = T), 
+                                        function(x) x[length(x)]), ".", fixed = T), "[", 1))
+
+# glimpse
+head(dat.valid.SSRI, 7)
+
+# dim
+dim(dat.valid.SSRI)
+
+# Hist
+hist(as.numeric(dat.valid.SSRI[, 2]), breaks = 10, main = "SSRI", col = 4, xlab = "")
+```
+## Shade Color
+
+To extract the SSRI the following colors are required and need to be converted to
+hex.
+
+```{r}
+# set
+setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs/Auxiliary")
+
+# import
+dat.col.KAG <- read.table(list.files(pattern = "RGB"), 
+                          col.names = c("KAG", "R", "G", "B"))
+
+# add hex
+sapply(as.data.frame(t(dat.col.KAG[, -1])), 
+       function(x) do.call( rgb, as.list(c(x, maxColorValue = 255)))) -> HEX
+
+# bind
+dat.col.KAG <- cbind(dat.col.KAG, "HEX" = HEX)
+
+# display
+dat.col.KAG
+```
+
+
+
+
+
+
