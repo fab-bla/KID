@@ -59,9 +59,16 @@ setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
 file_names <- list.files(pattern = ".pdf", recursive = T)
 
 # create df
-dat.valid.SSRI <- cbind("KID" = file_names,
+dat.valid.SSRI <- as.data.frame(cbind("KID" = file_names,
                         "SSRI" = sapply(strsplit(sapply(strsplit(file_names, "_", fixed = T), 
-                                        function(x) x[length(x)]), ".", fixed = T), "[", 1))
+                                        function(x) x[length(x)]), ".", fixed = T), "[", 1)))
+
+# split first col 
+dat.valid.SSRI[, "KAG"] <- sapply(strsplit(dat.valid.SSRI[, 1], "/"), "[", 1)
+dat.valid.SSRI[, "KID"] <- sapply(strsplit(dat.valid.SSRI[, 1], "/"), "[", 2)
+
+# order
+dat.valid.SSRI <- dat.valid.SSRI[, c(3, 1, 2)]
 
 # glimpse
 head(dat.valid.SSRI, 7)
@@ -70,7 +77,7 @@ head(dat.valid.SSRI, 7)
 dim(dat.valid.SSRI)
 
 # Hist
-hist(as.numeric(dat.valid.SSRI[, 2]), breaks = 10, main = "SSRI", col = 4, xlab = "")
+hist(as.numeric(dat.valid.SSRI[, "SSRI"]), breaks = 10, main = "SSRI", col = 4, xlab = "")
 ```
 ## Shade Color
 
@@ -124,7 +131,7 @@ SSRI.ext <- function(doc, col){
   }) -> pos.vec
   
   # ERROR if both pages yield a value different to NA
-  if(sum(is.na(pos.vec)) > 1) stop("Error: Could not uniquely idenfify position of SSRI.")
+  if(sum(is.na(pos.vec)) > 1) stop("Error: Could not uniquely identify position of SSRI.")
   
   ##  BITMAP  ##
   
@@ -213,6 +220,37 @@ SSRI.ext(doc = "C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs/Erste/kid-eb-1
 
 One Pixel of the predicted scale, it does not get much better than that. Lets hope this works
 close to as well for all the other documents.
+
+## Further Tests
+
+```{r}
+# set wd to file that contains 
+setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
+
+# safe dirs 
+dirs <- list.dirs()[-c(1, 4)] # remove hardcode later
+
+# colors 
+col <- dat.col.KAG[order(dat.col.KAG[, "KAG"]), c("KAG", "HEX")]
+
+# for loop as one cannot change dir only in global env
+for(i in seq_along(dirs)){
+
+  # set
+  {setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
+  setwd(dirs[i])}
+
+  # ,pdfs
+  file_nom <- list.files(pattern = ".pdf")
+
+  # FUN over all .pdfs
+  lapply(file_nom, function(z){
+    SSRI.ext(doc = z, col = col[i, 2])
+  })
+
+}
+```
+
 
 
 
