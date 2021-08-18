@@ -1,6 +1,6 @@
 ### Scraping the Synthetic Risk and Reward Indicator (SRRI) from Key Information Documents (KIDs)
 
-In each document a scale ranging from 1 to 7 is (usually) located on the first page. .
+In each document a scale ranging from 1 to 7 is (usually) located on the first page. 
 
 The Repository contains:
 
