@@ -195,8 +195,13 @@ SRRI.ext <- function(doc, col){
   ## IDENTIFY CLUSTER ##
   
   # identify cluster with minimum sum of variance
-  which.min(rowSums(aggregate(dat.grps[, 1:2], by = dat.grps[, 3, drop = F], 
-                            var))) -> rect.grp
+          # which.min(rowSums(aggregate(dat.grps[, 1:2], by = dat.grps[, 3, drop = F], 
+          #                           var))) -> rect.grp
+  
+  # horizontal variance scaled (alt decision rule)
+  which.min(tapply(dat.grps[, 1], dat.grps[, 3], 
+                   function(x) var(x) / length(x))) -> rect.grp
+
   # median
   med.rect.grp <- median(dat.grps[, 1][which(dat.grps[, 3] == rect.grp)])
   
@@ -241,7 +246,7 @@ Map(function(x, y){
   
   # set
   {setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
-   setwd(dirs)
+   setwd(x)
 
   # ,pdfs
   file_nom <- list.files(pattern = ".pdf")}
@@ -262,13 +267,13 @@ cbind(dat.valid.SRRI[dat.valid.SRRI[, "KAG"] == "Erste", ],
 par(mfrow = c(3, 4))
 
 # plot
-invis.Map(function(x, y, z, k){
+invis.Map(function(x, y, z, l, k){
   
-  {plot(x[, 1], x[, 2], col = x[, ncol(x)], pch = 19, main = paste("Predicted:", z))
+  {plot(x[, 1], x[, 2], col = x[, ncol(x)], pch = 19, main = paste("Predicted:", z, "| Actual:", l))
   abline(v = y, col = "red", lty = 2, lwd = 2)
   lapply(k, function(x) abline(v = x, col = 4, lwd = 2))}
   
-}, lapply(erste.test[[1]], "[[", 3), sapply(erste.test[[1]], "[[", 4), res[, 4],
+}, lapply(erste.test[[1]], "[[", 3), sapply(erste.test[[1]], "[[", 4), res[, 4], res[, 3],
    lapply(erste.test[[1]], "[[", 5))
 ```
 
