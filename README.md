@@ -1,4 +1,4 @@
-### Scraping the Synthetic Risk and Reward Indicator (SRRI) from Key Information Documents (KID)
+### Scraping the Synthetic Risk and Reward Indicator (SRRI) from Key Information Documents (KIDs)
 
 In each document there is a scale ranging from 1 to 7 usually located on the first page. The number that is shaded in different color is to be extracted from the document.
 
