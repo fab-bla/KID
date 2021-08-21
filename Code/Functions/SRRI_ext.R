@@ -1,7 +1,9 @@
 # doc ... path to file 
 # col ... HEX code of color shade
+# off ... vertical offset when cutting the bitmap right under the predicted 
+#         position of the SRRI graph
 
-SRRI_ext <- function(doc, col){
+SRRI_ext <- function(doc, col, off = 0.05){
   
   ## FIND PAGE ##
   
@@ -36,7 +38,7 @@ SRRI_ext <- function(doc, col){
   bit.map <- pdftools::pdf_render_page(doc, page = page.SRRI, dpi = 50)
   
   # subset array
-  ind.page.len <- round(dim(bit.map)[3] * (pos.vec[page.SRRI] - 0.1))
+  ind.page.len <- round(dim(bit.map)[3] * (pos.vec[page.SRRI] - off))
   
   # return
   bit.map.sub <- bit.map[ , , -c(ind.page.len:1)]
