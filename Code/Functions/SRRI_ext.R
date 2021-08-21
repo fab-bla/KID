@@ -21,8 +21,11 @@ SRRI_ext <- function(doc, col){
     }
   }) -> pos.vec
   
-  # ERROR if both pages yield a value different to NA
-  if(sum(is.na(pos.vec)) > 1) stop("Error: Could not uniquely identify position of SRRI.")
+  # ERROR if both pages yield a value different to NA 
+  if(sum(!is.na(pos.vec)) > 1) stop("Error: Could not uniquely identify position of SRRI.")
+  
+  # ERROR if header was not detected
+  if(sum(!is.na(pos.vec)) == 0) stop("Error: Could not detect SRRI.")
   
   ##  BITMAP  ##
   
@@ -42,7 +45,7 @@ SRRI_ext <- function(doc, col){
   
   # split HEX
   col.split <- unlist(strsplit(gsub("(.{2})", "\\1 ", 
-                                    unlist(strsplit(dat.col.KAG[4, 5], "#"))[[2]]), " "))
+                                    unlist(strsplit(col, "#"))[[2]]), " "))
   
   # convert to lower case
   col.split <- tolower(col.split) 
