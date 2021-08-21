@@ -75,9 +75,9 @@ SRRI_ext <- function(doc, col, off = 0.05){
   # midpoints
   scale <- setNames(cumsum(c(lsm + int_leng / 2, rep(int_leng, 6))), 1:7)
   
-  ## CLASSIFICATIOn ##
+  ## CLASSIFICATIONs ##
   
-  # p = 5, method = "average"
+  # hierarchical clustering: k = 5, method = "average"
   
   # get grouping
   grps <- agnes(coo, method = "average", diss = F)

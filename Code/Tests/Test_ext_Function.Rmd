@@ -82,7 +82,7 @@ hist(as.numeric(dat.valid.SRRI[, "SRRI"]), breaks = 10, main = "SRRI", col = 4, 
 ## Shade Color
 
 To extract the SRRI the following colors are required and need to be converted to
-hex.
+HEX.
 
 ```{r}
 # set
@@ -94,7 +94,7 @@ dat.col.KAG <- read.table(list.files(pattern = "RGB"),
 
 # add hex
 sapply(as.data.frame(t(dat.col.KAG[, -1])), 
-       function(x) do.call( rgb, as.list(c(x, maxColorValue = 255)))) -> HEX
+       function(x) do.call(rgb, as.list(c(x, maxColorValue = 255)))) -> HEX
 
 # bind
 dat.col.KAG <- cbind(dat.col.KAG, "HEX" = HEX)
@@ -157,8 +157,8 @@ par(mfrow = c(3, 4))
 invis.Map(function(x, y, z, l, k){
   
   {plot(x[, 1], x[, 2], col = x[, ncol(x)], pch = 19, main = paste("Predicted:", z, "| Actual:", l))
-  abline(v = y, col = "red", lty = 2, lwd = 2)
-  lapply(k, function(x) abline(v = x, col = 4, lwd = 2))}
+  abline(v = y, col = "red", lwd = 2)
+  lapply(k, function(x) abline(v = x, col = "grey", lwd = 2, lty = 2))}
   
 }, lapply(erste.test[[1]], "[[", 3), sapply(erste.test[[1]], "[[", 4), res[, 4], res[, 3],
    lapply(erste.test[[1]], "[[", 5))
@@ -166,7 +166,11 @@ invis.Map(function(x, y, z, l, k){
 
 In the case of Erste the SRRI extraction works perfectly. Now the remaining KAGs will be examined.
 
-```{r}
+```{r, message = FALSE, error = FALSE, warning = FALSE}
+# store Errors 
+utils::capture.output(
+
+# Map over dirs 
 Map(function(x, y){
   
   # set
@@ -176,39 +180,118 @@ Map(function(x, y){
   # ,pdfs
   file_nom <- list.files(pattern = ".pdf")}
   
-   # FUN over all .pdfs
+   # lapply over all .pdfs
   lapply(file_nom, function(z){
-    # 
-    tryCatch(SRRI_ext(doc = z, col = y), error = function(e){})
+    
+    # extract and error handle
+    try(SRRI_ext(doc = z, col = y), silent = F)
     
   })
-
   
 }, dirs, col[, 2]) -> test
 
-# Plot
-          # Map(function(x, y){
-          #   
-          #   # match
-          #   cbind(dat.valid.SRRI[dat.valid.SRRI[, "KAG"] == x, ], 
-          #         "Extracted" = tryCatch({sapply(test, "[[", 2)}, function(e){}))
-          #   
-          #   
-          # }, col[, 1], test)
-          # 
-          # 
-          # par(mfrow = c(3, 4))
-          # 
-          # # plot
-          # invis.Map(function(x, y, z, l, k){
-          #   
-          #   {plot(x[, 1], x[, 2], col = x[, ncol(x)], pch = 19, main = paste("Predicted:", z, "| Actual:", l))
-          #   abline(v = y, col = "red", lty = 2, lwd = 2)
-          #   lapply(k, function(x) abline(v = x, col = 4, lwd = 2))}
-          #   
-          # }, lapply(erste.test[[1]], "[[", 3), sapply(erste.test[[1]], "[[", 4), res[, 4], res[, 3],
-          #    lapply(erste.test[[1]], "[[", 5))
+, type = "message")
+
+# error index
+lapply(test, function(x){
+  
+  # error ind
+  which(sapply(x, class) == "try-error")
+  
+}) -> err.tmp
+
+# retrieve error throwing funds with ind
+do.call(rbind, Map(function(x, y, z){
+  
+  if(length(y) > 0){
+    
+    {setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
+     setwd(z)
+
+    # .pdfs
+    file_nom <- list.files(pattern = ".pdf")}
+    
+    # subset
+    cbind(rep(z, length(y)),
+          file_nom[y], 
+          sapply(x[y], "[", 1))
+    
+  } else {
+   cbind(NA, NA, "No errros.")
+  }
+
+}, test, err.tmp, dirs)) -> dat.err
 ```
+
+Now that we have identified all KIDs for which the extraction failed, we can proceed to see if the classification was correct for the remaining kids. 
+
+```{r, , fig.width = 15, fig.height = 17}
+# Plot
+Map(function(x, y){
+
+  sapply(y, function(x){
+    # cond
+    if(class(x) == "try-error"){
+      return(NA)
+    } else {
+      x[[2]]
+    }
+  }) -> tmp
+  
+  # match
+  cbind(dat.valid.SRRI[dat.valid.SRRI[, "KAG"] == x, ],
+        "Extracted" = tmp)
+
+
+}, col[, 1], test) -> tef
+
+
+
+par(mfrow = c(3, 4))
+
+# plot
+
+# over KAGs
+invis.Map(function(m, n){
+  
+  # arrange
+  par(mfrow = c(ceiling(length(m) / 4), 4))
+  
+  # over KIDs
+  invis.Map(function(x, y, z){
+  
+    if(class(x) == "try-error"){
+      
+      # plot empty for KIDs that remain unclassified for now 
+      plot(NULL, xlim = c(0, 1), ylim = c(0, 1), main = "Error")
+      
+    } else {
+      browser()
+      # build tmp vars for plotting 
+      plot.coo <- lapply(x, "[[", 3)
+      med <- sapply(x, "[[", 4)
+      scal <- lapply(x, "[[", 5)
+      pred <- y[, 4][z]
+      act <- y[, 3][z]
+    
+      # plot
+      plot(plot.coo[, 1], plot.coo[, 2], col = plot.coo[, ncol(plot.coo)], pch = 19, 
+           main = paste("Predicted:", pred, "| Actual:", act))
+      
+      # median
+      abline(v = med, col = "red", lty = 1, lwd = 2)
+      
+      # Scale
+      lapply(scal, function(s) abline(v = s, col = "grey", lwd = 2, lty = 2))
+      }
+  
+    },m ,n, 1:length(m))
+  
+}, test, tef)
+
+
+```
+
 
 
 
