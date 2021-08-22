@@ -170,25 +170,25 @@ In the case of Erste the SRRI extraction works perfectly. Now the remaining KAGs
 # store Errors 
 utils::capture.output(
 
-# Map over dirs 
-Map(function(x, y){
-  
-  # set
-  {setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
-   setwd(x)
-
-  # ,pdfs
-  file_nom <- list.files(pattern = ".pdf")}
-  
-   # lapply over all .pdfs
-  lapply(file_nom, function(z){
+  # Map over dirs 
+  Map(function(x, y){
     
-    # extract and error handle
-    try(SRRI_ext(doc = z, col = y), silent = F)
-    
-  })
+    # set
+    {setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
+     setwd(x)
   
-}, dirs, col[, 2]) -> test
+    # ,pdfs
+    file_nom <- list.files(pattern = ".pdf")}
+    
+     # lapply over all .pdfs
+    lapply(file_nom, function(z){
+      
+      # extract and error handle
+      try(SRRI_ext(doc = z, col = y), silent = F)
+      
+    })
+    
+  }, dirs, col[, 2]) -> test
 
 , type = "message")
 
@@ -258,7 +258,7 @@ invis.Map(function(m, n){
   par(mfrow = c(ceiling(length(m) / 4), 4))
   
   # over KIDs
-  invis.Map(function(x, y, z){
+  invis.Map(function(x, y, z, k){
   
     if(class(x) == "try-error"){
       
@@ -266,17 +266,17 @@ invis.Map(function(m, n){
       plot(NULL, xlim = c(0, 1), ylim = c(0, 1), main = "Error")
       
     } else {
-      browser()
       # build tmp vars for plotting 
-      plot.coo <- lapply(x, "[[", 3)
-      med <- sapply(x, "[[", 4)
-      scal <- lapply(x, "[[", 5)
-      pred <- y[, 4][z]
-      act <- y[, 3][z]
+      plot.coo <- x[[3]]
+      med <- x[[4]]
+      scal <- x[[5]]
+      pred <- y
+      act <- z
+      fund <- k
     
       # plot
       plot(plot.coo[, 1], plot.coo[, 2], col = plot.coo[, ncol(plot.coo)], pch = 19, 
-           main = paste("Predicted:", pred, "| Actual:", act))
+           main = paste(fund, "\n", "Predicted:", pred, "| Actual:", act))
       
       # median
       abline(v = med, col = "red", lty = 1, lwd = 2)
@@ -285,11 +285,9 @@ invis.Map(function(m, n){
       lapply(scal, function(s) abline(v = s, col = "grey", lwd = 2, lty = 2))
       }
   
-    },m ,n, 1:length(m))
+    },m , n[, 4], n[, 3], n[, 1])
   
 }, test, tef)
-
-
 ```
 
 
