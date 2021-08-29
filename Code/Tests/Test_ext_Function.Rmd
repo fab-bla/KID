@@ -245,10 +245,6 @@ Map(function(x, y){
 
 }, col[, 1], test) -> tef
 
-
-
-par(mfrow = c(3, 4))
-
 # plot
 
 # over KAGs
@@ -290,7 +286,7 @@ invis.Map(function(m, n){
 }, test, tef)
 ```
 
-By KAG
+## Problem description by KAG
 
 * Alianz
   - Read out worked quite well for all cases in which the rectangle was identified,
@@ -324,6 +320,24 @@ By KAG
   - check color
 * Union
   - check SRRI text detection
+
+## Diagnosis
+
+### Alianz
+
+No errors were thrown by the shade.ext(), however, in three cases the plot does not display the pixel cluster containing the SRRI.
+As the plots are created in order as stored in the dir we can indicidually diagnose the problem for those three.
+
+```{r}
+# problematic .pdfs. 5, 9 and 11
+# starting with the 5th
+
+{setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs/Alianz")
+list.files()}
+
+```
+  
+
 
 
 
