@@ -3,7 +3,7 @@
 # off ... vertical offset when cutting the bitmap right under the predicted 
 #         position of the SRRI graph
 
-SRRI_ext <- function(doc, col, off = 0.1){
+SRRI_ext_fast <- function(doc, col, off = 0.1){
   
   ## DATA ##
   
@@ -14,8 +14,6 @@ SRRI_ext <- function(doc, col, off = 0.1){
   bit.map <- pdftools::pdf_render_page(doc, page = 1, dpi = 50)
   
   ## PAGE MARGINS ##
-  
-  # all black
   coob <-  which(bit.map[1, , ] == "00" & bit.map[2, , ] == "00" & bit.map[3, , ] == "00", 
                  arr.ind = T)
   
@@ -32,7 +30,13 @@ SRRI_ext <- function(doc, col, off = 0.1){
   ## SUBSET BITMAP ##
   
   # if the file is scanned the pdf_text output will be and empty list 
-  if(!all(sapply(pdf.text, function(x) length(x) == 0))){
+  cond <- all(sapply(pdf.text, function(x) length(x) == 0))
+  
+  # return warning if the file cannot be cut, this will drastically increase prediction error
+  if(cond) warning("The file is most likely scanned, this casues a higher rate of false classification")
+  
+  # if not cut the file past the identifying header
+  if(!cond){
     
     # relative position of identifying text
     rel.pos <- grep("Risiko- und Ertragsprofil", pdf.text[[1]]) / length(pdf.text[[1]])
@@ -41,13 +45,14 @@ SRRI_ext <- function(doc, col, off = 0.1){
     if(is.na(rel.pos)) stop("Error: Could not detect SRRI.")
     
     ##  BITMAP  SUBSET##
-
+    
     # subset array
     ind.page.len <- round(dim(bit.map)[3] * (rel.pos - off))
     
     # return
     bit.map <- bit.map[ , , -c(ind.page.len:1)]
-  }
+    
+  } 
   
   ## COLOR ##
   
@@ -72,7 +77,7 @@ SRRI_ext <- function(doc, col, off = 0.1){
   # hierarchical clustering: k = 5, method = "average"
   
   # get grouping
-  grps <- agnes(coo, method = "average", diss = F)
+  grps <- fastcluster::hclust(dist(coo), method = "average") 
   
   # restrict amnt of groups
   grps <- cutree(grps, k = 5)
@@ -81,7 +86,7 @@ SRRI_ext <- function(doc, col, off = 0.1){
   dat.grps <- as.data.frame(cbind(coo, grps))
   
   ## IDENTIFY CLUSTER ##
-
+  
   # discard all grps with less than 10% of all points
   tbl.rel <- table(dat.grps$grps) / length(dat.grps$grps)
   
@@ -111,4 +116,3 @@ SRRI_ext <- function(doc, col, off = 0.1){
        med.rect.grp,
        scale)
 }
-
