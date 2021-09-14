@@ -6,6 +6,7 @@
 SRRI_ext_fast <- function(doc, col, off = 0.1){
   
   ## DATA ##
+  pdf.data <- pdftools::pdf_data(doc)[[1]]
   
   # convert pdf to text
   pdf.text <- strsplit(pdftools::pdf_text(doc), "\n") 

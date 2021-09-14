@@ -1,0 +1,31 @@
+# Debug IQAM utilizing a example pdf
+source("C:/Users/blasc/OneDrive/Documents/GitHub/KID/Code/Functions/SRRI_ext_fast.R")
+
+# locate scale uising pdf_data
+setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDS/Allianz")
+pd <- list.files(pattern = ".pdf")[2]
+
+# algo that identifies whether there are 
+tt <- pdftools::pdf_render_page(pd, dpi = 67.31)
+
+# calc multiple and then use that for tranlation
+
+
+# get data
+pdf.dat <-pdftools::pdf_data(pd)[[1]]
+
+#  page size to determin dpi
+ps <- as.numeric(sapply(pdf.dat, max)[c(3, 4)])
+ps[1] / ps[2]
+
+# examine
+
+
+
+# first filter for 1 to 7 
+pdf.dat <- within(pdf.dat, 
+                  ind <- nchar(gsub("\\s", "", text)) == 1 & grepl("[1-7]", text))
+
+# location
+loc <- with(pdf.dat, pdf.dat[ind, c("x", "y", "text")])
+ 
