@@ -12,5 +12,6 @@ scale_cand_coord <- function(file, page = 1){
   
   # location
   loc <- with(pdf.dat, pdf.dat[ind, c("x", "y", "text")])
+  
 }
 
