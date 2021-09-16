@@ -67,7 +67,7 @@ coord.id <- function(loc){
     
     # find all rows which absolute distance is less than three pixels
     apply(x, 1, function(y){
-      sum(y <= 3) >= 5
+      sum(y <= 3) == 5
     }) 
   }) -> ind.int
   
