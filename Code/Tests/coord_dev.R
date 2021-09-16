@@ -81,4 +81,8 @@ coord.id <- function(loc){
 # run exmpl
 coord.id(loc)
 
+## ToDo ##
+  # insert conditionals to catch groups of numbers between 1 and 7 that do not rep the scale
+  # catch cases where scale is incomplete
+  # catch cases where no scale was detected
 
