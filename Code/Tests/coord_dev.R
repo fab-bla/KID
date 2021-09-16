@@ -28,4 +28,57 @@ pdf.dat <- within(pdf.dat,
 
 # location
 loc <- with(pdf.dat, pdf.dat[ind, c("x", "y", "text")])
- 
+
+# function that identifies the coordinates of the scale.
+
+# helper function that find the vertical distance of all elements within a vector
+abs.dis.vec <- function(x, set = 999){
+  # pairwise distance
+  dis <- abs(outer(x, x, "-"))
+  
+  # set diag to NA
+  diag(dis) <- set
+  
+  # return
+  return(dis)
+}
+
+abs.dis.vec(rnorm(10))
+# input should be a n x 3 
+
+coord.id <- function(loc){
+  
+  # all abs diff of horizontal and vertical coords
+  lapply(loc[, c("x", "y")], function(x){
+                                          # dis
+                                          tmp <- abs.dis.vec(x)
+                                          
+                                          # name and text
+                                          rownames(tmp) <- loc$text
+                                          
+                                          # return 
+                                          tmp
+                                          }) -> dis
+  
+  
+  # identify whether the scale is vertical or horizontal
+  
+  lapply(dis, function(x){
+    
+    # find all rows which absolute distance is less than three pixels
+    apply(x, 1, function(y){
+      sum(y <= 3) >= 5
+    }) 
+  }) -> ind.int
+  
+  # vert or horz
+  ind.fin <- ind.int[[which.max(sapply(ind.int, sum))]]
+  
+  # subset
+  as.data.frame(loc[ind.fin, ])
+}
+
+# run exmpl
+coord.id(loc)
+
+
