@@ -18,12 +18,11 @@ coord_id <- function(loc){
   
   
   # identify whether the scale is vertical or horizontal
-  
   lapply(dis, function(x){
     
     # find all rows which absolute distance is less than three pixels
     apply(x, 1, function(y){
-      sum(y <= 3) >= 5
+      sum(y <= 3) == 6
     }) 
     
   }) -> ind.int
@@ -33,4 +32,5 @@ coord_id <- function(loc){
   
   # subset
   as.data.frame(loc[ind.fin, ])
+  
 }
