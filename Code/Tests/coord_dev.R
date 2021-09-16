@@ -86,4 +86,6 @@ coord.id(loc)
   # catch cases where scale is incomplete
   # catch cases where no scale was detected
   # write coord translation function to switch between pdf_data and pdf_render_page aka bitmaps
+  # write function that creates the input for coord.id from pdf_data
+
 
