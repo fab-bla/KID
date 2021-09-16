@@ -85,4 +85,5 @@ coord.id(loc)
   # insert conditionals to catch groups of numbers between 1 and 7 that do not rep the scale
   # catch cases where scale is incomplete
   # catch cases where no scale was detected
+  # write coord translation function to switch between pdf_data and pdf_render_page aka bitmaps
 
