@@ -4,10 +4,14 @@
 #         position of the SRRI graph
 
 #' @export
-SRRI_ext_fast <- function(doc, col, off = 0.1){
+SRRI_ext_loc <- function(doc, col, off = 0.1){
   
   ## DATA ##
-  pdf.data <- pdftools::pdf_data(doc)[[1]]
+  pdf.data  <- scale_cand_coord(doc)
+  scale.data <- pdf.data[[1]]
+  
+  # extract scale
+  ext.loc <- KIDs::coord_id(scale.data)
   
   # convert pdf to text
   pdf.text <- strsplit(pdftools::pdf_text(doc), "\n") 
@@ -15,46 +19,8 @@ SRRI_ext_fast <- function(doc, col, off = 0.1){
   # generate bitmap
   bit.map <- pdftools::pdf_render_page(doc, page = 1, dpi = 50)
   
-  ## PAGE MARGINS ##
-  coob <-  which(bit.map[1, , ] == "00" & bit.map[2, , ] == "00" & bit.map[3, , ] == "00", 
-                 arr.ind = T)
-  
-  # lsm / rsm
-  lsm <- min(coob[, 1])
-  rsm <- max(coob[, 1])
-  
-  # scale
-  int_leng <- (rsm - lsm) / 7
-  
-  # midpoints
-  scale <- setNames(cumsum(c(lsm + int_leng / 2, rep(int_leng, 6))), 1:7)
-  
-  ## SUBSET BITMAP ##
-  
-  # if the file is scanned the pdf_text output will be and empty list 
-  cond <- all(sapply(pdf.text, function(x) length(x) == 0))
-  
-  # return warning if the file cannot be cut, this will drastically increase prediction error
-  if(cond) warning("The file is most likely scanned, may result in a higher rate of false classification")
-  
-  # if not cut the file past the identifying header
-  if(!cond){
-    
-    # relative position of identifying text
-    rel.pos <- grep("Risiko- und Ertragsprofil", pdf.text[[1]]) / length(pdf.text[[1]])
-    
-    # ERROR if header was not detected
-    if(is.na(rel.pos)) stop("Error: Could not detect SRRI.")
-    
-    ##  BITMAP  SUBSET##
-    
-    # subset array
-    ind.page.len <- round(dim(bit.map)[3] * (rel.pos - off))
-    
-    # return
-    bit.map <- bit.map[ , , -c(ind.page.len:1)]
-    
-  } 
+  # convert coords
+  scale.coords <- KIDs::coord_conv(ext.loc, bit.map)
   
   ## COLOR ##
   

@@ -8,7 +8,7 @@ coord_id <- function(loc){
   # all abs diff of horizontal and vertical coords
   lapply(loc[, c("x", "y")], function(x){
     # dis
-    tmp <- abs.dis.vec(x)
+    tmp <- KIDs::abs_dis_vec(x)
     
     # name and text
     rownames(tmp) <- loc$text

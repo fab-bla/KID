@@ -1,4 +1,4 @@
-# helper function for coord.id that calculates the pairwise absolute distance 
+# helper function for coord.id that calculates the pairwise absolute distance of 
 # all vector elements
 
 #' @export
