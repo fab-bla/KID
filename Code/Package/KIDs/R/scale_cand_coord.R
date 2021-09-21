@@ -1,6 +1,7 @@
 # function that pulls all potential candidates for scale identification of SRRI
 # given a KID PDF file
 
+#' @export
 scale_cand_coord <- function(file, page = 1){
   
   # import

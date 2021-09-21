@@ -3,6 +3,7 @@
 # off ... vertical offset when cutting the bitmap right under the predicted 
 #         position of the SRRI graph
 
+#' @export
 SRRI_ext_test <- function(doc, col, off = 0.05, maxColorValue = 255){
   
   ## FIND PAGE ##

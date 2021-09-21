@@ -2,6 +2,7 @@
 # finds the coordinates of the scale of the SRRI no matter if it is horizontal 
 # or vertical 
 
+#' @export
 coord_id <- function(loc){
   
   # all abs diff of horizontal and vertical coords
