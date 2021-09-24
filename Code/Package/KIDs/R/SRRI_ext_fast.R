@@ -4,7 +4,7 @@
 #         position of the SRRI graph
 
 #' @export
-SRRI_ext_fast <- function(doc, col, off = 0.1){
+SRRI_ext_fast <- function(doc, col, off = 0.1, dpi = 72){
   
   ## DATA ##
   
@@ -12,7 +12,7 @@ SRRI_ext_fast <- function(doc, col, off = 0.1){
   pdf.text <- strsplit(pdftools::pdf_text(doc), "\n") 
   
   # generate bitmap
-  bit.map <- pdftools::pdf_render_page(doc, page = 1, dpi = 50)
+  bit.map <- pdftools::pdf_render_page(doc, page = 1, dpi = dpi)
   
   ## PAGE MARGINS ##
   coob <-  which(bit.map[1, , ] == "00" & bit.map[2, , ] == "00" & bit.map[3, , ] == "00", 
