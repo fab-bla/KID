@@ -11,9 +11,8 @@ pd <- list.files(pattern = ".pdf")[3]
 debugonce(SRRI_ext_loc)
 SRRI_ext_fast(pd, "#A6A6A6") -> tmp
 
-
 # debug coord cobnv
-debugonce(coord_conv)
+#debugonce(coord_conv)
 coord_conv(ext.loc, bit.map)
 
 ## Notes ##
@@ -32,7 +31,7 @@ pdftools::pdf_info(pd)
 
 # prep for loc file
 loc <- scale_cand_coord(pd)[[1]]
-
+coord_id(loc)
 # id coord of scale
 scale <- coord_id(loc)
 
@@ -46,9 +45,11 @@ tmp[[3]]
 # get bitmap
 bit.map <- pdftools::pdf_render_page(pd, page = 1, dpi = 71.4)
 
+# extr shading
 coo <- which(bit.map[1, , ] == "a6" & "a6" == "a6" & 
                bit.map[3, , ] == "a6", arr.ind = T)
 
+# plot
 plot(coo[, 1], coo[, 2])
 points(x = scale[, 1], y = scale [, 2], col = "red", pch = 19)
 abline(v = median(tmp[[3]][, "col"]), col = "green")
