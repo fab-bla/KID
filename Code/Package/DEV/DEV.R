@@ -55,20 +55,24 @@ points(x = scale[[1]][, 1], y = scale[[1]][, 2], col = "red", pch = 19)
 abline(h = c(scale[[1]][, 2] - 50, scale[[1]][, 2] + 50), col = "red")
 
 
-# Debug IQAM
+# Debug Raiffeisen
 
 # col
 setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDS/Auxiliary")
-Col_Hex <- read.csv("KAG_COL_HEX.csv")[, -1]
+Col_Hex <- readRDS(file = "list_col_KAG.rds")
 
 # setwd
-setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDS/Erste")
+setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDS/Raiffeisen")
 pd <- list.files(pattern = ".pdf")[1]
 
-# debug
-#debugonce(SRRI_ext_loc)
-SRRI_ext_loc(pd, col = list.col.KAG[[1]])
 
-# check color
-rgb(149, 149, 149, maxColorValue = 255)
+# debug
+debugonce(SRRI_ext_loc)
+SRRI_ext_loc(pd, col = Col_Hex[["Raiffeisen"]])
+
+
+
+
+
+
 

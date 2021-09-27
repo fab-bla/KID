@@ -122,6 +122,7 @@ list.col.KAG[["IQAM"]] <- c(list.col.KAG[["IQAM"]], "#949494")
 
 # write 
 # write.csv(dat.col.KAG, "KAG_COL_HEX.csv")
+# saveRDS(list.col.KAG, file = "list_col_KAG.rds")
 }
 ```
 ## SRRI Extraction Function
@@ -319,19 +320,20 @@ invis.Map(function(m, n){
 * Erste
   - Works for the given sample.
 * IQAM
-  - No box detected in given color.
-  - Check HEX code.
+  - Works for the given sample.
 * Kepler Fonds
-  - requires separate run specified error source is unknown
+   - Works for the given sample.
 * Masterinvest 
   - Works for he given sample.
 * Raiffeisen 
+  - pdf.data readout does not contain the full scale 
   - Check color
   - Check last three PDFs for text detection issues
 * Schoellerbank
   - No box detected, check color
   - three PDFs threw an error, all because of text detection.
 * Security
+  - pdf.data readout does not contain the full scale
   - Scale is completely off 
   - rectangle is missing in some files
   - check cutoff 
