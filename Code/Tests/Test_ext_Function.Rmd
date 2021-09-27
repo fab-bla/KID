@@ -86,7 +86,7 @@ HEX.
 
 ```{r}
 # set
-setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs/Auxiliary")
+{setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs/Auxiliary")
 
 # import
 dat.col.KAG <- read.table(list.files(pattern = "RGB"), 
@@ -105,17 +105,33 @@ dat.col.KAG
 # list of RG vectors for all KAGs
 KAG_RGB <- setNames(lapply(as.data.frame(t(dat.col.KAG)[2:4, ]), function(x){
   as.numeric(x)
-}), nm = dat.col.KAG[, 1]) 
+}), nm = dat.col.KAG[, 1])
+
+# correct IQAM 
+dat.col.KAG[5, 5] <- "#959595"
+
+# IQAM actually features changing color shemes across their KIDs
+# therefore the format haws to change from df to list as we have to match 
+# against multiple colors
+ 
+list.col.KAG <- as.list(dat.col.KAG[order(dat.col.KAG$KAG), ncol(dat.col.KAG)]) |> 
+                        setNames(nm = dat.col.KAG$KAG[order(dat.col.KAG$KAG)])
+
+# add second col to IQAM 
+list.col.KAG[["IQAM"]] <- c(list.col.KAG[["IQAM"]], "#949494")
+
+# write 
+# write.csv(dat.col.KAG, "KAG_COL_HEX.csv")
+}
 ```
 ## SRRI Extraction Function
 
 Given a KID document this function aims to extract the SRRI from the standard graph (usually) located on the first of two pages.
 
 ```{r}
-# source functions
-source("C:/Users/blasc/OneDrive/Documents/GitHub/KID/Code/Functions/SRRI_ext.R")
-source("C:/Users/blasc/OneDrive/Documents/GitHub/KID/Code/Functions/SRRI_ext_test.R")
-source("C:/Users/blasc/OneDrive/Documents/GitHub/KID/Code/Functions/SRRI_ext_fast.R")
+# load package 
+{setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/Code/Package/KIDs")
+devtools::load_all()}
 ```
 
 ## Tests
@@ -147,7 +163,7 @@ Map(function(x){
   
    # FUN over all .pdfs
   lapply(file_nom, function(z){
-    SRRI_ext_fast(doc = z, col = dat.col.KAG[4, 5])
+    SRRI_ext_loc(doc = z, col = dat.col.KAG[4, 5])
   })
 
   
@@ -163,7 +179,7 @@ par(mfrow = c(3, 4))
 invis.Map(function(x, y, z, l, k, m){
   
   {plot(x[, 1], x[, 2], col = x[, ncol(x)], pch = 19, main = paste("Predicted:", z, "| Actual:", l),
-        xlim = c(1, 413))
+        xlim = c(1, 590))
   abline(v = y, col = "red", lwd = 2)
   lapply(k, function(x) abline(v = x, col = "grey", lwd = 2, lty = 2))}
   
@@ -191,11 +207,11 @@ utils::capture.output(
     lapply(file_nom, function(z){
       
       # extract and error handle
-      try(SRRI_ext_fast(doc = z, col = y), silent = F)
+      try(SRRI_ext_loc(doc = z, col = y, tol = 50), silent = F)
       
     })
     
-  }, dirs, col[, 2]) -> test
+  }, dirs, list.col.KAG) -> test
 
 , type = "message")
 
@@ -278,7 +294,7 @@ invis.Map(function(m, n){
     
       # plot
       plot(plot.coo[, 1], plot.coo[, 2], col = plot.coo[, ncol(plot.coo)], pch = 19, 
-           xlim = c(1, 413),
+           xlim = c(1, 590),
            main = paste(fund, "\n", "Predicted:", pred, "| Actual:", act))
       
       # median

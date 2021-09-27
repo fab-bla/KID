@@ -2,14 +2,13 @@
 setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/Code/Package/KIDs")
 devtools::load_all()
 
-
 # locate scale uising pdf_data
 setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDS/Erste")
-pd <- list.files(pattern = ".pdf")[3]
+pd <- list.files(pattern = ".pdf")[1]
 
 # function that translates coordinates
-debugonce(SRRI_ext_loc)
-SRRI_ext_fast(pd, "#A6A6A6") -> tmp
+#debugonce(SRRI_ext_loc)
+SRRI_ext_loc(pd, "#A6A6A6")
 
 # debug coord cobnv
 #debugonce(coord_conv)
@@ -32,6 +31,7 @@ pdftools::pdf_info(pd)
 # prep for loc file
 loc <- scale_cand_coord(pd)[[1]]
 coord_id(loc)
+
 # id coord of scale
 scale <- coord_id(loc)
 
@@ -51,5 +51,24 @@ coo <- which(bit.map[1, , ] == "a6" & "a6" == "a6" &
 
 # plot
 plot(coo[, 1], coo[, 2])
-points(x = scale[, 1], y = scale [, 2], col = "red", pch = 19)
-abline(v = median(tmp[[3]][, "col"]), col = "green")
+points(x = scale[[1]][, 1], y = scale[[1]][, 2], col = "red", pch = 19)
+abline(h = c(scale[[1]][, 2] - 50, scale[[1]][, 2] + 50), col = "red")
+
+
+# Debug IQAM
+
+# col
+setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDS/Auxiliary")
+Col_Hex <- read.csv("KAG_COL_HEX.csv")[, -1]
+
+# setwd
+setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDS/Erste")
+pd <- list.files(pattern = ".pdf")[1]
+
+# debug
+#debugonce(SRRI_ext_loc)
+SRRI_ext_loc(pd, col = list.col.KAG[[1]])
+
+# check color
+rgb(149, 149, 149, maxColorValue = 255)
+

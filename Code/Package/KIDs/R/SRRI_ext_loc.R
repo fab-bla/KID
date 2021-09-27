@@ -4,39 +4,56 @@
 #         position of the SRRI graph
 
 #' @export
-SRRI_ext_loc <- function(doc, col, off = 0.1){
+SRRI_ext_loc <- function(doc, col, dpi = 71.5, tol = 50){
   
   ## DATA ##
-  pdf.data  <- scale_cand_coord(doc)
+  pdf.data  <- KIDs::scale_cand_coord(doc)
   scale.data <- pdf.data[[1]]
   
   # extract scale
   ext.loc <- KIDs::coord_id(scale.data)
   
-  # convert pdf to text
-  pdf.text <- strsplit(pdftools::pdf_text(doc), "\n") 
+  # horz or vert
+  if(ext.loc[[2]] == "h"){dir <- 1} else{dir <- 2}
+
+  # location vertically / horizontally
+  cut.off.point <- which.min(sapply(ext.loc[[1]][, c(1, 2)], var))
   
   # generate bitmap
-  bit.map <- pdftools::pdf_render_page(doc, page = 1, dpi = 50)
+  bit.map <- pdftools::pdf_render_page(doc, page = 1, dpi = dpi)
   
-  # convert coords
-  scale.coords <- KIDs::coord_conv(ext.loc, bit.map)
+  # midpoint of scale 
+  mid.point <- median(ext.loc[[1]][, cut.off.point])
+  
+  # subset bitmap using scale
+  bit.map <- bit.map[ , , (mid.point - tol) : (mid.point + tol)]
   
   ## COLOR ##
-  
-  # split HEX
-  col.split <- unlist(strsplit(gsub("(.{2})", "\\1 ", 
-                                    unlist(strsplit(col, "#"))[[2]]), " "))
-  
-  # convert to lower case
-  col.split <- tolower(col.split) 
+  lapply(col, function(x){
+    
+    # split HEX
+    col.split <- unlist(strsplit(gsub("(.{2})", "\\1 ", 
+                                      unlist(strsplit(x, "#"))[[2]]), " "))
+    
+    # convert to lower case
+    col.split <- tolower(col.split) 
+    
+    # return
+    col.split
+    
+  }) -> prep.col.list
+ 
+  # transpose list 
+  prep.col.list.t <- data.table::transpose(prep.col.list)
   
   ## COORDINATES ##
   
   # Shade
-  coo <- which(bit.map[1, , ] == col.split[1] & bit.map[2, , ] == col.split[2] & 
-                 bit.map[3, , ] == col.split[3], arr.ind = T)
-  
+  coo <- which(KIDs::match_keep_dim(bit.map[1, , ], prep.col.list.t[[1]]) & 
+               KIDs::match_keep_dim(bit.map[2, , ], prep.col.list.t[[2]]) & 
+               KIDs::match_keep_dim(bit.map[3, , ], prep.col.list.t[[3]]), 
+               arr.ind = TRUE)
+
   # stopif no pixels of desired color detected
   if(nrow(coo) < 1) stop("Error: No pixels of given color detected.")
   
@@ -72,7 +89,7 @@ SRRI_ext_loc <- function(doc, col, off = 0.1){
   med.rect.grp <- median(dat.grps[which(dat.grps[, 3] == names(rect.grp)), 1])
   
   # return minimum absolute difference
-  dif <- abs(med.rect.grp - scale)
+  dif <- abs(med.rect.grp - ext.loc[[1]][, dir])
   
   # which 
   SRRI <- which.min(dif)
@@ -82,5 +99,5 @@ SRRI_ext_loc <- function(doc, col, off = 0.1){
        SRRI,
        dat.grps,
        med.rect.grp,
-       scale)
+       ext.loc[[1]][, dir])
 }
