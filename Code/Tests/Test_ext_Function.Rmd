@@ -120,6 +120,10 @@ list.col.KAG <- as.list(dat.col.KAG[order(dat.col.KAG$KAG), ncol(dat.col.KAG)]) 
 # add second col to IQAM 
 list.col.KAG[["IQAM"]] <- c(list.col.KAG[["IQAM"]], "#949494")
 
+# correct Schoellerbank col and add
+list.col.KAG[["Schoellerbank"]] <- "#E3E3E3"
+list.col.KAG[["Schoellerbank"]] <- c(list.col.KAG[["Schoellerbank"]], "#CBCBCB")
+
 # write 
 # write.csv(dat.col.KAG, "KAG_COL_HEX.csv")
 # saveRDS(list.col.KAG, file = "list_col_KAG.rds")

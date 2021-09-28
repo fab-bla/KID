@@ -62,15 +62,14 @@ setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDS/Auxiliary")
 Col_Hex <- readRDS(file = "list_col_KAG.rds")
 
 # setwd
-setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDS/Raiffeisen")
-pd <- list.files(pattern = ".pdf")[1]
+setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDS/Schoellerbank")
+pd <- list.files(pattern = ".pdf")[6]
 
 
 # debug
 debugonce(SRRI_ext_loc)
-SRRI_ext_loc(pd, col = Col_Hex[["Raiffeisen"]])
-
-
+SRRI_ext_loc(pd, col = Col_Hex[["Schoellerbank"]], tol = 70)
+rgb(203, 203, 203, maxColorValue = 255)
 
 
 
