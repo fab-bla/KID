@@ -38,10 +38,7 @@ get.package <- function(package){
 get.package(c("png", "jpeg", "tabulizer", "pdftools", "raster", "rgdal", "sp", 
               "cluster", "fastcluster"))
 
-
-
-
-# since I will use Map() / lapply() alot for plotting I will wrap them in invisible()
+# since I will use Map() and lapply() for plotting I will wrap them in invisible()
 invis.Map <- function(f, ...) invisible(Map(f, ...))
 invis.lapply <- function(x, f, ...) invisible(lapply(x, f, ...))
 ```
@@ -53,7 +50,7 @@ the classification accuracy of the applied methods.
 
 ```{r, fig.height = 5, fig.width = 7}
 # set
-setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
+setwd("./../../KIDs")
 
 # files
 file_names <- list.files(pattern = ".pdf", recursive = T)
@@ -86,7 +83,7 @@ HEX.
 
 ```{r}
 # set
-{setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs/Auxiliary")
+{setwd("./../../KIDs/Auxiliary")
 
 # import
 dat.col.KAG <- read.table(list.files(pattern = "RGB"), 
@@ -124,6 +121,9 @@ list.col.KAG[["IQAM"]] <- c(list.col.KAG[["IQAM"]], "#949494")
 list.col.KAG[["Schoellerbank"]] <- "#E3E3E3"
 list.col.KAG[["Schoellerbank"]] <- c(list.col.KAG[["Schoellerbank"]], "#CBCBCB")
 
+# correct Union
+list.col.KAG[["Union"]] <- "#4F4E4E"
+
 # write 
 # write.csv(dat.col.KAG, "KAG_COL_HEX.csv")
 # saveRDS(list.col.KAG, file = "list_col_KAG.rds")
@@ -135,7 +135,7 @@ Given a KID document this function aims to extract the SRRI from the standard gr
 
 ```{r}
 # load package 
-{setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/Code/Package/KIDs")
+{setwd("./../Package/KIDs")
 devtools::load_all()}
 ```
 
@@ -146,8 +146,8 @@ Starting with one KAG.
 ### Erste
 
 ```{r, fig.width = 15, fig.height = 17}
-# set wd to file that contains 
-setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
+# setwd to file that contains KIDs
+setwd("./../../KIDs")
 
 # safe dirs 
 dirs <- list.dirs()[-c(1, 4)] # remove hardcode later
@@ -158,12 +158,11 @@ col[5, 1] <- "Kepler Fonds"
 
 # test Erste 
 Map(function(x){
-  
-  # set
-  {setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
-   setwd(x)
 
-  # ,pdfs
+  # change dir to respective KAG
+  {setwd(x)
+
+  # pdfs
   file_nom <- list.files(pattern = ".pdf")}
   
    # FUN over all .pdfs
@@ -178,6 +177,7 @@ Map(function(x){
 cbind(dat.valid.SRRI[dat.valid.SRRI[, "KAG"] == "Erste", ], 
       "Extracted" = sapply(erste.test[[1]], "[[", 2)) -> res
 
+# align
 par(mfrow = c(3, 4))
 
 # plot
@@ -194,23 +194,25 @@ invis.Map(function(x, y, z, l, k, m){
 
 In the case of Erste the SRRI extraction works perfectly. Now the remaining KAGs will be examined.
 
-```{r, message = FALSE, error = FALSE, warning = FALSE}
+```{r, message = FALSE, error = FALSE, warning = FALSE, results = "hide"}
+# setwd to file that contains the first KIDs
+setwd("./../../KIDs/Allianz")
+
 # store Errors 
 utils::capture.output(
 
   # Map over dirs 
   Map(function(x, y){
-    
+
     # set
-    {setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
-     setwd(x)
-  
-    # ,pdfs
+    {setwd(paste0("./../", x))
+    
+    # pdfs
     file_nom <- list.files(pattern = ".pdf")}
     
      # lapply over all .pdfs
     lapply(file_nom, function(z){
-      
+
       # extract and error handle
       try(SRRI_ext_loc(doc = z, col = y, tol = 50), silent = F)
       
@@ -233,8 +235,7 @@ do.call(rbind, Map(function(x, y, z){
   
   if(length(y) > 0){
     
-    {setwd("C:/Users/blasc/OneDrive/Documents/GitHub/KID/KIDs")
-     setwd(z)
+    {setwd(paste0("./../", z))
 
     # .pdfs
     file_nom <- list.files(pattern = ".pdf")}
@@ -313,14 +314,14 @@ invis.Map(function(m, n){
   
 }, test, tef)
 ```
-
+\newpage
 ## Problem description by KAG
 
 * Allianz
   - Works for the given sample.
 * Amundi
-  - Works for every KID excluding one that is a scanned pdf. Unfortunately, all Amundi files have 2 bars in the same color as the SRRI shade,#
-  accordingly the weight of SRRI shade is reduced and the median no longer lies in the middle of the SRRI shading. For now all scanned PDFs      will return a warning. Later one could implement an algorithm that detects whether bars cover the entire page and accordingly remove those     bitmap entries. 
+  - Works for every KID excluding one that is a scanned pdf. Unfortunately, all Amundi files have 2 bars in the same color as the SRRI shade,
+  accordingly the weight of SRRI shade is reduced and the median no longer lies in the middle of the SRRI shading. For now all scanned PDFs will return a warning. Later one could implement an algorithm that detects whether bars cover the entire page and accordingly remove those bitmap entries. 
 * Erste
   - Works for the given sample.
 * IQAM
@@ -330,20 +331,20 @@ invis.Map(function(m, n){
 * Masterinvest 
   - Works for he given sample.
 * Raiffeisen 
-  - pdf.data readout does not contain the full scale 
-  - Check color
-  - Check last three PDFs for text detection issues
+  - Readout does not contain the full scale.
+  - Check color.
+  - Check last three PDFs for text detection issues.
 * Schoellerbank
-  - No box detected, check color
-  - three PDFs threw an error, all because of text detection.
+  - No box detected, check color.
+  - Three PDFs threw an error, all because of text detection.
 * Security
-  - pdf.data readout does not contain the full scale
-  - Scale is completely off 
-  - rectangle is missing in some files
-  - check cutoff 
-  - check color
+  - Readout does not contain the full scale.
+  - Scale is completely off.
+  - Rectangle is missing in some files.
+  - Check cutoff.
+  - Check color.
 * Union
-  - check SRRI text detection
+  - Check SRRI text detection.
 
 
 
