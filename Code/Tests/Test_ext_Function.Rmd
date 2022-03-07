@@ -5,21 +5,28 @@ title: |
       
 author: "Fabian Blasch"
 date: "`r format(Sys.Date(), format = '%d.%m.%Y')`"
-output: pdf_document
+header-includes:
+   - \usepackage{amsmath}
+   - \usepackage{amssymb}
+   - \usepackage{dsfont}
+   - \usepackage{float}
+output: 
+   pdf_document:
+     number_sections: TRUE
 ---
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE,
-                      message = FALSE,
-                      # cache = TRUE ,
-                      fig.width = 4,
-                      fig.height = 3, 
-                      fig.align = "center")
+                      fig.pos = "center",
+                      fig.width = 3,
+                      fig.height = 3,
+                      fig.pos = "H",
+                      out.extra = "")
 ```
 
-## Packages
+# Packages
 
-```{r, results = "hide"}
+```{r, results = "hide", message = FALSE}
 # Packages
 get.package <- function(package){
   
@@ -43,7 +50,7 @@ invis.Map <- function(f, ...) invisible(Map(f, ...))
 invis.lapply <- function(x, f, ...) invisible(lapply(x, f, ...))
 ```
 
-## Actual SRRI 
+# Actual SRRI 
 
 We can obtain the actual SRRI from the file name. Later this data will be utilized to evaluate 
 the classification accuracy of the applied methods.
@@ -74,8 +81,23 @@ head(dat.valid.SRRI, 7)
 dim(dat.valid.SRRI)
 
 # Hist
-hist(as.numeric(dat.valid.SRRI[, "SRRI"]), breaks = 10, main = "SRRI", col = 4, xlab = "")
+barplot(table(as.numeric(dat.valid.SRRI[, "SRRI"])), main = "SRRI", col = 4, xlab = "",
+        ylim = c(0, 35))
 ```
+
+# Performance evaluation
+
+The SRRI is measured on an increasing ordinal scale, with 7 being associated with the highest risk and simultaneously also with the highest return. This would in theory allow for a measurement of predictive performance utilizing the abolute or squared difference between prediction and actual value. However, in this case we want to measure whether the read-out was successful or not. Hence the performance evaluation will be based on predicting correctly. Formally this means, we will use a discrete metric, i.e
+
+$$
+Accuracy = \frac{\sum_{i = 1}^n \mathds{1}_{\{pred_i \text{ }= \text{ } act_i\}}}{n}.
+$$
+Put differently, the accuracy measure is equivalent with the relative amount of correctly predicted cases.
+
+# Extraction utilizing pixel agglomeration
+
+The first method which will be evaluated is based on hierarchical agglomerative clustering methods. All pixels in the color of the SRRI shade are extracted and grouped. The group associated with the highest probability of containing the SRRI is used to calculate the median of the horizontal position on the page. Then the predcited SRRI results as the SRRI value with the least horizontal absolute distance to the calculated median.
+
 ## Shade Color
 
 To extract the SRRI the following colors are required and need to be converted to
@@ -315,6 +337,7 @@ invis.Map(function(m, n){
 }, test, tef)
 ```
 \newpage
+
 ## Problem description by KAG
 
 * Allianz
@@ -346,8 +369,45 @@ invis.Map(function(m, n){
 * Union
   - Check SRRI text detection.
 
+\newpage
 
+# Naive Extraction
 
+This approach is quite a bit is simpler and less error-prone than the previous one. Additionally, it does not require a color specification to extract the SRRI given a PDF. The idea is to cut out the rectangle around each scale entry to then identify if the color is different to the background of the remaining pdf. 
+
+```{r}
+# setwd to file that contains KIDs
+setwd("./../../KIDs/Allianz")
+
+# tover KAGs 
+mapply(\(x){
+
+  # change dir to respective KAG
+  {setwd(paste0("./../", x))
+ 
+  # pdfs
+  file_nom <- list.files(pattern = ".pdf")}
+  
+  # FUN over all .pdfs
+  sapply(file_nom, \(z){
+    
+    # extract
+    SRRI_ext_rec(doc = z)
+    
+  }) |> (\(y) sapply(y, \(t) ifelse(length(t) > 0, t, NA)))() # integer(0) to NA
+
+}, dirs) -> pred_naiv 
+
+# performance
+pred_un <- pred_naiv |> unlist() |> unname()
+
+# NAs
+pred_un |> is.na() |> mean()
+
+# Performance for all non NAs
+(pred_un == as.numeric(dat.valid.SRRI[,"SRRI"])) |> mean(na.rm = TRUE)
+```
+The accuracy for documents that are not partly or completely scanned is 100%. This is definitely a performance increase when comparing to the agglomerative classification.
 
   
 
