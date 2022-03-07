@@ -70,8 +70,6 @@ pd <- list.files(pattern = ".pdf")[6]
 debugonce(SRRI_ext_loc)
 SRRI_ext_loc(pd, col = Col_Hex[["Union"]], tol = 70)
 
-
-
-
-
+# handle scanned pdfs
+# example Union
 

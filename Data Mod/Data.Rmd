@@ -1,0 +1,52 @@
+---
+title: "Data Modification"
+author: "Fabian Blasch"
+date: "`r format(Sys.Date(), format = '%m/%d/%Y')`"
+output: pdf_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Intro
+
+In this file the PDFs are converted into a Dataset that can be used to train common machine learning models such as but not limited to, Multinomial Elastic-Net Regularized Generalized Linear Models, Random Forests and Boosted Regression Trees.
+
+The Data that will be summarized in the dataset is the actual label of the SRRI, the Bitmap entries with their respective position on the page as well as the corresponding color. Further, a variable will be included that signifies whether the SRRI is depicted vertically or horizontally.
+
+## Load Existing Functions
+
+```{r}
+# load functions
+{setwd("./../Code/Package/KIDs")
+devtools::load_all()}
+```
+
+## Illustration using a single PDF
+
+```{r}
+# set to KID location
+{setwd("./../KIDs/Erste")
+
+# choose any PDf
+testpdf <- list.files(pattern = ".pdf")[1]
+
+# load bitmap
+bitmap <- pdftools::pdf_render_page(testpdf)
+
+}
+
+# convert to raster
+apply(bitmap, 1, function(x) paste0(x, collapse = ""))
+
+a3 <- array(c(sample(c("ff", "00", "33"), 9, replace = T)), c(3,3,2))
+a3
+aperm(a3, c(2, 3, 1))
+
+apply(apply(a3, 3, function(x) paste0(x)), 1, function(x) paste0(x, collapse = ""))
+
+apply(aperm(bitmap, c(3, 1, 2)), 1, function(x) paste0(x, collapse = ""))
+data.frame(aperm(a3, c(3, 1, 2)))
+```
+

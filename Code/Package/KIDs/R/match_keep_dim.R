@@ -3,13 +3,28 @@
 
 #' @export
 match_keep_dim <- function(x, y){
-  
+
   # match
   tmp <- x %in% y
-  
+
   # reassign dim
   dim(tmp) <- dim(x)
-  
+
   # return
   return(tmp)
+
+}
+
+# operator
+`%IN%` <- function(x,  y){
+
+  # match
+  tmp <- x %in% y
+
+  # reassign dim
+  dim(tmp) <- dim(x)
+
+  # return
+  return(tmp)
+
 }
