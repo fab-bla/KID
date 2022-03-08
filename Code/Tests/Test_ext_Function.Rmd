@@ -405,9 +405,19 @@ pred_un <- pred_naiv |> unlist() |> unname()
 pred_un |> is.na() |> mean()
 
 # Performance for all non NAs
-(pred_un == as.numeric(dat.valid.SRRI[,"SRRI"])) |> mean(na.rm = TRUE)
+(pred_un == as.numeric(dat.valid.SRRI[, "SRRI"])) |> mean(na.rm = TRUE)
 ```
-The accuracy for documents that are not partly or completely scanned is 100%. This is definitely a performance increase when comparing to the agglomerative classification.
+
+The accuracy for documents that are not partly or completely scanned is 100%. This is definitely a performance increase when comparing to the agglomerative classification. 
+
+## Workaround for scanned cases 
+
+```{r}
+# using Security KIDs for illustration
+
+```
+
+
 
   
 

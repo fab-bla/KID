@@ -1,0 +1,61 @@
+---
+title: |
+    | KID
+    | Handling Scanned Files
+      
+author: "Fabian Blasch"
+date: "`r format(Sys.Date(), format = '%d.%m.%Y')`"
+header-includes:
+   - \usepackage{amsmath}
+   - \usepackage{amssymb}
+   - \usepackage{dsfont}
+   - \usepackage{float}
+   - \usepackage{hyperref}
+   - \usepackage{xcolor}
+output: 
+   pdf_document:
+     number_sections: FALSE
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      fig.pos = "center",
+                      fig.width = 3,
+                      fig.height = 3,
+                      fig.pos = "H",
+                      out.extra = "")
+```
+
+\newpage 
+
+# Tesseract
+
+Tesseract is an optical character recognition engine, it can be used to convert pictures into machine readable characters. The \href{https://github.com/tesseract-ocr/tesseract}{\textcolor{teal}{sourcecode}} is available on GitHub and fortunately the API was implemented in an \href{https://github.com/ropensci/tesseract}{\textcolor{teal}{R package}}.
+
+## First Steps
+
+Tesseract offers the possibility to alter the engine based on the problem at hand. In the case of KIDs, we want to extract the position of the scale of each SRRI entry. Thus one parameter of great importance is the character white list. It allows us to narrow the classification into the characters or in this case digits handed over to tesseract via the white list.
+
+```{r, warning = FALSE}
+# load KiDs
+setwd("./../KIDs")
+devtools::load_all()
+
+# example pdf
+setwd("./../../../KIDs/Security")
+pd <- list.files(pattern = ".pdf")[1]
+
+# first convert to png so we can use tesseract directly
+pdftools::pdf_convert(pd, pages = 1, filenames = c("testscanread.png"), dpi = 600)
+
+# set whitelist to digits 1-7 and whitespace
+tesseract::ocr_data("Scale_notext.jpeg",
+               engine = tesseract::tesseract(options = list(tessedit_char_whitelist = " 1234567")))
+```
+The readout worked good for all digits on white background, next we may use other engine parameters as well as image processing to obtain the scale in its entirety.
+
+
+
+
+
+
