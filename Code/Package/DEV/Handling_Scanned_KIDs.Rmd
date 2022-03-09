@@ -36,6 +36,8 @@ Tesseract is an optical character recognition engine, it can be used to convert 
 
 Tesseract offers the possibility to alter the engine based on the problem at hand. In the case of KIDs, we want to extract the position of the scale of each SRRI entry. Thus one parameter of great importance is the character white list. It allows us to narrow the classification into the characters or in this case digits handed over to tesseract via the white list.
 
+To eliminate noise we first look at a \href{https://github.com/Base-R-Best-R/KID/blob/main/KIDs/Security/Scale_notext.jpeg}{\textcolor{teal}{snippet}} taken from one of Security's KIDs that only contains the scale and no text, this allows for the identification of problems related to the extraction of the scale without the surrounding noise. 
+
 ```{r, warning = FALSE}
 # load KiDs
 setwd("./../KIDs")
@@ -49,10 +51,67 @@ pd <- list.files(pattern = ".pdf")[1]
 pdftools::pdf_convert(pd, pages = 1, filenames = c("testscanread.png"), dpi = 600)
 
 # set whitelist to digits 1-7 and whitespace
-tesseract::ocr_data("Scale_notext.jpeg",
-               engine = tesseract::tesseract(options = list(tessedit_char_whitelist = " 1234567")))
+eng_spec <- tesseract::tesseract(options = list(tessedit_char_whitelist = " 1234567"))
+
+# image that only contains the scale and no text 
+tesseract::ocr_data("Scale_notext.jpeg", engine = eng_spec) |> knitr::kable()
 ```
-The readout worked good for all digits on white background, next we may use other engine parameters as well as image processing to obtain the scale in its entirety.
+
+The readout worked good for all digits on white background, next we may use other engine parameters as well as image pre-processing to obtain the scale in its entirety. First off, we will try to convert to black and white to correctly identify the entire scale. The R package magick offers powerful tools for image processing.
+
+```{r, fig.width = 8, fig.height = 2}
+# reset
+setwd("./../../../KIDs/Security")
+
+# image
+img_m <- magick::image_read("Scale_notext.jpeg")
+
+# open image for a closer look
+# magick::image_browse(img_m)
+
+# plot image 
+par(mar = c(1, 4, 1, 2))
+plot(img_m)
+```
+
+Now to switch from grayscale to a true black and white there are two different options. We can either use the function image_convert() or image_threshold().
+
+```{r, fig.width = 8, fig.height = 2}
+# convert
+img_m_conv <- magick::image_convert(img_m, type = "Bilevel")
+
+# display
+# plot image 
+par(mar = c(1, 4, 1, 2))
+plot(img_m_conv)
+
+# repeat ocr
+tesseract::ocr_data(img_m_conv, engine = eng_spec)|> knitr::kable()
+```
+As visible from the table we are now able to detect the entire scale, on top of that the classification confidence increased significantly. Lets see if we can increase the confidence by using different thresholds when converting to black and white.
+
+```{r, fig.width = 5, fig.height = 6}
+# alter with varying thresholds
+img_m_thresh <- lapply(paste0(seq(10, 90, 10), "%"), 
+                       \(x) magick::image_threshold(img_m, threshold = x, type = "white"))
+# align
+par(mfrow = c(9, 1), mar = c(1, 4, 1, 2))
+
+# plot
+lapply(img_m_thresh, \(x) plot(x)) |> invisible()
+```
+
+For the plots above the threshold starts art 10% and increases to 90% in increments of 10%.In theory we want to choose a threshold that keeps the digits as legible as possible while converting the shade to white. By observing the plots we know that this threshold has to lie somewhere between 70% and 80%. We have to keep in mind however, that this will vary across different KIDs, thus this parameter will have to be determined via cross validation at a later stage, should it perform better than bi-level processing.
+
+```{r}
+lapply(img_m_thresh, 
+         \(x) tesseract::ocr_data(x, engine = eng_spec))
+```
+
+
+
+ 
+ 
 
 
 
