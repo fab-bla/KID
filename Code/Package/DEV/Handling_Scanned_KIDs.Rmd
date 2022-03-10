@@ -48,7 +48,7 @@ setwd("./../../../KIDs/Security")
 pd <- list.files(pattern = ".pdf")[1]
 
 # first convert to png so we can use tesseract directly
-pdftools::pdf_convert(pd, pages = 1, filenames = c("testscanread.png"), dpi = 600)
+pdftools::pdf_convert(pd, pages = 1, dpi = 600) -> img_f
 
 # set whitelist to digits 1-7 and whitespace
 eng_spec <- tesseract::tesseract(options = list(tessedit_char_whitelist = " 1234567"))
@@ -105,7 +105,33 @@ For the plots above the threshold starts art 10% and increases to 90% in increme
 
 ```{r}
 lapply(img_m_thresh, 
-         \(x) tesseract::ocr_data(x, engine = eng_spec))
+       \(x) tesseract::ocr_data(x, engine = eng_spec) |> knitr::kable())
+```
+
+Even though the threshold approach did not significantly improve the confidence in identification, it offers a parameter for optimization at a later stage. Accordingly, to be able to tell for sure whether an additional CV parameter is worth the computational complexity will be determined at a later stage.
+
+## Performance in untrimmed files
+
+Cropping an image drastically reduces noise, accordingly removing less of the noise will most likely come with a few problems. Before evaluating which options for cropping are realistically executable, we will explore the performance without cropping.
+
+```{r}
+# reset
+setwd("./../../../KIDs/Security")
+
+# image
+img_fm <- magick::image_read(img_f)
+
+# unaltered ocr
+ocr_full_u <- tesseract::ocr_data(img_f, engine = eng_spec)
+
+# bi-level
+biL_img_f <- magick::image_convert(img_fm, type = "Bilevel")
+
+# bi-level altered ocr
+ocr_full_a <- tesseract::ocr_data(biL_img_f, engine = eng_spec)
+
+# return
+ocr_full_a |> knitr::kable()
 ```
 
 
