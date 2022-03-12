@@ -1,0 +1,93 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[aodsor,preprint]{imsart}
+\usepackage{amsthm,amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage[authoryear,round]{natbib}
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[utf8]{inputenc}
+%\usepackage{ngerman}
+
+
+% settings
+%\pubyear{2005}
+%\volume{0}
+%\issue{0}
+%\firstpage{1}
+%\lastpage{8}
+%\arxiv{arXiv:0000.0000}
+
+
+\numberwithin{equation}{section}
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{corollary}[thm]{Corollary}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem*{remark*}{Remark}
+
+% customize math operators
+\newcommand{\E}{{\mathbb E}}
+
+
+\begin{document}
+
+\begin{frontmatter}
+\title{Scraping the Synthetic Risk and Reward Indicator from Funds' Key Information Documents}
+\runtitle{A Sample Document}
+
+\begin{aug}
+\author{\fnms{Fabian} \snm{Blasch}\ead[label=e1]{blasch57@gmail.com}}
+
+
+
+%\runauthor{F. Fabian Blasch}
+
+\affiliation{University of Vienna}
+
+\end{aug}
+
+\begin{abstract}
+INSERT ABSTRACT
+\end{abstract}
+
+\begin{keyword}[class=MSC]
+\kwd[Primary ]{Key1}
+\kwd{Key2}
+\kwd[; secondary ]{Key3}
+\end{keyword}
+
+\begin{keyword}
+\kwd{Scraping}
+\kwd{\LaTeXe}
+\end{keyword}
+
+\end{frontmatter}
+
+\section{Introduction}
+\text{ }\\\\
+INSERT INTRO
+
+\newpage
+%========= Appendix ==========
+
+\appendix
+
+
+\section{Code}
+\label{sec:app}
+
+Appendix for code and additional illustrations
+
+\subsection{Functions}
+
+
+
+
+%====== References ========
+
+
+\bibliographystyle{imsart-nameyear}
+\bibliography{sources}{}
+
+
+\end{document}
