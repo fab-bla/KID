@@ -13,7 +13,7 @@ SRRI_ext_rec <- function(doc, dpi = 71.5, page = 1, tolh = 35, tolv = 10.5){
   ## load ##
 
   # bitmap
-  btmp_n_bg_col <- KIDs::bg_col(doc)
+  btmp_n_bg_col <- KIDs::bg_col(doc, dpi = dpi, page = page)
 
   # scale cand
   pdf.data  <- KIDs::scale_cand_coord(doc)
