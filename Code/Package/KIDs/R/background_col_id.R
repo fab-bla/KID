@@ -4,16 +4,23 @@
 # dpi...desired input res
 
 #' @export
-bg_col <- function(doc, dpi = 71.5){
-  
+bg_col <- function(doc, dpi = dpi, page = page){
+
   # input
-  btmp <- pdftools::pdf_render_page(doc, dpi = dpi)
-  
-  # flatten array to matrix 
+  btmp <- pdftools::pdf_render_page(doc, dpi = dpi, page = page)
+
+  # flatten array to matrix
   colm <- apply(btmp, 2:3, \(x) paste(x, collapse = ""))
-  
-  # return most common color 
-  names(which.max(table(colm)))
-  
+
+  # identify background color
+  colm <- names(which.max(table(colm)))
+
+  # split
+  col_split <- gsub("(.{2})", "\\1 ", colm) |> strsplit("\\s+")
+
+  # return most common color and bitmap
+  list("bitmap" = btmp,
+       "bgCol" = col_split)
+
 }
 
