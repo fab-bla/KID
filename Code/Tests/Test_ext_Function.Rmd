@@ -392,7 +392,7 @@ mapply(\(x){
   sapply(file_nom, \(z){
     
     # extract
-    SRRI_ext_rec(doc = z)
+    SRRI_ext_rec(doc = z) |> try()
     
   }) |> (\(y) sapply(y, \(t) ifelse(length(t) > 0, t, NA)))() # integer(0) to NA
 

@@ -37,13 +37,13 @@ SRRI_ext_rec <- function(doc, dpi = 71.5, page = 1, tolh = 35, tolv = 10.5){
   mapply(function(x, y){
 
     # subset bitmap
-    bitmap[ , x[1]:x[2], y[1]:y[2]] -> sub.bit
+    btmp_n_bg_col[["bitmap"]][ , x[1]:x[2], y[1]:y[2]] -> sub.bit
 
     # calculate percentage of points that are not the background color
-    (sub.bit[1, , ] %in% "ff" &
-     sub.bit[2, , ] %in% "ff" &
-     sub.bit[3, , ] %in% "ff" &
-     sub.bit[4, , ] %in% "ff") -> logi
+    (sub.bit[1, , ] %in% btmp_n_bg_col[["bgCol"]][1] &
+     sub.bit[2, , ] %in% btmp_n_bg_col[["bgCol"]][2] &
+     sub.bit[3, , ] %in% btmp_n_bg_col[["bgCol"]][3] &
+     sub.bit[4, , ] %in% btmp_n_bg_col[["bgCol"]][4]) -> logi
 
     # rel. amount of non white pixels
     1 - mean(logi)

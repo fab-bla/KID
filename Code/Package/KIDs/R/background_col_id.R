@@ -16,7 +16,7 @@ bg_col <- function(doc, dpi = dpi, page = page){
   colm <- names(which.max(table(colm)))
 
   # split
-  col_split <- gsub("(.{2})", "\\1 ", colm) |> strsplit("\\s+")
+  col_split <- gsub("(.{2})", "\\1 ", colm) |> strsplit("\\s+") |> unlist()
 
   # return most common color and bitmap
   list("bitmap" = btmp,
