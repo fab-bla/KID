@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  22 MAR 2022 19:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  22 MAR 2022 20:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -676,24 +676,38 @@ G,.JBIG2,.JB2,.eps]
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package biblatex Info: Trying to load language 'german' -> 'german-apa'...
-Package biblatex Info: ... file 'german-apa.lbx' found.
+Package biblatex Info: Trying to load language 'english' -> 'english-apa'...
+Package biblatex Info: ... file 'english-apa.lbx' found.
 
-(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-apa\german-apa
-.lbx
-File: german-apa.lbx 2021/12/24 v9.15 APA biblatex localisation
-Package biblatex Info: Trying to load language 'german'...
-Package biblatex Info: ... file 'german.lbx' found.
+(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-apa\english-ap
+a.lbx
+File: english-apa.lbx 2021/12/24 v9.15 APA biblatex localisation
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
 
-(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\german.lbx
-File: german.lbx 2022/02/02 v3.17 biblatex localization (PK/MW)
+(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\english.lb
+x
+File: english.lbx 2022/02/02 v3.17 biblatex localization (PK/MW)
 )
-Package biblatex Info: Trying to load language 'german'...
-Package biblatex Info: ... file 'german.lbx' found.
+Package biblatex Info: Trying to load language 'american' -> 'american-apa'...
+Package biblatex Info: ... file 'american-apa.lbx' found.
 
-(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\german.lbx
-File: german.lbx 2022/02/02 v3.17 biblatex localization (PK/MW)
-))
+(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-apa\american-a
+pa.lbx
+File: american-apa.lbx 2021/12/24 v9.15 APA biblatex localisation
+Package biblatex Info: Trying to load language 'american'...
+Package biblatex Info: ... file 'american.lbx' found.
+
+(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\american.l
+bx
+File: american.lbx 2022/02/02 v3.17 biblatex localization (PK/MW)
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\english.lb
+x
+File: english.lbx 2022/02/02 v3.17 biblatex localization (PK/MW)
+))))
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
@@ -755,27 +769,26 @@ Package hyperref Warning: Suppressing link with empty target on input line 80.
 [1{C:/Users/blasc/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
 
 ] [2]
+Overfull \hbox (8.96552pt too wide) in paragraph at lines 101--101
+[][]\OT1/cmr/m/n/10 FMA. (2011). Or-di-nance of the fi-nan-cial mar-ket au-thor
+-ity. \OT1/cmr/m/it/10 KID-V; BGBI II 265/2011\OT1/cmr/m/n/10 . 
+ []
+
 [3] (Bachelor_Thesis_KIDs.aux)
-
-Package rerunfilecheck Warning: File `Bachelor_Thesis_KIDs.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Bachelor_Thesis_KIDs.out':
-(rerunfilecheck)             Before: 19F9045567F17348F2E4176FB0968AAE;364
-(rerunfilecheck)             After:  7ECFB8E73C533A7940B522E64854D678;359.
+Package rerunfilecheck Info: File `Bachelor_Thesis_KIDs.out' has not changed.
+(rerunfilecheck)             Checksum: 19F9045567F17348F2E4176FB0968AAE;364.
 Package logreq Info: Writing requests to 'Bachelor_Thesis_KIDs.run.xml'.
 \openout1 = `Bachelor_Thesis_KIDs.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18137 strings out of 478582
- 317842 string characters out of 2844344
- 1072549 words of memory out of 3000000
- 36108 multiletter control sequences out of 15000+600000
+ 18337 strings out of 478582
+ 321889 string characters out of 2844344
+ 1095374 words of memory out of 3000000
+ 36304 multiletter control sequences out of 15000+600000
  476311 words of font info for 55 fonts, out of 8000000 for 9000
- 1143 hyphenation exceptions out of 8191
- 60i,8n,68p,958b,2798s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 1141 hyphenation exceptions out of 8191
+ 60i,8n,68p,958b,5035s stack positions out of 10000i,1000n,20000p,200000b,80000s
 <C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmcsc10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/
@@ -788,7 +801,7 @@ ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/bl
 asc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/
 Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.
 pfb>
-Output written on Bachelor_Thesis_KIDs.pdf (3 pages, 140104 bytes).
+Output written on Bachelor_Thesis_KIDs.pdf (3 pages, 142369 bytes).
 PDF statistics:
  90 PDF objects out of 1000 (max. 8388607)
  9 named destinations out of 1000 (max. 500000)
