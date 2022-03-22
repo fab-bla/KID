@@ -2,7 +2,16 @@
 \documentclass[aodsor,preprint]{imsart}
 \usepackage{amsthm,amsmath,amssymb}
 \usepackage{graphicx}
-\usepackage[authoryear,round]{natbib}
+%\usepackage[authoryear,round]{natbib}
+\usepackage[
+backend=biber,
+natbib=true,
+language = german,
+doi = false, url = false, isbn = false, eprint = false,
+style = apa]
+{biblatex}
+\DeclareLanguageMapping{english}{english-apa}
+\addbibresource{sources.bib}
 \usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[utf8]{inputenc}
 %\usepackage{ngerman}
@@ -65,7 +74,7 @@ INSERT ABSTRACT
 
 \section{Introduction}
 %\text{ }\\\\
-According to BGBl. II Nr. 265/2011, effective 2011, every undertaking for collective investment in transferable securities (UCITS), has to publish a key information document (KID). Said document is supposed to inform potential and current investors about various characteristics of the investments at hand. Besides a short description of the investments as well as performance measured against a benchmark, this document also contains a synthetic risk- and reward indicator (SRRI). As the name suggests, the purpose of this indicator is to measure the risk associated with an investment in the respective fund. How the SRRI is derived depends on the class of investment fund and will be described in greater detail in a separate subsection. Independent of the exact procedure of derivation the underlying interpretation of risk is measured via the volatility of returns.\\
+According to BGBl. II Nr. 265/2011, effective 2011, every undertaking for collective investment in transferable securities (UCITS), has to publish a key information document (KID)\citep{BGB1}. Said document is supposed to inform potential and current investors about various characteristics of the investments at hand. Besides a short description of the investments as well as performance measured against a benchmark, this document also contains a synthetic risk- and reward indicator (SRRI). As the name suggests, the purpose of this indicator is to measure the risk associated with an investment in the respective fund. How the SRRI is derived depends on the class of investment fund and will be described in greater detail in a separate subsection. Independent of the exact procedure of derivation the underlying interpretation of risk is measured via the volatility of returns.\\
 The aim of this thesis is to firstly, give a short and precise introduction into the calculation of the SRRI.Then the data is briefly presented and the approach to measuring extraction performance is discussed. The following sections focus shifts to extracting the SRRI which is displayed as a graph, usually on the first page of every KID. The description of the extraction is based on pseudo-code which aims to aid the reader in understanding the approach taken to obtain the SRRI. In order to keep the structure as simple as possible the proccess is split into a parent function which calls a variety of helper functions.
 
 \newpage
@@ -87,8 +96,8 @@ Appendix for code and additional illustrations
 %====== References ========
 
 
-\bibliographystyle{imsart-nameyear}
-\bibliography{sources}{}
+\newpage
+\printbibliography
 
 
 \end{document}
