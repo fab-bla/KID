@@ -89,23 +89,23 @@ The SRRI aims to measure risk via the volatility of weekly returns from the last
 
 where $r_{f, t}$ is the fund's return and $\overline{r_f}$ represents the mean of returns over $T$ periods. Then scaling via  $m$, the return frequency within a year, yields the standard deviation of yearly returns. For illustrative purposes, the calculation using weekly returns would result in $m = 52$, as there are 52 months in a year and $T = 5 * 52 = 260$ the number of months in 5 years. To obtain the SRRI which is measured on a scale from 1 to 7 the regulating autorithy provides a table.\\
 \begin{center}
-\begin{tabular}{l|l|l}
+\begin{tabular}{|c|c|c}
 	\hline
-	SRRI & $\sigma_f$ greater or equal to & $\sigma_f$ less than\\
+	SRRI & $\sigma_f$ \\
 	\hline
-	1 & 0\% & 0.5\%\\
+	1 & $0\% \leq\sigma_f<0.5\%$\\
 	\hline
-	2 & 0.5\% & 2\%\\
+	2 & $0.5\%\leq\sigma_f<2\%$\\
 	\hline
-	3 & 2\% & 5\%\\
+	3 & $2\%\leq\sigma_f<5\%$\\
 	\hline
-	4 & 5\% & 10\%\\
+	4 & $5\%\leq\sigma_f<10\%$\\
 	\hline
-	5 & 10\% & 15\%\\
+	5 & $10\%\leq\sigma_f<15\%$\\
 	\hline
-	6 & 15\% & 25\%\\
+	6 & $15\%\leq\sigma_f<25\%$\\
 	\hline
-	7 & 25\% & \\
+	7 & $25\%\geq\sigma_f$\\
 	\hline
 \end{tabular}
 \end{center}
