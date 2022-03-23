@@ -15,6 +15,7 @@ style = apa]
 \usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{relsize}
+\usepackage{dsfont}
 %\usepackage{ngerman}
 
 
@@ -87,7 +88,7 @@ The SRRI aims to measure risk via the volatility of weekly returns from the last
 \sigma_f = \sqrt{\frac{m}{T - 1}\text{ }\mathlarger{\sum}_{t = 1}^{T} (r_{f, t} - \overline{r_f})^2},
 \]
 
-where $r_{f, t}$ is the fund's return and $\overline{r_f}$ represents the mean of returns over $T$ periods. Then scaling via  $m$, the return frequency within a year, yields the standard deviation of yearly returns. For illustrative purposes, the calculation using weekly returns would result in $m = 52$, as there are 52 months in a year and $T = 5 * 52 = 260$ the number of months in 5 years. To obtain the SRRI which is measured on a scale from 1 to 7 the regulating autorithy provides a table.\\
+where $r_{f, t}$ is the fund's return and $\overline{r_f}$ represents the mean of returns over $T$ periods. Then scaling via  $m$, the return frequency within a year, yields the standard deviation of yearly returns. For illustrative purposes, the calculation using weekly returns would result in $m = 52$, as there are 52 months in a year and $T = 5 * 52 = 260$ the number of months in 5 years. To obtain the SRRI which is measured on a scale from 1 to 7 the regulating autorithy provides a table.
 \begin{center}
 \begin{tabular}{|c|c|c}
 	\hline
@@ -111,6 +112,14 @@ where $r_{f, t}$ is the fund's return and $\overline{r_f}$ represents the mean o
 \end{center}
 
 \section{Measuring Scraping Performance}
+
+The SRRI is measured on an increasing ordinal scale, with 7 being associated with the highest risk and simultaneously also with the highest return. This would in theory allow for a measurement of predictive performance utilizing the abolute or squared difference between prediction and actual value. However, in this case we want to measure whether the read-out was successful or not. Hence the performance evaluation will be based on predicting correctly. Formally this means, we will use a discrete metric, i.e
+
+\[
+Accuracy = \frac{1}{n}\mathlarger{\sum}_{i = 1}^n\mathds{1}_{\{pred_i \text{ }= \text{ } act_i\}}\text{.}
+\]
+
+Put differently, the accuracy measure is equivalent to the relative amount of correctly predicted cases.
 
 \section{Data}
 
