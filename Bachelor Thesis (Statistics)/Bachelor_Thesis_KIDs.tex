@@ -14,6 +14,7 @@ style = apa]
 \addbibresource{sources.bib}
 \usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[utf8]{inputenc}
+\usepackage{relsize}
 %\usepackage{ngerman}
 
 
@@ -49,7 +50,7 @@ style = apa]
 
 
 
-%\runauthor{F. Fabian Blasch}
+%\runauthor{Fabian Blasch}
 
 \affiliation{University of Vienna}
 
@@ -73,11 +74,42 @@ INSERT ABSTRACT
 \end{frontmatter}
 
 \section{Introduction}
-%\text{ }\\\\
 According to BGBl. II Nr. 265/2011, effective 2011, every undertaking for collective investment in transferable securities (UCITS), has to publish a key information document (KID)\citep{BGB1}. Said document is supposed to inform potential and current investors about various characteristics of the investments at hand. Besides a short description of the investments as well as performance measured against a benchmark, this document also contains a synthetic risk- and reward indicator (SRRI). As the name suggests, the purpose of this indicator is to measure the risk associated with an investment in the respective fund. How the SRRI is derived depends on the class of investment fund and will be described in greater detail in a separate subsection. Independent of the exact procedure of derivation the underlying interpretation of risk is measured via the volatility of returns.\\
 The aim of this thesis is to firstly, give a short and precise introduction into the calculation of the SRRI.Then the data is briefly presented and the approach to measuring extraction performance is discussed. The following sections focus shifts to extracting the SRRI which is displayed as a graph, usually on the first page of every KID. The description of the extraction is based on pseudo-code which aims to aid the reader in understanding the approach taken to obtain the SRRI. In order to keep the structure as simple as possible the proccess is split into a parent function which calls a variety of helper functions.
 
 \newpage
+
+\section{SRRI}
+
+The SRRI aims to measure risk via the volatility of weekly returns from the last 5 years, should weekly retuns be unobtainable, the calculation may be executed using montly returns.Accordingly, by ordinance the SRRI may be obtained as follows
+
+\[
+\sigma_f = \sqrt{\frac{m}{T - 1}\text{ }\mathlarger{\sum}_{t = 1}^{T} (r_{f, t} - \overline{r_f})^2},
+\]
+
+where $r_{f, t}$ is the fund's return and $\overline{r_f}$ represents the mean of returns over $T$ periods. Then scaling via  $m$, the return frequency within a year, yields the standard deviation of yearly returns. For illustrative purposes, the calculation using weekly returns would result in $m = 52$, as there are 52 months in a year and $T = 5 * 52 = 260$ the number of months in 5 years. To obtain the SRRI which is measured on a scale from 1 to seven the regulating autorithy provides a table.
+\begin{center}
+\begin{tabular}{l|l|l}
+	\hline
+	SRRI & $\sigma_f$ greater or equal to & $\sigma_f$ less than\\
+	\hline
+	1 & 0\% & 0.5\%\\
+	\hline
+	2 & 0.5\% & 2\%\\
+	\hline
+	3 & 2\% & 5\%\\
+	\hline
+	4 & 5\% & 10\%\\
+	\hline
+	5 & 10\% & 15\%\\
+	\hline
+	6 & 15\% & 25\%\\
+	\hline
+	7 & 25\% & \\
+	\hline
+\end{tabular}
+\end{center}
+
 %========= Appendix ==========
 
 \appendix

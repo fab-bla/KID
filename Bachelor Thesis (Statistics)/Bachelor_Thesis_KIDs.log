@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  22 MAR 2022 20:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  23 MAR 2022 12:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -614,6 +614,9 @@ Package: inputenc 2021/02/14 v1.3d Input encoding file
 \inpenc@prehook=\toks31
 \inpenc@posthook=\toks32
 )
+(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/relsize\relsize.sty
+Package: relsize 2013/03/29 ver 4.1
+)
 \c@thm=\count424
 
 
@@ -624,24 +627,24 @@ Package biblatex Warning: Load 'inputenc' before biblatex.
 (Bachelor_Thesis_KIDs.aux)
 \openout1 = `Bachelor_Thesis_KIDs.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
 
 (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
@@ -661,16 +664,8 @@ ii
 (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-
-(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/grfext\grfext.sty
-Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
-)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
-Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 504.
 
 (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
 fg
@@ -716,8 +711,8 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Bachelor_Thesis_KIDs.bbl' found.
  (Bachelor_Thesis_KIDs.bbl)
-Package biblatex Info: Reference section=0 on input line 41.
-Package biblatex Info: Reference segment=0 on input line 41.
+Package biblatex Info: Reference section=0 on input line 42.
+Package biblatex Info: Reference segment=0 on input line 42.
 
 (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
 Package: color 2021/12/07 v1.3c Standard LaTeX Color (DPC)
@@ -727,7 +722,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 149.
 )
-Package hyperref Info: Link coloring ON on input line 41.
+Package hyperref Info: Link coloring ON on input line 42.
  (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 
@@ -740,20 +735,20 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count433
 )
-LaTeX Info: Redefining \ref on input line 41.
-LaTeX Info: Redefining \pageref on input line 41.
-LaTeX Info: Redefining \nameref on input line 41.
+LaTeX Info: Redefining \ref on input line 42.
+LaTeX Info: Redefining \pageref on input line 42.
+LaTeX Info: Redefining \nameref on input line 42.
  (Bachelor_Thesis_KIDs.out) (Bachelor_Thesis_KIDs.out)
 \@outlinefile=\write4
 \openout4 = `Bachelor_Thesis_KIDs.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 44.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 45.
 
 
 (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 44.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 45.
 
 
 (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -761,7 +756,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/scit' undefined
-(Font)              using `OT1/cmr/m/it' instead on input line 54.
+(Font)              using `OT1/cmr/m/it' instead on input line 55.
 
 
 Package hyperref Warning: Suppressing link with empty target on input line 80.
@@ -769,41 +764,46 @@ Package hyperref Warning: Suppressing link with empty target on input line 80.
 [1{C:/Users/blasc/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
 
 ] [2]
-Overfull \hbox (8.96552pt too wide) in paragraph at lines 101--101
+Overfull \hbox (8.96451pt too wide) in paragraph at lines 133--133
 [][]\OT1/cmr/m/n/10 FMA. (2011). Or-di-nance of the fi-nan-cial mar-ket au-thor
--ity. \OT1/cmr/m/it/10 KID-V; BGBI II 265/2011\OT1/cmr/m/n/10 . 
+-ity. \OT1/cmr/m/it/10 KID-V, BGBI II 265/2011\OT1/cmr/m/n/10 . 
  []
 
 [3] (Bachelor_Thesis_KIDs.aux)
 Package rerunfilecheck Info: File `Bachelor_Thesis_KIDs.out' has not changed.
-(rerunfilecheck)             Checksum: 19F9045567F17348F2E4176FB0968AAE;364.
+(rerunfilecheck)             Checksum: E8401B0611D6EE407502CFCDFA60D2ED;427.
 Package logreq Info: Writing requests to 'Bachelor_Thesis_KIDs.run.xml'.
 \openout1 = `Bachelor_Thesis_KIDs.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18337 strings out of 478582
- 321889 string characters out of 2844344
- 1095374 words of memory out of 3000000
- 36304 multiletter control sequences out of 15000+600000
- 476311 words of font info for 55 fonts, out of 8000000 for 9000
+ 18376 strings out of 478582
+ 322139 string characters out of 2844344
+ 1095548 words of memory out of 3000000
+ 36341 multiletter control sequences out of 15000+600000
+ 477558 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,8n,68p,958b,5035s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 60i,10n,68p,958b,5035s stack positions out of 10000i,1000n,20000p,200000b,80000s
 <C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmcsc10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmmi8.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/blasc/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/blasc/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/blasc/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/blasc/AppDa
-ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/bl
-asc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/
-Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.
-pfb>
-Output written on Bachelor_Thesis_KIDs.pdf (3 pages, 143063 bytes).
+public/amsfonts/cm/cmex10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/blasc/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/blasc/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/blasc/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/blasc/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users
+/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C
+:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8
+.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmr9.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmsy10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmti10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/blasc/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb>
+Output written on Bachelor_Thesis_KIDs.pdf (3 pages, 191358 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
- 9 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 119 PDF objects out of 1000 (max. 8388607)
+ 10 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
