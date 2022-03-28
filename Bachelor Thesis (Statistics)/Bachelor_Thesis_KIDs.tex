@@ -16,6 +16,7 @@ style = apa]
 \usepackage[utf8]{inputenc}
 \usepackage{relsize}
 \usepackage{dsfont}
+\usepackage{float}
 %\usepackage{ngerman}
 
 
@@ -89,7 +90,9 @@ The SRRI aims to measure risk via the volatility of weekly returns from the last
 \]
 
 where $r_{f, t}$ is the fund's return and $\overline{r_f}$ represents the mean of returns over $T$ periods. Then scaling via  $m$, the return frequency within a year, yields the standard deviation of yearly returns. For illustrative purposes, the calculation using weekly returns would result in $m = 52$, as there are 52 months in a year and $T = 5 * 52 = 260$ the number of months in 5 years. To obtain the SRRI which is measured on a scale from 1 to 7 the regulating autorithy provides a table.
+\begin{table}[H]
 \begin{center}
+	\caption{SRRI Classification}
 \begin{tabular}{|c|c|c}
 	\hline
 	SRRI & $\sigma_f$ \\
@@ -110,6 +113,7 @@ where $r_{f, t}$ is the fund's return and $\overline{r_f}$ represents the mean o
 	\hline
 \end{tabular}
 \end{center}
+\end{table}
 
 \section{Measuring Scraping Performance}
 
@@ -120,9 +124,17 @@ Accuracy = \frac{1}{n}\mathlarger{\sum}_{i = 1}^n\mathds{1}_{\{pred_i \text{ }= 
 \]
 
 Put differently, the accuracy measure is equivalent to the relative amount of correctly predicted cases.
+\newpage
 
 \section{Data}
+As previoulsy mentioned the KIDs are available to download from the respective fund managing firm. The sample used for measuring the extracting performance contains 121 Key Information documents, obtained from the websites of the respective KAG (Kapitalanlagegesellschaft). The distribution of the SRRI as well as the amount of KIDs per KAG within the sample are displayed below.
 
+\begin{figure}[H]
+	\includegraphics[width = 12cm]{data_overview}
+	\caption{Number of KIDs per KAG and distribution of SRRI}
+\end{figure}
+
+The two depicted plots give a good impression of the sample at hand. We can immediately observe that two KAGs are overrepresented in the sample, namely Raiffeisen and Schoellerbank. Further, we can see that for the remaining fund managing firms around 10 KIDs are available in the sample. Regarding the distribution of the SRRI, the graph depicted on the right enables us to notice that the sample seems to contain very little funds that are associated with an SRRI of 1 or 7. 
 \section{Naive Approach}
 
 \section{Agglomerative Clustering}

@@ -80,9 +80,45 @@ head(dat.valid.SRRI, 7)
 # dim
 dim(dat.valid.SRRI)
 
-# Hist
+## count KIDs per KAG ##
+
+# safe dirs 
+dirs <- list.dirs()[-c(1, 4)] # remove hardcode later
+
+# step into first KAGs dir
+setwd("Allianz")
+
+# loop over dirs
+sapply(dirs, \(x){
+  
+  # setwd
+  setwd(paste0("./../", x))
+
+  # count KIDs
+  length(list.files(pattern = ".pdf"))
+  
+}) -> sample_split
+
+# corr names
+names(sample_split) <- sapply(strsplit(names(sample_split), split = "/", fixed = TRUE), "[[", 2)
+
+
+# save
+# jpeg(file = "data_overview.jpeg", width = 700, height = 500, res = 100)
+
+# align
+par(mar = c(7, 4, 4, 2) + 0.1, mfrow = c(1, 2))
+
+# KIDs per KAG
+barplot(sort(sample_split, decreasing = T), las = 2, col = 7, ylim = c(0, 20),
+        main = "KIDs per KAG")
+
+# barplot
 barplot(table(as.numeric(dat.valid.SRRI[, "SRRI"])), main = "SRRI", col = 4, xlab = "",
         ylim = c(0, 35))
+
+# dev.off()
+
 ```
 
 # Performance evaluation
@@ -170,9 +206,6 @@ Starting with one KAG.
 ```{r, fig.width = 15, fig.height = 17}
 # setwd to file that contains KIDs
 setwd("./../../KIDs")
-
-# safe dirs 
-dirs <- list.dirs()[-c(1, 4)] # remove hardcode later
 
 # colors 
 col <- dat.col.KAG[order(dat.col.KAG[, "KAG"]), c("KAG", "HEX")]
