@@ -17,6 +17,8 @@ style = apa]
 \usepackage{relsize}
 \usepackage{dsfont}
 \usepackage{float}
+\usepackage{hyperref}
+\usepackage{xcolor}
 %\usepackage{ngerman}
 
 
@@ -134,7 +136,14 @@ As previoulsy mentioned the KIDs are available to download from the respective f
 	\caption{Number of KIDs per KAG and distribution of SRRI}
 \end{figure}
 
-The two depicted plots give a good impression of the sample at hand. We can immediately observe that two KAGs are overrepresented in the sample, namely Raiffeisen and Schoellerbank. Further, we can see that for the remaining fund managing firms around 10 KIDs are available in the sample. Regarding the distribution of the SRRI, the graph depicted on the right enables us to notice that the sample seems to contain very little funds that are associated with an SRRI of 1 or 7. 
+The two depicted plots give a good impression of the sample at hand. We can immediately observe that two KAGs are overrepresented in the sample, namely Raiffeisen and Schoellerbank. Further, we can see that for the remaining fund managing firms around 10 KIDs are available in the sample. Regarding the distribution of the SRRI, the graph depicted on the right enables us to notice that the sample seems to contain very little funds that are associated with an SRRI of 1 or 7. The low number of funds classified into the first class may be due to the way the standard deviation of retrurns is converted into the SRRI. The intervals which are used to determin the SRRI increase in length quite signigicantly. The first interval for which $0\% \leq\sigma_f<0.5\%$ spans a range of half a percent, while the intervall for the classification into the 6th class $15\%\leq\sigma_f<25\%$ spans 10\%. The other end, namely the SRRI of 7, could be underrepresented because of a lack in demand for such high risk products. Of course this is just mere speculation but interesting nonetheless.\newpage
+In regards to the extraction, to ease illustration of the coming chapters, an example document from Erste can be found \href{https://github.com/Base-R-Best-R/KID/blob/main/KIDs/Erste/kid-eb-147-t2957-at_de-de_en_4.pdf}{\textcolor{teal}{here}}. Additionally, an example of the SRRI graph as it can be found in an Erste KID is provided below.
+
+\begin{figure}[H]
+	\includegraphics[width = 12cm]{example_SRRI_graph}
+	\caption{Example of the SRRI graph from an Erste KID}
+\end{figure}
+
 \section{Naive Approach}
 
 \section{Agglomerative Clustering}
