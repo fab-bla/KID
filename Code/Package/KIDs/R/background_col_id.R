@@ -6,7 +6,7 @@
 #' @export
 bg_col <- function(doc, dpi = dpi, page = page, pass = FALSE){
 
-  # if is assumed to be white without extraction
+  # if the bg-color is assumed to be white without extraction
   if(pass) "#ffffffff"
 
   else{
