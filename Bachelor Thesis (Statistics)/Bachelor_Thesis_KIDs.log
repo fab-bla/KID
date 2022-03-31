@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  28 MAR 2022 15:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  31 MAR 2022 14:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -798,7 +798,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
                                                   \__shipout_drop_firstpage_...
 l.129 \newpage
               ]
-<data_overview.jpeg, id=71, 505.89pt x 361.35pt>
+<data_overview.jpeg, id=83, 505.89pt x 361.35pt>
 File: data_overview.jpeg Graphic file (type jpg)
 <use data_overview.jpeg>
 Package pdftex.def Info: data_overview.jpeg  used on input line 135.
@@ -815,7 +815,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.139 ...tion but interesting nonetheless.\newpage
                                                    <./data_overview.jpeg>]
-<example_SRRI_graph.png, id=78, 965.85844pt x 101.62968pt>
+<example_SRRI_graph.png, id=90, 965.85844pt x 101.62968pt>
 File: example_SRRI_graph.png Graphic file (type png)
 <use example_SRRI_graph.png>
 Package pdftex.def Info: example_SRRI_graph.png  used on input line 143.
@@ -830,28 +830,28 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.150 \newpage
-               <./example_SRRI_graph.png>] [5]
-Overfull \hbox (8.96451pt too wide) in paragraph at lines 171--171
+l.154 \subsubsection
+                    {} <./example_SRRI_graph.png>] [5] [6]
+Overfull \hbox (8.96451pt too wide) in paragraph at lines 180--180
 [][]\OT1/cmr/m/n/10 FMA. (2011). Or-di-nance of the fi-nan-cial mar-ket au-thor
 -ity. \OT1/cmr/m/it/10 KID-V, BGBI II 265/2011\OT1/cmr/m/n/10 . 
  []
 
-[6] (Bachelor_Thesis_KIDs.aux)
+[7] (Bachelor_Thesis_KIDs.aux)
 Package rerunfilecheck Info: File `Bachelor_Thesis_KIDs.out' has not changed.
-(rerunfilecheck)             Checksum: 3631FB252AC9E3E5C7456677506871EB;971.
+(rerunfilecheck)             Checksum: 5EAD5CAF000363BAE4AFDA29E4D26E57;1294.
 Package logreq Info: Writing requests to 'Bachelor_Thesis_KIDs.run.xml'.
 \openout1 = `Bachelor_Thesis_KIDs.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18933 strings out of 478582
- 329649 string characters out of 2844344
+ 18941 strings out of 478582
+ 329783 string characters out of 2844344
  1109279 words of memory out of 3000000
- 36869 multiletter control sequences out of 15000+600000
+ 36873 multiletter control sequences out of 15000+600000
  478147 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,10n,68p,1155b,5035s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 60i,10n,68p,1814b,5035s stack positions out of 10000i,1000n,20000p,200000b,80000s
 <C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmcsc10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/
@@ -875,9 +875,9 @@ ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users
 /blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><
 C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/doublestroke/ds
 rom10.pfb>
-Output written on Bachelor_Thesis_KIDs.pdf (6 pages, 295004 bytes).
+Output written on Bachelor_Thesis_KIDs.pdf (7 pages, 305079 bytes).
 PDF statistics:
- 182 PDF objects out of 1000 (max. 8388607)
- 20 named destinations out of 1000 (max. 500000)
- 83 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 205 PDF objects out of 1000 (max. 8388607)
+ 24 named destinations out of 1000 (max. 500000)
+ 107 words of extra memory for PDF output out of 10000 (max. 10000000)
 
