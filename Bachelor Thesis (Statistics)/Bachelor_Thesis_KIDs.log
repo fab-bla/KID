@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  31 MAR 2022 14:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  31 MAR 2022 14:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -830,16 +830,22 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.154 \subsubsection
-                    {} <./example_SRRI_graph.png>] [5] [6]
-Overfull \hbox (8.96451pt too wide) in paragraph at lines 180--180
+l.154 \subsection
+                 {Naive Approach} <./example_SRRI_graph.png>] [5] [6]
+Overfull \hbox (8.96451pt too wide) in paragraph at lines 178--178
 [][]\OT1/cmr/m/n/10 FMA. (2011). Or-di-nance of the fi-nan-cial mar-ket au-thor
 -ity. \OT1/cmr/m/it/10 KID-V, BGBI II 265/2011\OT1/cmr/m/n/10 . 
  []
 
 [7] (Bachelor_Thesis_KIDs.aux)
-Package rerunfilecheck Info: File `Bachelor_Thesis_KIDs.out' has not changed.
-(rerunfilecheck)             Checksum: 5EAD5CAF000363BAE4AFDA29E4D26E57;1294.
+
+Package rerunfilecheck Warning: File `Bachelor_Thesis_KIDs.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Bachelor_Thesis_KIDs.out':
+(rerunfilecheck)             Before: 5EAD5CAF000363BAE4AFDA29E4D26E57;1294
+(rerunfilecheck)             After:  983DEE5F021F2D4E765A2C8CAEC88B2A;1234.
 Package logreq Info: Writing requests to 'Bachelor_Thesis_KIDs.run.xml'.
 \openout1 = `Bachelor_Thesis_KIDs.run.xml'.
 
@@ -852,30 +858,34 @@ Here is how much of TeX's memory you used:
  478147 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,10n,68p,1814b,5035s stack positions out of 10000i,1000n,20000p,200000b,80000s
-<C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmbx10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmcsc10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmex10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/blasc/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/blasc/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/blasc/AppData/
-Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/blasc/
-AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/User
-s/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+
+pdfTeX warning (dest): name{subsubsection.5.1.1} has been referenced but does n
+ot exist, replaced by a fixed one
+
 <C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-r6.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
-s/cm/cmr7.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/
-amsfonts/cm/cmr8.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmr9.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/blasc/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/blasc/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/blasc/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/blasc/A
-ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users
-/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><
-C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/doublestroke/ds
-rom10.pfb>
-Output written on Bachelor_Thesis_KIDs.pdf (7 pages, 305079 bytes).
+bx10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
+nts/cm/cmcsc10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmex10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/blasc/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/blasc/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/blasc/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/blasc/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/
+blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C
+:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6
+.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmr7.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmr8.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmr9.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmsy10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/blasc/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/blasc/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/blasc/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/b
+lasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:
+/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/doublestroke/dsro
+m10.pfb>
+Output written on Bachelor_Thesis_KIDs.pdf (7 pages, 305039 bytes).
 PDF statistics:
  205 PDF objects out of 1000 (max. 8388607)
  24 named destinations out of 1000 (max. 500000)
