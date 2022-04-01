@@ -101,12 +101,12 @@ sapply(dirs, \(x){
 
 # corr names
 names(sample_split) <- sapply(strsplit(names(sample_split), split = "/", fixed = TRUE), "[[", 2)
-
+dirs
 
 # save
 # jpeg(file = "data_overview.jpeg", width = 700, height = 500, res = 100)
 
-# align
+# alignd
 par(mar = c(7, 4, 4, 2) + 0.1, mfrow = c(1, 2))
 
 # KIDs per KAG

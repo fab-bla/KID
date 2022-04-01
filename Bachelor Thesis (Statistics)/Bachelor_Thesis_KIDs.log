@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  31 MAR 2022 14:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  1 APR 2022 13:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -798,11 +798,11 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
                                                   \__shipout_drop_firstpage_...
 l.129 \newpage
               ]
-<data_overview.jpeg, id=83, 505.89pt x 361.35pt>
+<data_overview.jpeg, id=80, 481.8pt x 301.125pt>
 File: data_overview.jpeg Graphic file (type jpg)
 <use data_overview.jpeg>
 Package pdftex.def Info: data_overview.jpeg  used on input line 135.
-(pdftex.def)             Requested size: 341.43306pt x 243.88419pt.
+(pdftex.def)             Requested size: 341.43306pt x 213.40048pt.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/scit' undefined
@@ -815,7 +815,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.139 ...tion but interesting nonetheless.\newpage
                                                    <./data_overview.jpeg>]
-<example_SRRI_graph.png, id=90, 965.85844pt x 101.62968pt>
+<example_SRRI_graph.png, id=87, 965.85844pt x 101.62968pt>
 File: example_SRRI_graph.png Graphic file (type png)
 <use example_SRRI_graph.png>
 Package pdftex.def Info: example_SRRI_graph.png  used on input line 143.
@@ -831,63 +831,70 @@ s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.154 \subsection
-                 {Naive Approach} <./example_SRRI_graph.png>] [5] [6]
-Overfull \hbox (8.96451pt too wide) in paragraph at lines 178--178
+                 {Naive Approach} <./example_SRRI_graph.png>]
+<example_SRRI_graph_naive.png, id=103, 965.85844pt x 101.62968pt>
+File: example_SRRI_graph_naive.png Graphic file (type png)
+<use example_SRRI_graph_naive.png>
+Package pdftex.def Info: example_SRRI_graph_naive.png  used on input line 161.
+(pdftex.def)             Requested size: 341.43306pt x 35.92603pt.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/scit' undefined
+(Font)              using `OT1/cmr/m/sc' instead on input line 162.
+
+[5
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.166 \newpage
+               <./example_SRRI_graph_naive.png>] [6]
+Overfull \hbox (8.96451pt too wide) in paragraph at lines 187--187
 [][]\OT1/cmr/m/n/10 FMA. (2011). Or-di-nance of the fi-nan-cial mar-ket au-thor
 -ity. \OT1/cmr/m/it/10 KID-V, BGBI II 265/2011\OT1/cmr/m/n/10 . 
  []
 
 [7] (Bachelor_Thesis_KIDs.aux)
-
-Package rerunfilecheck Warning: File `Bachelor_Thesis_KIDs.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Bachelor_Thesis_KIDs.out':
-(rerunfilecheck)             Before: 5EAD5CAF000363BAE4AFDA29E4D26E57;1294
-(rerunfilecheck)             After:  983DEE5F021F2D4E765A2C8CAEC88B2A;1234.
+Package rerunfilecheck Info: File `Bachelor_Thesis_KIDs.out' has not changed.
+(rerunfilecheck)             Checksum: 983DEE5F021F2D4E765A2C8CAEC88B2A;1234.
 Package logreq Info: Writing requests to 'Bachelor_Thesis_KIDs.run.xml'.
 \openout1 = `Bachelor_Thesis_KIDs.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18941 strings out of 478582
- 329783 string characters out of 2844344
+ 18950 strings out of 478582
+ 330082 string characters out of 2844344
  1109279 words of memory out of 3000000
- 36873 multiletter control sequences out of 15000+600000
+ 36882 multiletter control sequences out of 15000+600000
  478147 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,10n,68p,1814b,5035s stack positions out of 10000i,1000n,20000p,200000b,80000s
-
-pdfTeX warning (dest): name{subsubsection.5.1.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
+<C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmbx10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmcsc10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmex10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/blasc/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/blasc/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/blasc/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/blasc/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/User
+s/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
 <C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-bx10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
-nts/cm/cmcsc10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmex10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/blasc/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/blasc/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/blasc/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/blasc/Ap
-pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/
-blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C
-:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6
-.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
-cm/cmr7.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmr8.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmr9.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmsy10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/blasc/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/blasc/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/blasc/App
-Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/b
-lasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:
-/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/doublestroke/dsro
-m10.pfb>
-Output written on Bachelor_Thesis_KIDs.pdf (7 pages, 305039 bytes).
+r6.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmr7.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmr8.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmr9.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/blasc/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/blasc/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/blasc/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/blasc/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users
+/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><
+C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/doublestroke/ds
+rom10.pfb>
+Output written on Bachelor_Thesis_KIDs.pdf (7 pages, 324804 bytes).
 PDF statistics:
- 205 PDF objects out of 1000 (max. 8388607)
+ 208 PDF objects out of 1000 (max. 8388607)
  24 named destinations out of 1000 (max. 500000)
- 107 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 104 words of extra memory for PDF output out of 10000 (max. 10000000)
 

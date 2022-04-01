@@ -129,7 +129,7 @@ Put differently, the accuracy measure is equivalent to the relative amount of co
 \newpage
 
 \section{Data}
-As previoulsy mentioned the KIDs are available to download from the respective fund managing firm. The sample used for measuring the extracting performance contains 121 Key Information documents, obtained from the websites of the respective KAG (Kapitalanlagegesellschaft). The distribution of the SRRI as well as the amount of KIDs per KAG within the sample are displayed below.
+As previoulsy mentioned the KIDs are available to download from the respective fund managing firm's website. The  sample used for measuring the extracting performance contains 110 Key Information Documents, and can be found \href{https://github.com/Base-R-Best-R/KID/tree/main/KIDs}{\textcolor{teal}{here}}. First ten Kapitalanlagegesellschaften (KAG) that manage funds registered in austria where choosen.Then the sample was generated via randomly choosing funds on the respective websites of the fund managing firms. The distribution of the SRRI as well as the amount of KIDs per KAG within the sample are displayed below.
 
 \begin{figure}[H]
 	\includegraphics[width = 12cm]{data_overview}
@@ -152,6 +152,15 @@ Before splitting into the two approaches taken to obtain the SRRI, the helper fu
 Besides the backgroundcolor, it is also important to localize the SRRI scale on the page, this task is designated to \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/background_col_id.R}{\textcolor{teal}{coord\_id()}}, which calls two additional helper functions. As each document contains many numbers, to identify which of those make up the SRRI graph, \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/scale_cand_coord.R}{\textcolor{teal}{scale\_cand\_cord()}} first identifies which single digit numbers could possibly be part of the SRRI. This is done by extracting all single digit numbers between 1 and 7 from the document, including the vertical and horizontal position on the page. Summarized in a matrix, this information is then passed to \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}}, which first finds the absolute difference in vertical position of all candidates utilizing \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/abs_dis_vec.R}{\textcolor{teal}{abs\_dis\_vec()}}, including some tolerance level, to then check if there exist 7 single digit entries with the same vertical position. If this is the case, the function has succesfully identified the position of the SRRI. Accordingly, the function then returns a matrix containing the vertical and horizontal position of each scale entry as well as a string specifying wether the SRRI is displayed vertically or horizontally. Even though not a single occurance of a vertical SRRI depiction is included in the random sample of KIDs, this feature was included for the sake of completeness.
 
 \subsection{Naive Approach}
+This approach, as the name might suggest, does not make use of any statistical methods. The function \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_rec.R}{\textcolor{teal}{SRRI\_ext\_rec()}} first localizes each of the 7 SRRI entries on the page via \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}}. Then the rectangles as displayed in blue in the figure below are built using vertical and horizontal tolerances measured from the location of each SRRI entry. Those tolerances are an argument of the function \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_rec.R}{\textcolor{teal}{SRRI\_ext\_rec()}}, however, default values are implemented that achieve an accuracy of 100\% on all sample documents that are not scanned. Once the rectangles are built, the bitmap containing all color entries is subset to obtain the colors within the rectangle. Subsequently, the percentage of non-background colored pixels are calculated. Finally the rectangle with the least amount of background-colored pixels is choosen as the predicted SRRI.
+
+
+
+
+\begin{figure}[H]
+	\includegraphics[width = 12cm]{example_SRRI_graph_naive}
+	\caption{Illustration of the Naive Approach}
+\end{figure}
 
 \subsection{Agglomerative Clustering}
 \newpage
