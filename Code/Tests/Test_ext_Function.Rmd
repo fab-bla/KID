@@ -103,7 +103,7 @@ sapply(dirs, \(x){
 names(sample_split) <- sapply(strsplit(names(sample_split), split = "/", fixed = TRUE), "[[", 2)
 
 # save
-# jpeg(file = "data_overview.jpeg", width = 800, height = 500, res = 120)
+# pdf(file = "data_overview.pdf", height = 4)
 
 # alignd
 par(mar = c(7, 4, 4, 2) + 0.1, mfrow = c(1, 2))
