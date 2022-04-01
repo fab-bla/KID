@@ -172,7 +172,7 @@ abline(v = mean(coob[, 1]), col = "green")
 
 ### JPEG
 
-```{r, fig.height = 7, fig.width = 5}
+```{r, fig.height = 5, fig.width = 5}
 # convert by alpha value in this case 255
 imt <- imt * 255
 
@@ -184,11 +184,26 @@ imt <- imt * 255
 coo <- which(imt[,,1] == 166 & imt[,,2] == 166 & imt[,,3] == 166, arr.ind = T)
 
 # Pixel / Coordinateplot
+#save
+#pdf(file = "highnoiselownoise.pdf", height = 5)
+
+par(mfrow = c(1, 2), mar = c(1, 1, 4, 1) + 0.1)
+
 {
-plot(coo[,2], coo[, 1], main = "Pixels: r = 166, g = 166, b = 166", pch = 19, cex = 0.3)
+plot(coo1[,1], coo1[, 2], main = "Pixels: a6a6a6ff\nNoise: Low", pch = 19, cex = 0.3, ylab = "", xlab = "", col.lab = "black", col.axis = "white", xaxt = "n", yaxt = "n")
+abline(v = median(coo1[, 1]), col = "red")
+abline(v = mean(coo1[, 1]), col = "green")
+}
+par(mar = c(1, -0.1, 4, 1) + 0.1)
+{
+plot(coo[,2], coo[, 1], main = "Pixels: a6a6a6ff\nNoise: High", pch = 19, cex = 0.3, ylab = "",
+     xlab = "", col.lab = "black", col.axis = "white", xaxt = "n", yaxt = "n")
 abline(v = median(coo[, 1]), col = "red")
 abline(v = mean(coo[, 1]), col = "green")
 }
+
+#off
+#dev.off()
 ```
 
 ### Classify utilizing k-means.
