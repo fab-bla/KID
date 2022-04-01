@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  1 APR 2022 14:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  1 APR 2022 16:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -798,7 +798,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
                                                   \__shipout_drop_firstpage_...
 l.129 \newpage
               ]
-<data_overview.jpeg, id=84, 481.8pt x 301.125pt>
+<data_overview.jpeg, id=92, 481.8pt x 301.125pt>
 File: data_overview.jpeg Graphic file (type jpg)
 <use data_overview.jpeg>
 Package pdftex.def Info: data_overview.jpeg  used on input line 135.
@@ -815,7 +815,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.139 ...tion but interesting nonetheless.\newpage
                                                    <./data_overview.jpeg>]
-<example_SRRI_graph.png, id=91, 965.85844pt x 101.62968pt>
+<example_SRRI_graph.png, id=99, 965.85844pt x 101.62968pt>
 File: example_SRRI_graph.png Graphic file (type png)
 <use example_SRRI_graph.png>
 Package pdftex.def Info: example_SRRI_graph.png  used on input line 143.
@@ -832,40 +832,57 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.154 \subsection
                  {Naive Approach} <./example_SRRI_graph.png>]
-<example_SRRI_graph_naive.png, id=107, 965.85844pt x 191.9672pt>
+<example_SRRI_graph_naive.png, id=115, 965.85844pt x 191.9672pt>
 File: example_SRRI_graph_naive.png Graphic file (type png)
 <use example_SRRI_graph_naive.png>
-Package pdftex.def Info: example_SRRI_graph_naive.png  used on input line 161.
+Package pdftex.def Info: example_SRRI_graph_naive.png  used on input line 158.
 (pdftex.def)             Requested size: 341.43306pt x 67.8603pt.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/scit' undefined
-(Font)              using `OT1/cmr/m/sc' instead on input line 162.
+(Font)              using `OT1/cmr/m/sc' instead on input line 159.
 
 [5
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.168 \newpage
-               <./example_SRRI_graph_naive.png>] [6]
-Overfull \hbox (8.96451pt too wide) in paragraph at lines 189--189
+l.161 \newpage
+               <./example_SRRI_graph_naive.png>]
+<highnoiselownoise.pdf, id=123, 505.89pt x 361.35pt>
+File: highnoiselownoise.pdf Graphic file (type pdf)
+<use highnoiselownoise.pdf>
+Package pdftex.def Info: highnoiselownoise.pdf  used on input line 167.
+(pdftex.def)             Requested size: 341.43306pt x 243.88419pt.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/scit' undefined
+(Font)              using `OT1/cmr/m/sc' instead on input line 168.
+
+[6
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.172 \newpage
+               <./highnoiselownoise.pdf>] [7] [8]
+Overfull \hbox (8.96451pt too wide) in paragraph at lines 198--198
 [][]\OT1/cmr/m/n/10 FMA. (2011). Or-di-nance of the fi-nan-cial mar-ket au-thor
 -ity. \OT1/cmr/m/it/10 KID-V, BGBI II 265/2011\OT1/cmr/m/n/10 . 
  []
 
-[7] (Bachelor_Thesis_KIDs.aux)
+[9] (Bachelor_Thesis_KIDs.aux)
 Package rerunfilecheck Info: File `Bachelor_Thesis_KIDs.out' has not changed.
-(rerunfilecheck)             Checksum: 1393680B1CE66AFF62225926F6C342AD;1391.
+(rerunfilecheck)             Checksum: 0D41013CC8ADCC551C2871E9AC527C0A;1743.
 Package logreq Info: Writing requests to 'Bachelor_Thesis_KIDs.run.xml'.
 \openout1 = `Bachelor_Thesis_KIDs.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18952 strings out of 478582
- 330102 string characters out of 2844344
+ 18966 strings out of 478582
+ 330404 string characters out of 2844344
  1109279 words of memory out of 3000000
- 36883 multiletter control sequences out of 15000+600000
+ 36891 multiletter control sequences out of 15000+600000
  478147 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,10n,68p,1814b,5035s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -892,9 +909,9 @@ ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users
 /blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><
 C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/doublestroke/ds
 rom10.pfb>
-Output written on Bachelor_Thesis_KIDs.pdf (7 pages, 328139 bytes).
+Output written on Bachelor_Thesis_KIDs.pdf (9 pages, 506841 bytes).
 PDF statistics:
- 213 PDF objects out of 1000 (max. 8388607)
- 25 named destinations out of 1000 (max. 500000)
- 112 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 237 PDF objects out of 1000 (max. 8388607)
+ 30 named destinations out of 1000 (max. 500000)
+ 133 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -152,17 +152,26 @@ Before splitting into the two approaches taken to obtain the SRRI, the helper fu
 Besides the backgroundcolor, it is also important to localize the SRRI scale on the page, this task is designated to \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/background_col_id.R}{\textcolor{teal}{coord\_id()}}, which calls two additional helper functions. As each document contains many numbers, to identify which of those make up the SRRI graph, \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/scale_cand_coord.R}{\textcolor{teal}{scale\_cand\_cord()}} first identifies which single digit numbers could possibly be part of the SRRI. This is done by extracting all single digit numbers between 1 and 7 from the document, including the vertical and horizontal position on the page. Summarized in a matrix, this information is then passed to \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}}, which first finds the absolute difference in vertical position of all candidates utilizing \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/abs_dis_vec.R}{\textcolor{teal}{abs\_dis\_vec()}}, including some tolerance level, to then check if there exist 7 single digit entries with the same vertical position. If this is the case, the function has succesfully identified the position of the SRRI. Accordingly, the function then returns a matrix containing the vertical and horizontal position of each scale entry as well as a string specifying wether the SRRI is displayed vertically or horizontally. Even though not a single occurance of a vertical SRRI depiction is included in the random sample of KIDs, this feature was included for the sake of completeness.
 
 \subsection{Naive Approach}
-To establish a benchmark for the extraction performance, the naive approach, as the name might suggest, does not make use of any statistical methods. The function \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_rec.R}{\textcolor{teal}{SRRI\_ext\_rec()}} first localizes each of the 7 SRRI entries on the page via \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}}. Then the rectangles as displayed in blue in the figure below are built using vertical and horizontal tolerances measured from the location of each SRRI entry. Those tolerances are an argument of the function \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_rec.R}{\textcolor{teal}{SRRI\_ext\_rec()}}, however, default values are implemented that achieve an accuracy of 100\% on all sample documents that are not scanned. Once the rectangles are built, the bitmap containing all color entries is subset to obtain the colors within the rectangle. Subsequently, the percentage of non-background colored pixels are calculated. Finally the rectangle with the least amount of background-colored pixels is choosen as the predicted SRRI.
-
-
-
+To establish a benchmark for the extraction performance, the naive approach, as the name might suggest, does not make use of any statistical methods. The function \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_rec.R}{\textcolor{teal}{SRRI\_ext\_rec()}} first localizes each of the 7 SRRI entries on the page via \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}}. Then the rectangles as displayed in blue in the figure below are built using vertical (yellow) and horizontal (red) tolerances measured from the location of each SRRI entry. Those tolerances are an argument of the function \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_rec.R}{\textcolor{teal}{SRRI\_ext\_rec()}}, however, default values are implemented that achieve an accuracy of 100\% on all sample documents that are not scanned. Once the rectangles are built, the bitmap containing all color entries is subset to obtain the colors within the rectangle. Subsequently, the percentage of non-background colored pixels is calculated. Finally the rectangle with the least amount of background-colored pixels is choosen as the predicted SRRI.
 
 \begin{figure}[H]
 	\includegraphics[width = 12cm]{example_SRRI_graph_naive}
 	\caption{Illustration of the Naive Approach}
 \end{figure}
+\newpage
+\subsection{Clustering Approach}
+\subsubsection{Motivation}
+The second approach is based on agglomerative hierarchical clustering. Before going into detail in regards to the technicalities of this clustering technique, firstly, the idea will be outlined using some graphical illustrations. Assume one knows the color that is used to shade the SRRI, in the case of figure 3 that would be grey (HEX: \href{https://www.color-hex.com/color/a6a6a6}{\textcolor{teal}{\#a6a6a6ff}}). Then an intuitive approach would be to subset all pixels in the color of the SRRI shade to then produce some sort of representative value of the horizontal location of the SRRI shade.
 
-\subsection{Agglomerative Clustering}
+\begin{figure}[H]
+	\includegraphics[width = 12cm]{highnoiselownoise.pdf}
+	\caption{Pixels in the color of the SRRI shade}
+\end{figure}
+
+Above we observe the subset of pixels in the color of the SRRI shade for two different documents. Further the mean of the horizontal coordinates of the pixels is represented by the green line while the median is represented by the red line. Unfortunately, this makes it painfully obvious that neither the median nor the mean of the horizontal coordinates will suffice as a representative of the cloud of pixels in the color of the SRRI shade. To be precise, the median is not a good representative, in a high noise enviroment as displayed on the right. Thus if we manage to reduce said noise to obtain a situation somewhat similar to the one on the left, we may be able to succesfully use the median as a good representative of the horizontal position of the SRRI pixel cloud. This noise reduction may be achieved via unsupervised classification into groups based on agglomerative hierarchical clustering.
+\newpage
+\subsubsection{Agglomerative Hierarchical Clustering}
+
 
 \section{Performance Comparison}
 \newpage
