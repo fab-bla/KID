@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  1 APR 2022 19:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  1 APR 2022 19:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -832,7 +832,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.154 \subsection
                  {Naive Approach} <./example_SRRI_graph.png>]
-<example_SRRI_graph_naive.png, id=121, 965.85844pt x 191.9672pt>
+<example_SRRI_graph_naive.png, id=122, 965.85844pt x 191.9672pt>
 File: example_SRRI_graph_naive.png Graphic file (type png)
 <use example_SRRI_graph_naive.png>
 Package pdftex.def Info: example_SRRI_graph_naive.png  used on input line 158.
@@ -849,7 +849,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.161 \newpage
                <./example_SRRI_graph_naive.png>]
-<highnoiselownoise.pdf, id=129, 505.89pt x 361.35pt>
+<highnoiselownoise.pdf, id=130, 505.89pt x 361.35pt>
 File: highnoiselownoise.pdf Graphic file (type pdf)
 <use highnoiselownoise.pdf>
 Package pdftex.def Info: highnoiselownoise.pdf  used on input line 167.
@@ -885,7 +885,7 @@ Here is how much of TeX's memory you used:
  36881 multiletter control sequences out of 15000+600000
  478147 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,10n,68p,1814b,5035s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 60i,10n,68p,1879b,5035s stack positions out of 10000i,1000n,20000p,200000b,80000s
 <C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmcsc10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/
@@ -909,9 +909,9 @@ ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users
 /blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><
 C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/doublestroke/ds
 rom10.pfb>
-Output written on Bachelor_Thesis_KIDs.pdf (9 pages, 471039 bytes).
+Output written on Bachelor_Thesis_KIDs.pdf (9 pages, 471259 bytes).
 PDF statistics:
- 243 PDF objects out of 1000 (max. 8388607)
+ 244 PDF objects out of 1000 (max. 8388607)
  30 named destinations out of 1000 (max. 500000)
  133 words of extra memory for PDF output out of 10000 (max. 10000000)
 
