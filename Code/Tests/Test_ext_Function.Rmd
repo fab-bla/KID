@@ -101,21 +101,22 @@ sapply(dirs, \(x){
 
 # corr names
 names(sample_split) <- sapply(strsplit(names(sample_split), split = "/", fixed = TRUE), "[[", 2)
-dirs
 
 # save
-# jpeg(file = "data_overview.jpeg", width = 700, height = 500, res = 100)
+# jpeg(file = "data_overview.jpeg", width = 800, height = 500, res = 120)
 
 # alignd
 par(mar = c(7, 4, 4, 2) + 0.1, mfrow = c(1, 2))
 
 # KIDs per KAG
-barplot(sort(sample_split, decreasing = T), las = 2, col = 7, ylim = c(0, 20),
+barplot(sort(sample_split, decreasing = T), las = 2, col = 7, ylim = c(0, 15),
         main = "KIDs per KAG")
 
+# table
+tab <- table(as.numeric(dat.valid.SRRI[, "SRRI"]))
+
 # barplot
-barplot(table(as.numeric(dat.valid.SRRI[, "SRRI"])), main = "SRRI", col = 4, xlab = "",
-        ylim = c(0, 35))
+barplot(tab / sum(tab), main = "SRRI", col = 4, xlab = "", ylim = c(0, 0.3))
 
 # dev.off()
 
