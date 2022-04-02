@@ -43,6 +43,46 @@
       \field{title}{Ordinance of the Financial Market Authority}
       \field{year}{2011}
     \endentry
+    \entry{Rok09}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e583bae19511d6aca7ecc9e44953ed07}{%
+           family={Rokach},
+           familyi={R\bibinitperiod},
+           given={Lior},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer {US}}%
+      }
+      \strng{namehash}{e583bae19511d6aca7ecc9e44953ed07}
+      \strng{fullhash}{e583bae19511d6aca7ecc9e44953ed07}
+      \strng{bibnamehash}{e583bae19511d6aca7ecc9e44953ed07}
+      \strng{authorbibnamehash}{e583bae19511d6aca7ecc9e44953ed07}
+      \strng{authornamehash}{e583bae19511d6aca7ecc9e44953ed07}
+      \strng{authorfullhash}{e583bae19511d6aca7ecc9e44953ed07}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Data Mining and Knowledge Discovery Handbook}
+      \field{title}{A survey of Clustering Algorithms}
+      \field{year}{2009}
+      \field{pages}{269\bibrangedash 298}
+      \range{pages}{30}
+      \verb{doi}
+      \verb 10.1007/978-0-387-09823-4_14
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-0-387-09823-4_14
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-0-387-09823-4_14
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

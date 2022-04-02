@@ -1,15 +1,15 @@
 [0] Config.pm:307> INFO - This is Biber 2.17
 [0] Config.pm:310> INFO - Logfile is 'Bachelor_Thesis_KIDs.blg'
-[171] biber-MSWIN64:340> INFO - === 
-[224] Biber.pm:418> INFO - Reading 'Bachelor_Thesis_KIDs.bcf'
-[420] Biber.pm:972> INFO - Found 1 citekeys in bib section 0
-[445] Biber.pm:4383> INFO - Processing section 0
-[464] Biber.pm:4574> INFO - Looking for bibtex file 'sources.bib' for section 0
-[532] bibtex.pm:1713> INFO - LaTeX decoding ...
-[541] bibtex.pm:1518> INFO - Found BibTeX data source 'sources.bib'
-[598] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[599] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[599] Biber.pm:4203> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'en-US'
-[599] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
-[601] bbl.pm:654> INFO - Writing 'Bachelor_Thesis_KIDs.bbl' with encoding 'UTF-8'
-[602] bbl.pm:757> INFO - Output to Bachelor_Thesis_KIDs.bbl
+[167] biber-MSWIN64:340> INFO - === 
+[213] Biber.pm:418> INFO - Reading 'Bachelor_Thesis_KIDs.bcf'
+[388] Biber.pm:972> INFO - Found 2 citekeys in bib section 0
+[408] Biber.pm:4383> INFO - Processing section 0
+[423] Biber.pm:4574> INFO - Looking for bibtex file 'sources.bib' for section 0
+[497] bibtex.pm:1713> INFO - LaTeX decoding ...
+[517] bibtex.pm:1518> INFO - Found BibTeX data source 'sources.bib'
+[570] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[570] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[570] Biber.pm:4203> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'en-US'
+[570] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[578] bbl.pm:654> INFO - Writing 'Bachelor_Thesis_KIDs.bbl' with encoding 'UTF-8'
+[580] bbl.pm:757> INFO - Output to Bachelor_Thesis_KIDs.bbl

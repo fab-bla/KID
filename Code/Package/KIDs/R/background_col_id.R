@@ -10,7 +10,6 @@ bg_col <- function(doc, dpi = dpi, page = page, pass = FALSE){
   # input bitmap
   btmp <- pdftools::pdf_render_page(doc, dpi = dpi, page = page)
 
-
   # if the bg-color is assumed to be white without extraction
   if(pass){
 
