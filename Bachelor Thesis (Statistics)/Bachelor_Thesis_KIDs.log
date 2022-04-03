@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  2 APR 2022 15:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.22)  3 APR 2022 19:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -644,48 +644,135 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
 )
-\c@thm=\count425
+(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/algorithm2e\algorithm2e
+.sty
+Package: algorithm2e 2017/07/18 v5.2 algorithms environments
+\c@AlgoLine=\count425
+\algocf@hangindent=\skip78
 
+(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty
+Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
+\c@checkoddpage=\count426
+) (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+)
+\skiptotal=\skip79
+\skiplinenumber=\skip80
+\skiprule=\skip81
+\skiphlne=\skip82
+\skiptext=\skip83
+\skiplength=\skip84
+\algomargin=\skip85
+\skipalgocfslide=\skip86
+\algowidth=\dimen159
+\inoutsize=\dimen160
+\inoutindent=\dimen161
+\interspacetitleruled=\dimen162
+\interspacealgoruled=\dimen163
+\interspacetitleboxruled=\dimen164
+\algocf@ruledwidth=\skip87
+\algocf@inoutbox=\box58
+\algocf@inputbox=\box59
+\AlCapSkip=\skip88
+\AlCapHSkip=\skip89
+\algoskipindent=\skip90
+\algocf@nlbox=\box60
+\algocf@hangingbox=\box61
+\algocf@untilbox=\box62
+\algocf@skipuntil=\skip91
+\algocf@capbox=\box63
+\algocf@lcaptionbox=\skip92
+\algoheightruledefault=\skip93
+\algoheightrule=\skip94
+\algotitleheightruledefault=\skip95
+\algotitleheightrule=\skip96
+\c@algocfline=\count427
+\c@algocfproc=\count428
+\c@algocf=\count429
+\algocf@algoframe=\box64
+\algocf@algobox=\box65
+)
+(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/tools\bm.sty
+Package: bm 2021/04/25 v1.2e Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup6
+\symboldletters=\mathgroup7
+\symboldsymbols=\mathgroup8
+Package bm Info: No bold for \OMX/cmex/m/n, using \pmb.
+Package bm Info: No bold for \U/msa/m/n, using \pmb.
+Package bm Info: No bold for \U/msb/m/n, using \pmb.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 149.
+)
+(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mathtools.sty
+Package: mathtools 2022/02/07 v1.28a mathematical typesetting tools
+(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count430
+\calc@Bcount=\count431
+\calc@Adimen=\dimen165
+\calc@Bdimen=\dimen166
+\calc@Askip=\skip97
+\calc@Bskip=\skip98
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count432
+\calc@Cskip=\skip99
+)
+(C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mhsetup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
+)
+\g_MT_multlinerow_int=\count433
+\l_MT_multwidth_dim=\dimen167
+\origjot=\skip100
+\l_MT_shortvdotswithinadjustabove_dim=\dimen168
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen169
+\l_MT_above_intertext_sep=\dimen170
+\l_MT_below_intertext_sep=\dimen171
+\l_MT_above_shortintertext_sep=\dimen172
+\l_MT_below_shortintertext_sep=\dimen173
+\xmathstrut@box=\box66
+\xmathstrut@dim=\dimen174
+)
+\c@thm=\count434
 
 Package biblatex Warning: Load 'inputenc' before biblatex.
 
-\@quotelevel=\count426
-\@quotereset=\count427
+\@quotelevel=\count435
+\@quotereset=\count436
 (Bachelor_Thesis_KIDs.aux)
 \openout1 = `Bachelor_Thesis_KIDs.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
 
 (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count428
-\scratchdimen=\dimen159
-\scratchbox=\box58
-\nofMPsegments=\count429
-\nofMParguments=\count430
+\scratchcounter=\count437
+\scratchdimen=\dimen175
+\scratchbox=\box67
+\nofMPsegments=\count438
+\nofMParguments=\count439
 \everyMPshowfont=\toks35
-\MPscratchCnt=\count431
-\MPscratchDim=\dimen160
-\MPnumerator=\count432
-\makeMPintoPDFobject=\count433
+\MPscratchCnt=\count440
+\MPscratchDim=\dimen176
+\MPnumerator=\count441
+\makeMPintoPDFobject=\count442
 \everyMPtoPDFconversion=\toks36
 )
 (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
@@ -738,9 +825,9 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Bachelor_Thesis_KIDs.bbl' found.
  (Bachelor_Thesis_KIDs.bbl)
-Package biblatex Info: Reference section=0 on input line 46.
-Package biblatex Info: Reference segment=0 on input line 46.
-Package hyperref Info: Link coloring ON on input line 46.
+Package biblatex Info: Reference section=0 on input line 52.
+Package biblatex Info: Reference segment=0 on input line 52.
+Package hyperref Info: Link coloring ON on input line 52.
 
 (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -752,22 +839,22 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 lestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count434
+\c@section@level=\count443
 )
-LaTeX Info: Redefining \ref on input line 46.
-LaTeX Info: Redefining \pageref on input line 46.
-LaTeX Info: Redefining \nameref on input line 46.
+LaTeX Info: Redefining \ref on input line 52.
+LaTeX Info: Redefining \pageref on input line 52.
+LaTeX Info: Redefining \nameref on input line 52.
  (Bachelor_Thesis_KIDs.out) (Bachelor_Thesis_KIDs.out)
 \@outlinefile=\write4
 \openout4 = `Bachelor_Thesis_KIDs.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 49.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 55.
 
 
 (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 49.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 55.
 
 
 (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -775,20 +862,20 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/scit' undefined
-(Font)              using `OT1/cmr/m/it' instead on input line 59.
+(Font)              using `OT1/cmr/m/it' instead on input line 65.
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 84.
+Package hyperref Warning: Suppressing link with empty target on input line 90.
 
 [1{C:/Users/blasc/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/scit' undefined
-(Font)              using `OT1/cmr/m/sc' instead on input line 97.
+(Font)              using `OT1/cmr/m/sc' instead on input line 103.
 
 LaTeX Font Info:    Trying to load font information for U+dsrom on input line 1
-25.
+31.
 (C:\Users\blasc\AppData\Local\Programs\MiKTeX\tex/latex/doublestroke\udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 ) [2
@@ -796,77 +883,83 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
  been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.129 \newpage
+l.135 \newpage
               ]
 <data_overview.pdf, id=92, 505.89pt x 289.08pt>
 File: data_overview.pdf Graphic file (type pdf)
 <use data_overview.pdf>
-Package pdftex.def Info: data_overview.pdf  used on input line 135.
+Package pdftex.def Info: data_overview.pdf  used on input line 141.
 (pdftex.def)             Requested size: 341.43306pt x 195.10733pt.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/scit' undefined
-(Font)              using `OT1/cmr/m/sc' instead on input line 136.
+(Font)              using `OT1/cmr/m/sc' instead on input line 142.
 
 [3
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.139 ...tion but interesting nonetheless.\newpage
+l.145 ...tion but interesting nonetheless.\newpage
                                                    <./data_overview.pdf>]
 <example_SRRI_graph.png, id=105, 965.85844pt x 101.62968pt>
 File: example_SRRI_graph.png Graphic file (type png)
 <use example_SRRI_graph.png>
-Package pdftex.def Info: example_SRRI_graph.png  used on input line 143.
+Package pdftex.def Info: example_SRRI_graph.png  used on input line 149.
 (pdftex.def)             Requested size: 341.43306pt x 35.92603pt.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/scit' undefined
-(Font)              using `OT1/cmr/m/sc' instead on input line 144.
+(Font)              using `OT1/cmr/m/sc' instead on input line 150.
 
 [4
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.154 \subsection
+l.160 \subsection
                  {Naive Approach} <./example_SRRI_graph.png>]
 <example_SRRI_graph_naive.png, id=122, 965.85844pt x 191.9672pt>
 File: example_SRRI_graph_naive.png Graphic file (type png)
 <use example_SRRI_graph_naive.png>
-Package pdftex.def Info: example_SRRI_graph_naive.png  used on input line 158.
+Package pdftex.def Info: example_SRRI_graph_naive.png  used on input line 164.
 (pdftex.def)             Requested size: 341.43306pt x 67.8603pt.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/scit' undefined
-(Font)              using `OT1/cmr/m/sc' instead on input line 159.
+(Font)              using `OT1/cmr/m/sc' instead on input line 165.
 
 [5
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.161 \newpage
+l.167 \newpage
                <./example_SRRI_graph_naive.png>]
 <highnoiselownoise.pdf, id=130, 505.89pt x 361.35pt>
 File: highnoiselownoise.pdf Graphic file (type pdf)
 <use highnoiselownoise.pdf>
-Package pdftex.def Info: highnoiselownoise.pdf  used on input line 167.
+Package pdftex.def Info: highnoiselownoise.pdf  used on input line 173.
 (pdftex.def)             Requested size: 341.43306pt x 243.88419pt.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/scit' undefined
-(Font)              using `OT1/cmr/m/sc' instead on input line 168.
+(Font)              using `OT1/cmr/m/sc' instead on input line 174.
 
 [6
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.172 \newpage
-               <./highnoiselownoise.pdf>] [7] [8]
-Overfull \hbox (8.96451pt too wide) in paragraph at lines 200--200
+l.178 \newpage
+               <./highnoiselownoise.pdf>] [7
+pdfTeX warning (ext4): destination with the same identifier (name{algocf.1}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.207 \newpage
+              ] [8]
+Overfull \hbox (8.96451pt too wide) in paragraph at lines 228--228
 [][]\OT1/cmr/m/n/10 FMA. (2011). Or-di-nance of the fi-nan-cial mar-ket au-thor
 -ity. \OT1/cmr/m/it/10 KID-V, BGBI II 265/2011\OT1/cmr/m/n/10 . 
  []
@@ -879,39 +972,43 @@ Package logreq Info: Writing requests to 'Bachelor_Thesis_KIDs.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18967 strings out of 478582
- 330485 string characters out of 2844344
- 1109326 words of memory out of 3000000
- 36892 multiletter control sequences out of 15000+600000
- 478147 words of font info for 64 fonts, out of 8000000 for 9000
+ 20642 strings out of 478582
+ 359916 string characters out of 2844344
+ 1149391 words of memory out of 3000000
+ 38525 multiletter control sequences out of 15000+600000
+ 483725 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,10n,68p,1879b,5035s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 60i,16n,68p,1879b,5035s stack positions out of 10000i,1000n,20000p,200000b,80000s
 <C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmcsc10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmex10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/blasc/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/blasc/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/blasc/AppData/
-Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/blasc/
-AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/User
-s/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+fonts/cm/cmbx6.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmbx8.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/blasc/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/blasc/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/blasc/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/blasc/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/User
+s/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb>
 <C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-r6.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
-s/cm/cmr7.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/
-amsfonts/cm/cmr8.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmr9.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/blasc/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/blasc/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/blasc/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/blasc/A
-ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users
-/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><
-C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/doublestroke/ds
-rom10.pfb>
-Output written on Bachelor_Thesis_KIDs.pdf (9 pages, 475428 bytes).
+mi8.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmr6.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmr7.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/blasc/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/blasc/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/blasc/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/blasc/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/
+blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C
+:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti
+10.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmti7.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmti8.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmtt8.pfb><C:/Users/blasc/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/doublestroke/dsrom10.pfb>
+Output written on Bachelor_Thesis_KIDs.pdf (9 pages, 525025 bytes).
 PDF statistics:
- 247 PDF objects out of 1000 (max. 8388607)
- 31 named destinations out of 1000 (max. 500000)
+ 269 PDF objects out of 1000 (max. 8388607)
+ 33 named destinations out of 1000 (max. 500000)
  133 words of extra memory for PDF output out of 10000 (max. 10000000)
 

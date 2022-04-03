@@ -19,6 +19,12 @@ style = apa]
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{xcolor}
+\usepackage{algorithm2e}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+%\usepackage{algorithm}
+%\usepackage{algpseudocode}
 %\usepackage{ngerman}
 
 
@@ -41,7 +47,7 @@ style = apa]
 
 % customize math operators
 \newcommand{\E}{{\mathbb E}}
-
+\DeclareMathOperator*{\argminA}{arg\,min}
 
 \begin{document}
 
@@ -171,8 +177,30 @@ The second approach is based on agglomerative hierarchical clustering. Before go
 Above we observe the subset of pixels in the color of the SRRI shade for two different documents. Further, the mean of the horizontal coordinates of the pixels is represented by the green line while the median is represented by the red line. Unfortunately, this makes it painfully obvious that neither the median nor the mean of the horizontal coordinates will suffice as a representative of the cloud of pixels in the color of the SRRI shade. To be precise, the median is not a good representative, in a high noise enviroment as displayed on the right. Thus if we manage to reduce said noise to obtain a situation somewhat similar to the one on the left, we may be able to succesfully use the median as a good representative of the horizontal position of the SRRI pixel cloud. This noise reduction may be achieved via unsupervised classification into groups based on agglomerative hierarchical clustering.
 \newpage
 \subsubsection{Agglomerative Hierarchical Clustering}
-The goal of noise reduction via clustering is achieved by grouping the pixel coordinates. The idea is to cluster the set of all pixels S into subsets $G_1, G_2,..., G_n$, such that the union of all groups $\cup_{i = 1}^n G_i$ forms a partition on the set of all pixels, i.e., $S = \cup_{i = 1}^n G_i$ where $G_i \cap G_j = \emptyset$ for $i \neq j$ \citep{Rok09}. Since the grouping is based on the simuilarity across pixel coordinates, we need a measure for similarity. In this thesis the euclidean distance is used to determine similarity.\\
-The approach of agglomerative hierarchichal clustering starts by initially assigning each pixel its own cluster. Then in each iteration based on the minimal distance, clusters are merged until the desired number of clusters is obtained. Summarized in pseudo code this looks as follows:
+The goal of noise reduction via clustering is achieved by grouping the pixels. The idea is to cluster the set of all pixels S into subsets $G_1, G_2,..., G_n$, such that the union of all groups $\cup_{i = 1}^n G_i$ forms a partition on the set of all pixels, i.e., $S = \cup_{i = 1}^n G_i$ where $G_i \cap G_j = \emptyset$ for $i \neq j$ \citep{Rok09}. Since the grouping is based on the simuilarity across pixel coordinates, we need a measure for similarity. In this thesis the euclidean distance is used to determine similarity.\\
+The approach of agglomerative hierarchichal clustering starts by initially assigning each pixel its own cluster. Then in each iteration based on the minimal distance, clusters are merged until the desired number of clusters is obtained. In detail the algorithm can be described as follows:
+
+\RestyleAlgo{ruled}
+
+%% This is needed if you want to add comments in
+%% your algorithm with \Comment
+\SetKwComment{Comment}{/* }{ */}
+% A distance matrix based on pairwise euclidean distance $\mathbf{D} \coloneqq Dist(G_i, G_j)\text{ }\forall\text{ }i, j$,\\
+\begin{algorithm}[hbt!]
+	\caption{\textit{Agglomerative Hierarchical Clustering}}\label{alg:one}
+	\KwData{N vectors of pixel coordinates $\{x_i\}^N_{i = 1}$ and $p$ the number of desired clusters.}
+	$\mathbf{X} \gets \emptyset$\ \Comment*[r]{Initialize empty set as storage for clusters}
+	\For{$k \gets 1 ... N $}{ 
+		$\mathbf{X} \gets \mathbf{X} \cup \{\{x_k\}\}$\Comment*[r]{Assign each pixels its own cluster}
+	}
+	$\mathbf{T} \gets \mathbf{X}$\Comment*[r]{Storage of clusters, to cretae a dendrogramm at a later stage}
+	\While{$\lvert \mathbf{X} \rvert >  p$}{
+		$G_1^*, G_2^* \gets  \underset{G_i, G_j \in \mathbf{X}}{\mathrm{argmin} \text{ } Dist(G_i, G_j)\text{ } for \text{ } i \neq j}$ \Comment*[r]{Find minimal distance}
+		$\mathbf{X}  \gets (\mathbf{X}\setminus G_1^*)\setminus G_2^*$ \Comment*[r]{Remove individual occurances}
+		$\mathbf{X} \gets \mathbf{X} \cup \{ G_1^* \cup  G_2^* \}$\Comment*[r]{Add union as new cluster}
+		$\mathbf{T} \gets \mathbf{X} \cup \{ G_1^* \cup  G_2^* \}$\Comment*[r]{Add union to secondary storage for traceability}
+	}
+\end{algorithm}
 
 
 \section{Performance Comparison}
