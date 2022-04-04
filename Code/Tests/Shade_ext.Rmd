@@ -249,7 +249,7 @@ invis.Map(function(x, y){
 
 ### Classify utilizing hierarchical clustering
 
-```{r, fig.height = 10, fig.width = 7}
+```{r, fig.height = 10}
 # methods
 meth <- c("single", "average", "complete")
 
@@ -294,8 +294,9 @@ lapply(Group.list, \(x){
 
 # plot
 # arrange
-par(mfrow = c(4, 3))
 
+#pdf(file = "methodsclust.pdf", height = 8)
+par(mfrow = c(4, 3), mar = c(1, 1, 3, 1) + 0.1)
 invis.lapply(paste("P =", p), \(x){
   
   # over p
@@ -306,10 +307,11 @@ invis.lapply(paste("P =", p), \(x){
     
     # plot
     plot(tmp.plot[, 1], tmp.plot[, 2], col = tmp.plot[, ncol(tmp.plot)], pch = 19,
-    main = paste("Method:", y, ",", x), xlab = "", ylab = "")
+    main = paste("Method:", y, ",", x), xlab = "", ylab = "", , xaxt = "n", yaxt = "n")
     
   })
 })
+#dev.off()
 ```
 ## Identifying the cluster and estimating SSRI
 

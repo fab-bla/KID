@@ -193,15 +193,36 @@ The approach of agglomerative hierarchichal clustering starts by initially assig
 	\For{$k \gets 1 ... N $}{ 
 		$\mathbf{X} \gets \mathbf{X} \cup \{\{x_k\}\}$\Comment*[r]{Assign each pixels its own cluster}
 	}
-	$\mathbf{T} \gets \mathbf{X}$\Comment*[r]{Storage of clusters, to cretae a dendrogramm at a later stage}
+	$\mathbf{T} \gets \mathbf{X}$\Comment*[r]{Storage of clusters, to create a dendrogramm at a later stage}
 	\While{$\lvert \mathbf{X} \rvert >  p$}{
-		$G_1^*, G_2^* \gets  \underset{G_i, G_j \in \mathbf{X}}{\mathrm{argmin} \text{ } Dist(G_i, G_j)\text{ } for \text{ } i \neq j}$ \Comment*[r]{Find minimal distance}
+		$G_1^*, G_2^* \gets  \underset{G_i, G_j \in \mathbf{X}}{\mathrm{argmin}} \text{ } Dist(G_i, G_j)\text{ } for \text{ } i \neq j$ \Comment*[r]{Find minimal distance}
 		$\mathbf{X}  \gets (\mathbf{X}\setminus G_1^*)\setminus G_2^*$ \Comment*[r]{Remove individual occurances}
 		$\mathbf{X} \gets \mathbf{X} \cup \{ G_1^* \cup  G_2^* \}$\Comment*[r]{Add union as new cluster}
 		$\mathbf{T} \gets \mathbf{X} \cup \{ G_1^* \cup  G_2^* \}$\Comment*[r]{Add union to secondary storage for traceability}
 	}
 \end{algorithm}
 
+Given that euclidean distance is used to judge similarity the first iteration of the while loop is unambigous as only the distance between pixels is required for exection. However, starting from the second iteration we need to find the distance between pixels, other pixels and the first cluster. Hence, $Dist(G_i, G_j)$ needs to be defined for $G_i$ and/or $G_j$ as clusters. In this thesis three diffrernt approaches to determin the above described distance are considered.
+
+\begin{enumerate}
+	\item \textbf{Average-link:} $D(G_i, G_j) = D(\{x_k\}_{k = 1}^K, \{y_s\}_{s = 1}^S) = \frac{1}{MN} \mathlarger{\sum}_{k = 1}^K \mathlarger{\sum}_{s = 1}^S \lvert\lvert x_k - y_s\rvert \rvert$
+	
+	\item \textbf{Single-link:} $D(G_i, G_j) = \underset{x \in G_i, y \in G_j}{min} \lvert \lvert x - y\rvert \rvert$
+	
+	\item \textbf{Complete-link:} $D(G_i, G_j) = \underset{x \in G_i, y \in G_j}{max} \lvert \lvert x - y\rvert \rvert$
+\end{enumerate}
+
+At a later stage the link will be chosen based on prediction accuracy. For illustrative purposes, the clustering for different links and varying numbers of final clusters is displayed.\newpage
+
+%methodsclust.pdf
+\begin{figure}[H]
+	\includegraphics[width = 12cm]{methodsclust.pdf}
+	\caption{Example: Different values for P and varying linking methods}
+\end{figure}
+
+Coming back to the problem at hand, noise reduction, we would like to exclude as many pixels as possible from the coloured square, i.e., keep the cluster that contains the SRRI shade in tact while removing as many pixels that are obviously not part of the SRRI pixel cloud. Figure 5 gives the impression that complete and average linkage seem to be able to better exclude far off pixels from the SRRI pixel cloud.Further, one can observe that for values p between 2 and 5 the SRRI pixel cloud is not split into multiple clusters, thus a higher value for p is probably advisable. Accuracy comparisons accross different values for p and linking methods will show which combination will yield the best performance.\newpage
+
+\subsubsection{SRRI\_ext\_fast()}
 
 \section{Performance Comparison}
 \newpage
