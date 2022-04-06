@@ -73,3 +73,9 @@ SRRI_ext_loc(pd, col = Col_Hex[["Union"]], tol = 70)
 # handle scanned pdfs
 # example Union
 
+
+
+
+
+
+

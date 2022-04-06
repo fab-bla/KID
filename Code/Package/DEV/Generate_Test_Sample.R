@@ -1,7 +1,5 @@
 ## sampling documents into test set ##
 
-# first generate test sample folder in each KAG folder #
-
 # setwd
 setwd("GitHub/KID/KIDs")
 
@@ -11,7 +9,7 @@ dirs <- list.dirs()[-c(1, 4)]
 # step into first folder
 setwd(dirs[1])
 
-# loop over dirs to create test folder
+# loop over dirs to create test folder and randomly sample two KIDs 
 lapply(dirs, \(x){
 
   # set
