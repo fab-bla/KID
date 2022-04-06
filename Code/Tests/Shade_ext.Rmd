@@ -307,7 +307,7 @@ invis.lapply(paste("P =", p), \(x){
     
     # plot
     plot(tmp.plot[, 1], tmp.plot[, 2], col = tmp.plot[, ncol(tmp.plot)], pch = 19,
-    main = paste("Method:", y, ",", x), xlab = "", ylab = "", , xaxt = "n", yaxt = "n")
+    main = paste("Method:", y, ",", x), xlab = "", ylab = "", xaxt = "n", yaxt = "n")
     
   })
 })
