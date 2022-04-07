@@ -205,7 +205,7 @@ The approach of agglomerative hierarchichal clustering starts by initially assig
 Given that euclidean distance is used to judge similarity the first iteration of the while loop is unambigous as only the distance between pixels is required for exection. However, starting from the second iteration we need to find the distance between pixels, other pixels and the first cluster. Hence, $Dist(G_i, G_j)$ needs to be defined for $G_i$ and/or $G_j$ as clusters. In this thesis three diffrernt approaches to determin the above described distance are considered.
 
 \begin{enumerate}
-	\item \textbf{Average-link:} $D(G_i, G_j) = D(\{x_k\}_{k = 1}^K, \{y_s\}_{s = 1}^S) = \frac{1}{MN} \mathlarger{\sum}_{k = 1}^K \mathlarger{\sum}_{s = 1}^S \lvert\lvert x_k - y_s\rvert \rvert$
+	\item \textbf{Average-link:} $D(G_i, G_j) = D(\{x_k\}_{k = 1}^K, \{y_s\}_{s = 1}^S) = \frac{1}{KS} \mathlarger{\sum}_{k = 1}^K \mathlarger{\sum}_{s = 1}^S \lvert\lvert x_k - y_s\rvert \rvert$
 	
 	\item \textbf{Single-link:} $D(G_i, G_j) = \underset{x \in G_i, y \in G_j}{min} \lvert \lvert x - y\rvert \rvert$
 	

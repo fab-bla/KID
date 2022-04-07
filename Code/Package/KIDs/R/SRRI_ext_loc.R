@@ -4,7 +4,7 @@
 #         position of the SRRI graph
 
 #' @export
-SRRI_ext_loc <- function(doc, col, dpi = 71.5, tol = 50, p = 5, method = "average", pass = FALSE){
+SRRI_ext_loc <- function(doc, col, dpi = 71.5, tol = 50, p = 5, method = "average"){
 
   ## DATA ##
   pdf.data  <- KIDs::scale_cand_coord(doc)
@@ -59,10 +59,10 @@ SRRI_ext_loc <- function(doc, col, dpi = 71.5, tol = 50, p = 5, method = "averag
 
   ## CLASSIFICATIONs ##
 
-  # hierarchical clustering: k = 5, method = "average"
+  # hierarchical clustering #
 
   # get grouping
-  grps <- fastcluster::hclust(dist(coo), method = method)
+  grps <- fastcluster::hclust(dist(coo, method = "euclidean"), method = method)
 
   # restrict amnt of groups
   grps <- cutree(grps, k = p)
@@ -72,7 +72,7 @@ SRRI_ext_loc <- function(doc, col, dpi = 71.5, tol = 50, p = 5, method = "averag
 
   ## IDENTIFY CLUSTER ##
 
-  # discard all grps with less than 10% of all points
+  # find percentage of total points in group
   tbl.rel <- table(dat.grps$grps) / length(dat.grps$grps)
 
   # grps with less than 20% of all pixels
@@ -81,17 +81,16 @@ SRRI_ext_loc <- function(doc, col, dpi = 71.5, tol = 50, p = 5, method = "averag
   # match and subset
   dat.grps <- dat.grps[dat.grps$grps %in% excl.nom, ]
 
-  # horizontal variance scaled (alt decision rule)
-  which.min(tapply(dat.grps[, 1], dat.grps[, 3],
-                   function(x) var(x) / length(x))) -> rect.grp
+  # horizontal variance
+  which.min(tapply(dat.grps[, 1], dat.grps[, 3], var)) -> rect.grp
 
   # median
   med.rect.grp <- median(dat.grps[which(dat.grps[, 3] == names(rect.grp)), 1])
 
-  # return minimum absolute difference
+  # minimum absolute difference
   dif <- abs(med.rect.grp - ext.loc[[1]][, dir])
 
-  # which
+  # find minimum
   SRRI <- which.min(dif)
 
   # return
