@@ -4,7 +4,7 @@
 #         position of the SRRI graph
 
 #' @export
-SRRI_ext_loc <- function(doc, col, dpi = 71.5, tol = 50, p = 5, method = "average"){
+SRRI_ext_loc <- function(doc, col, dpi = 71.5, tol = 50, p = 5, method = "average", co = 0.2){
 
   ## DATA ##
   pdf.data  <- KIDs::scale_cand_coord(doc)
@@ -76,7 +76,7 @@ SRRI_ext_loc <- function(doc, col, dpi = 71.5, tol = 50, p = 5, method = "averag
   tbl.rel <- table(dat.grps$grps) / length(dat.grps$grps)
 
   # grps with less than 20% of all pixels
-  excl.nom <- as.numeric(names(tbl.rel[tbl.rel > 0.2]))
+  excl.nom <- as.numeric(names(tbl.rel[tbl.rel > co]))
 
   # match and subset
   dat.grps <- dat.grps[dat.grps$grps %in% excl.nom, ]

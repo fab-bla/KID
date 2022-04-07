@@ -62,10 +62,18 @@ setwd("./../../KIDs")
 # files
 file_names <- list.files(pattern = ".pdf", recursive = T)
 
+# test files
+file_names_test <- file_names[grepl("Test", file_names, fixed = TRUE)]
+
+# remove test set files 
+file_names <- file_names[!grepl("Test", file_names, fixed = TRUE)]
+
 # create df
 dat.valid.SRRI <- as.data.frame(cbind("KID" = file_names,
                         "SRRI" = sapply(strsplit(sapply(strsplit(file_names, "_", fixed = T), 
                                         function(x) x[length(x)]), ".", fixed = T), "[", 1)))
+dat.valid.SRRI
+## remove last two entries for each KAG because of changes to test set ##
 
 # split first col 
 dat.valid.SRRI[, "KAG"] <- sapply(strsplit(dat.valid.SRRI[, 1], "/"), "[", 1)
@@ -82,15 +90,16 @@ dim(dat.valid.SRRI)
 
 ## count KIDs per KAG ##
 
-# safe dirs 
-dirs <- list.dirs()[-c(1, 4)] # remove hardcode later
+# required dirs 
+dirs <- list.dirs()
+dirs <- dirs[!grepl("Test", dirs, fixed = TRUE)][-c(1, 4)] 
 
 # step into first KAGs dir
 setwd("Allianz")
 
 # loop over dirs
 sapply(dirs, \(x){
-  
+ 
   # setwd
   setwd(paste0("./../", x))
 
@@ -234,18 +243,24 @@ cbind(dat.valid.SRRI[dat.valid.SRRI[, "KAG"] == "Erste", ],
       "Extracted" = sapply(erste.test[[1]], "[[", 2)) -> res
 
 # align
-par(mfrow = c(3, 4))
+
+#pdf("Ersteextr.pdf", height = 6)
+par(mfrow = c(2, 3), cex.lab = 2, mar = c(3, 1, 4, 2) + 0.1)
 
 # plot
 invis.Map(function(x, y, z, l, k, m){
   
-  {plot(x[, 1], x[, 2], col = x[, ncol(x)], pch = 19, main = paste("Predicted:", z, "| Actual:", l),
-        xlim = c(1, 590))
+  {plot(x[, 1], x[, 2], col = x[, ncol(x)], pch = 19,
+        xlim = c(1, 590), yaxt = "n", ylab = "", xlab = "", xaxt = "n")
+   title(paste("Predicted:", z, "| Actual:", l))
+    
+  axis(1, at = k, labels = 1:7, tick  = FALSE)
   abline(v = y, col = "red", lwd = 2)
   lapply(k, function(x) abline(v = x, col = "grey", lwd = 2, lty = 2))}
   
-}, lapply(erste.test[[1]], "[[", 3), sapply(erste.test[[1]], "[[", 4), res[, 4], res[, 3],
-   lapply(erste.test[[1]], "[[", 5), lapply(erste.test[[1]], "[[", 5))
+}, lapply(erste.test[[1]], "[[", 3)[1:6], sapply(erste.test[[1]], "[[", 4)[1:6], res[, 4][1:6], res[, 3][1:6],
+   lapply(erste.test[[1]], "[[", 5)[1:6], lapply(erste.test[[1]], "[[", 5)[1:6])
+#dev.off()
 ```
 
 In the case of Erste the SRRI extraction works perfectly. Now the remaining KAGs will be examined.
