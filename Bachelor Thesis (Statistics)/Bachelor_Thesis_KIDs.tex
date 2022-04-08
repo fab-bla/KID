@@ -207,9 +207,9 @@ Given that euclidean distance is used to judge similarity the first iteration of
 \begin{enumerate}
 	\item \textbf{Average-link:} $D(G_i, G_j) = D(\{x_k\}_{k = 1}^K, \{y_s\}_{s = 1}^S) = \frac{1}{KS} \mathlarger{\sum}_{k = 1}^K \mathlarger{\sum}_{s = 1}^S \lvert\lvert x_k - y_s\rvert \rvert$
 	
-	\item \textbf{Single-link:} $D(G_i, G_j) = \underset{x \in G_i, y \in G_j}{min} \lvert \lvert x - y\rvert \rvert$
+	\item \textbf{Single-link:} $D(\{x_k\}_{k = 1}^K, \{y_s\}_{s = 1}^S) = \underset{k, s}{min} \lvert \lvert x_k - y_s\rvert \rvert$
 	
-	\item \textbf{Complete-link:} $D(G_i, G_j) = \underset{x \in G_i, y \in G_j}{max} \lvert \lvert x - y\rvert \rvert$
+	\item \textbf{Complete-link:}  $D(\{x_k\}_{k = 1}^K, \{y_s\}_{s = 1}^S) = \underset{k, s}{max} \lvert \lvert x_k - y_s\rvert \rvert$
 \end{enumerate}
 
 At a later stage the link will be chosen based on prediction accuracy. For illustrative purposes, the clustering for different links and varying numbers of final clusters is displayed.\newpage
@@ -223,16 +223,50 @@ At a later stage the link will be chosen based on prediction accuracy. For illus
 Coming back to the problem at hand, noise reduction, we would like to exclude as many pixels as possible from the coloured square, i.e., keep the cluster that contains the SRRI shade in tact while removing as many pixels that are obviously not part of the SRRI pixel cloud. Figure 5 gives the impression that complete and average linkage seem to be able to better exclude far off pixels from the SRRI pixel cloud.Further, one can observe that for values p between 2 and 5 the SRRI pixel cloud is not split into multiple clusters, thus a higher value for p is probably advisable. Accuracy comparisons accross different values for p and linking methods will show which combination will yield the best performance.\newpage
 
 \subsubsection{Implementing the AH Clustering Approach}
-The function that executes the clustering approach is called \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_loc.R}{\textcolor{teal}{SRRI\_ext\_loc()}}, as inputs it requires the document and the HEX code of the color of the SRRI pixel shade. Additionally, one may choose the linking method as well as the number of final clusters as explained in the previous subsection. The function first slices the bitmap of the document horizontally above and below the scale that is located by \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}}. Then using this subset of the original bitmap all pixels in the color of the SRRI shade are extracted and subsequently clustered into groups in order to reduce noise. Next all groups containing less than a cutoff value of points are discarded to then choose the group with the lowest vertical variance in pixel position as the one being the SRRI shade. The idea is that the removal of all pixel groups below a number of points ensures that clusters with very little observations do not end up having the lowest horizontal variance by chance. For the actual proccess of clustering the package fastcluster is used, as hierarchichal clustering is not particularly computationally efficient, i.e., depending on the implementation the computational complexity of the algorithm in time is either $\mathcal{O}(n^3)$ or $\mathcal{O}(n^2)$ \citep{JSSv053i09, Rok09}. For ease of imagination a graphical depiction of Erste KID SRRI extraction via \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_loc.R}{\textcolor{teal}{SRRI\_ext\_loc()}} is displayed below.
+The function that executes the clustering approach is called \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_loc.R}{\textcolor{teal}{SRRI\_ext\_loc()}}, as inputs it requires the document and the HEX code of the color of the SRRI pixel shade. Additionally, one may choose the linking method as well as the number of final clusters as explained in the previous subsection. The function first slices the bitmap of the document horizontally above and below the scale that is located by \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}}. Then using this subset of the original bitmap all pixels in the color of the SRRI shade are extracted and subsequently clustered into groups in order to reduce noise. Next, all groups containing less than a cutoff value of points are discarded to then choose the group with the lowest vertical variance in pixel position as the one being the SRRI shade. The idea is that the removal of all pixel groups below a number of points ensures that clusters with very little observations do not end up having the lowest horizontal variance by chance. Alternatively, one could also generate features that describe each of the clusters, such as number of pixels within a cluster, average distance of points within cluster, average variance of vertical and horizontal pixel coordinates to then use predictive methods like decision trees or elastic nets to determin which of the clusters most likely contains the SRRI shade.
 
 \begin{figure}[H]
 	\includegraphics[width = 12cm]{Ersteextr.pdf}
 	\caption{SRRI extraction via SRRI\_ext\_loc() using average linkage and $P = 5$}
+	\label{fig6}
 \end{figure}
 
+ For the actual proccess of clustering the package fastcluster is used, as hierarchichal clustering is not particularly computationally efficient, i.e., depending on the implementation the computational complexity of the algorithm in time is either $\mathcal{O}(n^3)$ or $\mathcal{O}(n^2)$ \citep{JSSv053i09, Rok09}. For ease of imagination a graphical depiction of Erste KID SRRI extraction via \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_loc.R}{\textcolor{teal}{SRRI\_ext\_loc()}} is displayed in figure \ref{fig6}. We observe that the pixel clusters contain very little noise indicating that the function performed as intended.
 
 
-\section{Parameter Choice and Performance Comparison}
+\section{Parameter Choice and Performance Comparison} \text{}
+
+\begin{table}[H]
+	\begin{center}
+		\caption{SRRI Classification - In Sample Performance}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Tolerance & P & Method & Per Gross & NA & Per Net\\
+			\hline
+			 20 & 4 & single & 1 & 0.356 & 0.644\\
+			\hline
+			 20 & 6 & single & 1 & 0.356 & 0.644 \\
+			\hline
+			 20 & 8 & single & 1 & 0.356 & 0.644 \\
+			\hline
+			 20 & 4 & average & 1 & 0.356 & 0.644\\
+			\hline
+			 20 & 6 & average & 1 & 0.356 & 0.644\\
+			\hline
+			 20 & 4 & complete & 1 & 0.356 & 0.644\\
+			\hline
+			 20 & 6 & complete & 1 & 0.356 & 0.644\\
+			\hline
+			 20 & 8 & average & 1 & 0.467 & 0.533\\
+			\hline
+			 30 & 8 & average & 1 & 0.489 & 0.511\\
+			\hline
+			 30 & 8 & complete & 1 & 0.500 & 0.500\\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
 \newpage
 %========= Appendix ==========
 

@@ -456,15 +456,82 @@ pred_un |> is.na() |> mean()
 # Performance for all non NAs
 (pred_un == as.numeric(dat.valid.SRRI[, "SRRI"])) |> mean(na.rm = TRUE)
 ```
+## Improvement of SRRI_ext_loc()
+
+So far only the average link for 5 final clusters was thoroughly tested. Accordingly, now a tuning grid will be generated to see if the performance can be improved by changing some of the input parameters.
+
+```{r}
+
+# input parameter grid
+tgrid <- expand.grid("tol" = c(20, seq(30, 60, 15)), "p" = seq(4, 8, 2), "method" = c("single", "average",     "complete"))
+
+  
+## ran once ## 
+
+  # wd 
+  # setwd to file that contains KIDs
+  #  setwd("./../../KIDs/Allianz")
+  
+  # storage
+  # lst_store <- list()
+  
+  # loop over tgrid rows
+  # for (i in 1:nrow(tgrid)){
+  #   
+  #   mapply(\(x, y){
+  #   
+  #     # change dir to respective KAG
+  #     {setwd(paste0("./../", x))
+  #    
+  #     # pdfs
+  #     file_nom <- list.files(pattern = ".pdf")}
+  #     
+  #     # FUN over all .pdfs
+  #     lapply(file_nom, \(z){
+  #       
+  #       # extract
+  #       SRRI_ext_loc(doc = z, col = y, tol = tgrid[i, "tol"], p = tgrid[i, "p"], method = tgrid[i, "method"])[[2]] |> try()
+  #       
+  #     })  
+  # 
+  #   }, dirs, list.col.KAG) -> lst_store[[i]]
+  # }
+  
+# save
+# saveRDS(lst_store, "./../../KIDs/Auxiliary/SRRI_ext_loc_perf.rds")
+
+sapply(lst_store, \(x){
+  
+  # use coercion to remove Error messages
+  per_vec <- as.numeric(x) |> suppressWarnings()
+  
+  # performance
+  per <- (per_vec == as.numeric(dat.valid.SRRI[, "SRRI"])) |> mean(na.rm = TRUE)
+  
+  # nas
+  nas <- per_vec |> is.na() |> mean()
+  
+  # ret
+  cbind(per, nas)
+  
+}) |> t() -> per_SRRI_ext_loc 
+
+# names
+colnames(per_SRRI_ext_loc) <- c("Per", "NAs")
+
+# bind to tgrid to see corresponing paramter performance
+para_per <- cbind(tgrid, per_SRRI_ext_loc)
+
+# order 
+para_per_ordered <- para_per[order(para_per[, "Per"], para_per[, "NAs"], decreasing = c(TRUE, FALSE)), ]
+```
+
 
 The accuracy for documents that are not partly or completely scanned is 100%. This is definitely a performance increase when comparing to the agglomerative classification. 
 
 ## Workaround for scanned cases 
 
-```{r}
-# using Security KIDs for illustration
 
-```
 
 
 
