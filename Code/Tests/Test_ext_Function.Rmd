@@ -69,10 +69,17 @@ file_names_test <- file_names[grepl("Test", file_names, fixed = TRUE)]
 file_names <- file_names[!grepl("Test", file_names, fixed = TRUE)]
 
 # create df
-dat.valid.SRRI <- as.data.frame(cbind("KID" = file_names,
-                        "SRRI" = sapply(strsplit(sapply(strsplit(file_names, "_", fixed = T), 
-                                        function(x) x[length(x)]), ".", fixed = T), "[", 1)))
-dat.valid.SRRI
+dat.valid.SRRI_list <- lapply(list(file_names, file_names_test), \(x){
+  
+                        as.data.frame(cbind("KID" = x,
+                                      "SRRI" = sapply(strsplit(sapply(strsplit(x, "_", fixed = T), 
+                                                      function(x) x[length(x)]), ".", fixed = T), "[", 1)))
+                        })
+
+# assign 
+dat.valid.SRRI <- dat.valid.SRRI_list[[1]]
+dat.valid.SRRI_test <- dat.valid.SRRI_list[[2]] 
+
 ## remove last two entries for each KAG because of changes to test set ##
 
 # split first col 
@@ -441,7 +448,7 @@ mapply(\(x){
   sapply(file_nom, \(z){
     
     # extract
-    SRRI_ext_rec(doc = z) |> try()
+    SRRI_ext_rec(doc = z, pass = TRUE) |> try()
     
   }) |> (\(y) sapply(y, \(t) ifelse(length(t) > 0, t, NA)))() # integer(0) to NA
 
@@ -463,9 +470,13 @@ So far only the average link for 5 final clusters was thoroughly tested. Accordi
 ```{r}
 
 # input parameter grid
-tgrid <- expand.grid("tol" = c(20, seq(30, 60, 15)), "p" = seq(4, 8, 2), "method" = c("single", "average",     "complete"))
+# tgrid <- expand.grid("tol" = c(20, seq(30, 60, 15)), "p" = seq(4, 8, 2), "method" = c("single", "average",     "complete"))
 
-  
+# also alter 
+tgrid <- expand.grid("tol" = 20, "p" = seq(4, 8, 2),
+                     "method" = c("single", "average", "complete"), "co" = c(0.05, 0.1, 0.2, 0.3))
+
+
 ## ran once ## 
 
   # wd 
@@ -525,6 +536,82 @@ para_per <- cbind(tgrid, per_SRRI_ext_loc)
 # order 
 para_per_ordered <- para_per[order(para_per[, "Per"], para_per[, "NAs"], decreasing = c(TRUE, FALSE)), ]
 ```
+
+## Out of Sample Performance
+
+
+### Naive Approach
+
+```{r}
+# setwd to file that contains KIDs
+setwd("./../../KIDs/Allianz/Test")
+
+# tover KAGs 
+mapply(\(x){
+
+  # change dir to respective KAG
+  {setwd(paste0("./../../", x, "/Test"))
+ 
+  # pdfs
+  file_nom <- list.files(pattern = ".pdf")}
+  
+  # FUN over all .pdfs
+  sapply(file_nom, \(z){
+    
+    # extract
+    SRRI_ext_rec(doc = z) |> try()
+    
+  }) |> (\(y) sapply(y, \(t) ifelse(length(t) > 0, t, NA)))() # integer(0) to NA
+
+}, dirs) -> pred_naiv_test
+
+# performance
+pred_un_t <- pred_naiv_test |> unlist() |> unname()
+
+# NAs
+pred_un_t |> is.na() |> mean()
+
+# Performance for all non NAs
+(pred_un_t == as.numeric(dat.valid.SRRI_test[, "SRRI"])) |> mean(na.rm = TRUE)
+```
+### Cluster Approach 
+
+```{r}
+# setwd to file that contains KIDs
+setwd("./../../KIDs/Allianz/Test")
+
+# over dirs amd colors
+mapply(\(x, y){
+
+  # change dir to respective KAG
+  {setwd(paste0("./../../", x, "/Test"))
+
+  # pdfs
+  file_nom <- list.files(pattern = ".pdf")}
+
+  # FUN over all .pdfs
+  lapply(file_nom, \(z){
+
+    # extract
+    SRRI_ext_loc(doc = z, col = y, tol = 20, p = 4, method = "average")[[2]] |> try()
+
+  })
+
+}, dirs, list.col.KAG) -> testres
+
+# performance
+pred_un_ct <- testres |> unlist() |> unname()
+
+# NAs
+pred_un_ct |> as.numeric() |> is.na() |> mean()
+
+# Performance for all non NAs
+(pred_un_ct == as.numeric(dat.valid.SRRI_test[, "SRRI"])) |> mean(na.rm = TRUE)
+
+
+```
+
+
 
 
 The accuracy for documents that are not partly or completely scanned is 100%. This is definitely a performance increase when comparing to the agglomerative classification. 

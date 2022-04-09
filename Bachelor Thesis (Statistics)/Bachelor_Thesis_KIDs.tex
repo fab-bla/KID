@@ -218,6 +218,7 @@ At a later stage the link will be chosen based on prediction accuracy. For illus
 \begin{figure}[H]
 	\includegraphics[width = 12cm]{methodsclust.pdf}
 	\caption{Example: Different values for P and varying linking methods}
+	\label{fig5}
 \end{figure}
 
 Coming back to the problem at hand, noise reduction, we would like to exclude as many pixels as possible from the coloured square, i.e., keep the cluster that contains the SRRI shade in tact while removing as many pixels that are obviously not part of the SRRI pixel cloud. Figure 5 gives the impression that complete and average linkage seem to be able to better exclude far off pixels from the SRRI pixel cloud.Further, one can observe that for values p between 2 and 5 the SRRI pixel cloud is not split into multiple clusters, thus a higher value for p is probably advisable. Accuracy comparisons accross different values for p and linking methods will show which combination will yield the best performance.\newpage
@@ -234,14 +235,18 @@ The function that executes the clustering approach is called \href{https://githu
  For the actual proccess of clustering the package fastcluster is used, as hierarchichal clustering is not particularly computationally efficient, i.e., depending on the implementation the computational complexity of the algorithm in time is either $\mathcal{O}(n^3)$ or $\mathcal{O}(n^2)$ \citep{JSSv053i09, Rok09}. For ease of imagination a graphical depiction of Erste KID SRRI extraction via \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_loc.R}{\textcolor{teal}{SRRI\_ext\_loc()}} is displayed in figure \ref{fig6}. We observe that the pixel clusters contain very little noise indicating that the function performed as intended.
 
 
-\section{Parameter Choice and Performance Comparison} \text{}
+\section{Parameters and Performance} 
+\subsection{In-sample}
+The table below summarizes the performance of the extraction in sample for different parameter choices. Acc. Gross which represents gross accuracy, measures how accurate the extraction is, based on the total nuber of predicted cases that did not result in an error. This is the most important measure, since the aim is to automize the task of SRRI extraction. Consequently, the worst outcome is an incorrect readout that does not result in an error and is thus undetectable. Usually, one would aspire to have a higher gross performance than a human doing the same task, that way the implementation will drastically increase readout speed, when compared to a human and at the same time the amount of errors would be held constant. Of course the in-sample performance is not representative, hence out of sample performance measures are provided in the next section. Acc. net which stands for net performance, tells us how our algorithms performed after accounting for errors. We oberserve that the naive algorithm outperforms the clustering approach significantly. For the optimal in-sample parameters the single-link clustering approach, utilizing four final clusters and tolerance of 20 pixels results in around 12\% less net accuracy.
 
 \begin{table}[H]
 	\begin{center}
-		\caption{SRRI Classification - In Sample Performance}
+		\caption{SRRI Classification - In-sample Performance}
 		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
-			Tolerance & P & Method & Per Gross & NA & Per Net\\
+			Tolerance & P & Method & Acc. Gross & NA & Acc. Net\\
+			\hline
+			- & - & naive & 1 & 0.234 & 0.766\\
 			\hline
 			 20 & 4 & single & 1 & 0.356 & 0.644\\
 			\hline
@@ -266,6 +271,13 @@ The function that executes the clustering approach is called \href{https://githu
 		\end{tabular}
 	\end{center}
 \end{table}
+
+Further, it is also interesting to see that the intuition based on figure \ref{fig5} is apparently incorrect. The linking method seems to be irrelevant as long as the tolerance is low enough. This might be caused by the fact that the amount of far off pixels that the single link tends to generate more frequently do not have enough weight to create incorrectly classifiied cases.
+
+\subsection{Out-of-sample}
+Both the naive- as well as the clustering approach, manage to achieve a gross accuracy of 100\%. The net accuracy of the naive method is again drastically higher at 80\%, while the Clustering approach performs slightly better than in-sample at 70\% net accuracy.
+
+\subsection{SRRI\_ext\_loc() Diagnostics and Conclusion}
 
 \newpage
 %========= Appendix ==========
