@@ -60,44 +60,44 @@ style = apa]
 
 
 
-%\runauthor{Fabian Blasch}
+\runauthor{Fabian Blasch}
 
 \affiliation{University of Vienna}
 
 \end{aug}
 
 \begin{abstract}
-INSERT ABSTRACT
+The main objective of this paper is to extract the SRRI (Synthetic Risk and Reward Indicator) from funds' KIDs (Key information Documents). Two approaches are presented, the naive approach which does not rely on any statistical methods and the clustering approach which utilizes hierarchical agglomerative clustering methods. The naice approach manages to correctly predict 80\% of the test cases while the clustering approach performs slighlty worse at an accuracy of 70\%. Both methods do not generate any incorrectly predicted cases, i.e., the cases for which the SRRI is not scrapeable result in the applied function returning an error.
 \end{abstract}
 
 \begin{keyword}[class=MSC]
-\kwd[Primary ]{Key1}
-\kwd{Key2}
-\kwd[; secondary ]{Key3}
+\kwd[Primary ]{91C20}
+\kwd{62H30}
+%\kwd[; secondary ]{Key3}
 \end{keyword}
 
 \begin{keyword}
-\kwd{Scraping}
+\kwd{Data Mining, Hierarchical Clustering}
 \kwd{\LaTeXe}
 \end{keyword}
 
 \end{frontmatter}
 
 \section{Introduction}
-According to BGBl. II Nr. 265/2011, effective 2011, every undertaking for collective investment in transferable securities (UCITS), has to publish a key information document (KID)\citep{BGB1}. Said document is supposed to inform potential and current investors about various characteristics of the investments at hand. Besides a short description of the investments as well as performance measured against a benchmark, this document also contains a synthetic risk- and reward indicator (SRRI). As the name suggests, the purpose of this indicator is to measure the risk associated with an investment in the respective fund. How the SRRI is derived depends on the class of investment fund and will be described in greater detail in a separate subsection. Independent of the exact procedure of derivation the underlying interpretation of risk is measured via the volatility of returns.\\
-The aim of this thesis is to firstly, give a short and precise introduction into the calculation of the SRRI.Then the data is briefly presented and the approach to measuring extraction performance is discussed. The following sections' focus shifts to extracting the SRRI which is displayed as a graph, usually on the first page of every KID. In order to keep the structure as simple as possible the proccess is split into a parent function which calls a variety of helper functions, all functions are implemented in R, besides the base library, the use of further libraries is pointed out in the descrription of the individual functions \citep{base}.
+According to BGBl. II Nr. 265/2011, effective 2011, every undertaking for collective investment in transferable securities (UCITS), has to publish a key information document \citep{BGB1}. Said document is supposed to inform potential and current investors about various characteristics of the investment fund at hand. Besides a short description of the investments as well as performance measured against a benchmark, this document also contains a synthetic risk- and reward indicator (SRRI). As the name suggests, the purpose of this indicator is to measure the risk and return associated with an investment in the respective fund. How the SRRI is derived depends on data availability and will be described in greater detail in a separate section. Independent of the exact procedure of derivation the underlying interpretation of risk is measured via the volatility of returns.\\
+The aim of this thesis is to firstly, give a short and precise introduction into the calculation of the SRRI.Then the data is briefly presented and the approach to measuring extraction performance is discussed. The following sections' focus shifts to extracting the SRRI which is displayed as a graph, usually on the first page of every KID. In order to keep the structure as simple as possible the proccess is split into two parent functions which call a variety of helper functions. All functions are implemented in R, besides the base library, the use of further libraries is pointed out in the descrription of the individual functions \citep{base}.
 
 \newpage
 
 \section{SRRI}
 
-The SRRI aims to measure risk via the volatility of weekly returns from the last 5 years, should weekly retuns be unobtainable, the calculation may be executed using montly returns.Accordingly, by ordinance the SRRI may be obtained as follows
+The SRRI aims to measure risk via the volatility of weekly returns from the last 5 years, should weekly retuns be unobtainable, the calculation may be executed using montly returns. Accordingly, by ordinance the SRRI may be obtained as follows
 
 \[
 \sigma_f = \sqrt{\frac{m}{T - 1}\text{ }\mathlarger{\sum}_{t = 1}^{T} (r_{f, t} - \overline{r_f})^2},
 \]
 
-where $r_{f, t}$ is the fund's return and $\overline{r_f}$ represents the mean of returns over $T$ periods. Then scaling via  $m$, the return frequency within a year, yields the standard deviation of yearly returns. For illustrative purposes, the calculation using weekly returns would result in $m = 52$, as there are 52 months in a year and $T = 5 * 52 = 260$ the number of months in 5 years. To obtain the SRRI which is measured on a scale from 1 to 7 the regulating autorithy provides a table.
+where $r_{f, t}$ is the fund's return and $\overline{r_f}$ represents the mean of returns over $T$ periods. Then scaling via $m$, the return frequency within a year, yields the standard deviation of yearly returns. For illustrative purposes, the calculation using weekly returns would result in $m = 52$, as there are 52 weeks in a year and thus $T = 5 * 52 = 260$ represents the number of weeks in 5 years. To obtain the SRRI which is measured on a scale from 1 to 7 the regulating autorithy provides a table \citep{BGB1}.
 \begin{table}[H]
 \begin{center}
 	\caption{SRRI Classification}
@@ -125,7 +125,7 @@ where $r_{f, t}$ is the fund's return and $\overline{r_f}$ represents the mean o
 
 \section{Measuring Scraping Performance}
 
-The SRRI is measured on an increasing ordinal scale, with 7 being associated with the highest risk and simultaneously also with the highest return. This would in theory allow for a measurement of predictive performance utilizing the abolute or squared difference between prediction and actual value. However, in this case we want to measure whether the read-out was successful or not. Hence the performance evaluation will be based on predicting correctly. Formally this means, we will use a discrete metric, i.e
+The SRRI is measured on an increasing ordinal scale, with 7 being associated with the highest risk and simultaneously also with the highest return. This would in theory allow for a measurement of predictive performance utilizing the abolute or squared difference between prediction and actual value. However, in this case we want to measure whether the read-out was successful or not. Hence the performance evaluation will be based on predicting correctly. Formally this means, we will use a discrete metric, i.e., 
 
 \[
 Accuracy = \frac{1}{n}\mathlarger{\sum}_{i = 1}^n\mathds{1}_{\{pred_i \text{ }= \text{ } act_i\}}\text{.}
@@ -142,7 +142,7 @@ As previoulsy mentioned the KIDs are available to download from the respective f
 	\caption{Number of KIDs per KAG and distribution of the SRRI}
 \end{figure}
 
-The two depicted plots give a good impression of the sample at hand. We can immediately observe that for all fund managing firms, 11 KIDs are available in the sample. Regarding the distribution of the SRRI, the graph depicted on the right enables us to notice that the sample seems to contain very little funds that are associated with an SRRI of 1 or 7. The low number of funds classified into the first class may be due to the way the standard deviation of returns is converted into the SRRI. The intervals which are used to determin the SRRI increase in length quite signigicantly. The first interval for which $0\% \leq\sigma_f<0.5\%$ spans a range of half a percent, while the intervall for the classification into the 6th class $15\%\leq\sigma_f<25\%$ spans 10\%. The other end, namely the SRRI of 7, could be underrepresented because of a lack in demand for such high risk products. Of course this is just mere speculation but interesting nonetheless.
+The two depicted plots give a good impression of the sample at hand. We can immediately observe that for all fund managing firms, 11 KIDs are available in the sample. Regarding the distribution of the SRRI, the graph depicted on the right enables us to notice that the sample seems to contain very little funds that are associated with an SRRI of 1 or 7. The low number of funds classified into the first class may be due to the way the standard deviation of returns is converted into the SRRI. The intervals which are used to determin the SRRI differ in length quite signigicantly. The first interval for which $0\% \leq\sigma_f<0.5\%$ spans a range of half a percent, while the intervall for the classification into the 6th class $15\%\leq\sigma_f<25\%$ spans 10\%. The other end, namely the SRRI of 7, could be underrepresented because of a lack in demand for such high risk/return products. Of course, this is just mere speculation but interesting nonetheless.
 In regards to the extraction, to ease illustration of the coming chapters, an example document from Erste can be found \href{https://github.com/Base-R-Best-R/KID/blob/main/KIDs/Erste/kid-eb-147-t2957-at_de-de_en_4.pdf}{\textcolor{teal}{here}}. Additionally, an example of the SRRI graph as it can be found in an Erste KID is provided below.
 
 \begin{figure}[H]
@@ -155,7 +155,7 @@ In regards to the extraction, to ease illustration of the coming chapters, an ex
 
 \subsection{Helper Functions}
 Before splitting into the two approaches taken to obtain the SRRI, the helper functions that are utilized in both cases have to be explained. The naive approach relies on knowledge of the background color of the file at hand. In order to obtain this color, one can either assume that it is white, ie the color identification code being \href{https://www.color-hex.com/color/ffffff}{\textcolor{teal}{\#ffffffff}} or extract the most common color in the pdf. Both options are implemented, since obtaining the background color is a computationally intensive operation. The function called  \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/background_col_id.R}{\textcolor{teal}{bg\_col()}} first converts the input pdf file into a bitmap utilizing the R package pdftools \citep{pdftools}. A bitmap is an array of dimension $n \times m \times 4$, where $n$ and $m$ can be interpreted as the vertical and horizontal coordinates respectively while 4 signifies that each color entry is split into four substrings, the so called Hex Code of the color. Hex which stands for Hexadecimal would usually imply a string of six characters. However, in the case of inclusion of an alpha value the string includes 8 characters. The alpha value is used to alter the transparency of the color. An example for illustrative purposes, should we be interested in the color of the pixel that lies the furthest to the left on the top of the page we would subset with $m = 1$ and $n = 1$ to obtain the four substrings containing two characters each. Those 4 substrings then represent the color of the pixel. In order to obtain the background color, i.e., the most common color in the document we thus first flatten the array to an $n\times m$ matrix by pasting together the substrings of the Hex code to then find the color with the most entries in the matrix.\\
-Besides the backgroundcolor, it is also important to localize the SRRI scale on the page, this task is designated to \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/background_col_id.R}{\textcolor{teal}{coord\_id()}}, which calls two additional helper functions. As each document contains many numbers, to identify which of those make up the SRRI graph, \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/scale_cand_coord.R}{\textcolor{teal}{scale\_cand\_cord()}} first identifies which single digit numbers could possibly be part of the SRRI \citep{pdftools}. This is done by extracting all single digit numbers between 1 and 7 from the document, including the vertical and horizontal position on the page. Summarized in a matrix, this information is then passed to \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}}, which first finds the absolute difference in vertical position of all candidates utilizing \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/abs_dis_vec.R}{\textcolor{teal}{abs\_dis\_vec()}}, including some tolerance level, to then check if there exist 7 single digit entries with the same vertical position. If this is the case, the function has succesfully identified the position of the SRRI. Accordingly, the function then returns a matrix containing the vertical and horizontal position of each scale entry as well as a string specifying wether the SRRI is displayed vertically or horizontally. Even though not a single occurance of a vertical SRRI depiction is included in the random sample of KIDs, this feature was included for the sake of completeness.
+Besides the backgroundcolor, it is also important to localize the SRRI scale on the page, this task is designated to \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/background_col_id.R}{\textcolor{teal}{coord\_id()}}, which calls two additional helper functions. As each document contains many numbers, to identify which of those make up the SRRI graph, \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/scale_cand_coord.R}{\textcolor{teal}{scale\_cand\_cord()}} first identifies which single digit numbers could possibly be part of the SRRI \citep{pdftools}. This is done by extracting all single digit numbers between 1 and 7 from the document, including the vertical and horizontal position on the page. Summarized in a matrix, this information is then passed to \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}}, which first finds the absolute difference in vertical position of all candidates utilizing \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/abs_dis_vec.R}{\textcolor{teal}{abs\_dis\_vec()}}, including some tolerance level, to then check if there exist 7 single digit entries with the same vertical position. If this is the case, the function has succesfully identified the position of the SRRI. Accordingly, the function then returns a matrix containing the vertical and horizontal position of each scale entry as well as a string specifying wether the SRRI is displayed vertically or horizontally. Even though not a single occurance of a vertical SRRI depiction is included in the random sample of KIDs, this feature was implemented for the sake of completeness.
 
 \subsection{Naive Approach}
 To establish a benchmark for the extraction performance, the naive approach, as the name might suggest, does not make use of any statistical methods. The function \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_rec.R}{\textcolor{teal}{SRRI\_ext\_rec()}} first localizes each of the 7 SRRI entries on the page via \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}}. Then the rectangles as displayed in blue in the figure below are built using vertical (yellow) and horizontal (red) tolerances measured from the location of each SRRI entry. Those tolerances are an argument of the function \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_rec.R}{\textcolor{teal}{SRRI\_ext\_rec()}}, however, default values are implemented that achieve an accuracy of 100\% on all sample documents that are not scanned. Once the rectangles are built, the bitmap containing all color entries is subset to obtain the colors within the rectangle. Subsequently, the percentage of non-background colored pixels is calculated. Finally the rectangle with the least amount of background-colored pixels is choosen as the predicted SRRI.
@@ -198,7 +198,7 @@ The approach of agglomerative hierarchichal clustering starts by initially assig
 		$G_1^*, G_2^* \gets  \underset{G_i, G_j \in \mathbf{X}}{\mathrm{argmin}} \text{ } Dist(G_i, G_j)\text{ } for \text{ } i \neq j$ \Comment*[r]{Find minimal distance}
 		$\mathbf{X}  \gets (\mathbf{X}\setminus G_1^*)\setminus G_2^*$ \Comment*[r]{Remove individual occurances}
 		$\mathbf{X} \gets \mathbf{X} \cup \{ G_1^* \cup  G_2^* \}$\Comment*[r]{Add union as new cluster}
-		$\mathbf{T} \gets \mathbf{X} \cup \{ G_1^* \cup  G_2^* \}$\Comment*[r]{Add union to secondary storage for traceability}
+		$\mathbf{T} \gets \mathbf{X} \cup \{ G_1^* \cup  G_2^* \}$;
 	}
 \end{algorithm}
 
@@ -237,7 +237,7 @@ The function that executes the clustering approach is called \href{https://githu
 
 \section{Parameters and Performance} 
 \subsection{In-sample}
-The table below summarizes the performance of the extraction in sample for different parameter choices. Acc. Gross which represents gross accuracy, measures how accurate the extraction is, based on the total nuber of predicted cases that did not result in an error. This is the most important measure, since the aim is to automize the task of SRRI extraction. Consequently, the worst outcome is an incorrect readout that does not result in an error and is thus undetectable. Usually, one would aspire to have a higher gross performance than a human doing the same task, that way the implementation will drastically increase readout speed, when compared to a human and at the same time the amount of errors would be held constant. Of course the in-sample performance is not representative, hence out of sample performance measures are provided in the next section. Acc. net which stands for net performance, tells us how our algorithms performed after accounting for errors. We oberserve that the naive algorithm outperforms the clustering approach significantly. For the optimal in-sample parameters the single-link clustering approach, utilizing four final clusters and tolerance of 20 pixels results in around 12\% less net accuracy.
+The table below summarizes the performance of the extraction in sample for different parameter choices. Acc. Gross which represents gross accuracy, measures how accurate the extraction is, based on the total number of predicted cases that did not result in an error. This is the most important measure, since the aim is to automize the task of SRRI extraction. Consequently, the worst outcome is an incorrect readout that does not result in an error and is thus undetectable. Usually, one would aspire to have equal or higher gross performance than a human performing the same task, that way the implementation will drastically increase readout speed, when compared to a human and at the same time the amount of errors would be held constant. Of course the in-sample performance is not representative, hence out of sample performance measures are provided in the next section. Acc. net which stands for net performance, tells us how our algorithms performed after accounting for errors. We oberserve that the naive algorithm outperforms the clustering approach significantly. For the optimal in-sample parameters the single-link clustering approach, utilizing four final clusters and tolerance of 20 pixels results in around 12\% less net accuracy.
 
 \begin{table}[H]
 	\begin{center}
@@ -278,27 +278,25 @@ Further, it is also interesting to see that the intuition based on figure \ref{f
 Both the naive- as well as the clustering approach, manage to achieve a gross accuracy of 100\%. The net accuracy of the naive method is again drastically higher at 80\%, while the Clustering approach performs slightly better than in-sample at 70\% net accuracy.
 
 \section{Diagnostics and Conclusion}
-Now that the accuracy for both approaches is measured, the error sources have to be discussed. In the test sample of 20 KIDs, the 4 documents for which \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_rec.R}{\textcolor{teal}{SRRI\_ext\_rec()}} failed the readout of the SRRI are all scanned pdfs. Consequently, \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}} fails to identify the position of the SRRI graph. Since \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_loc.R}{\textcolor{teal}{SRRI\_ext\_loc()}} utilizes the same helper function, this also explains 20\% of the failed SRRI extractions of the clustering approach. The remaining 10\% are caused by varying colors across different document, meaning that even though the color of the SRRI shade looks very similar in the documents for the same KAG, the HEX code is actually different. Accordingly, when slicing the bitmap in the extraction proccess the resulting subset is empty. Hence, the required color input is the biggest drawback of the clustering based approach. The reader may rightfully ask, whether this renders the clustering approach obsolete. To an extend it does, for all KIDS that are not scanned pdfs the naive approach performs better. However, the clustering approach could in theory allow for the extraction of scanned cases, the idea would be to skip slicing the bitmap above and below the SRRI graph, since localization in scanned pdfs via \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}} is built on functionalities of the pdftools package that are not available for scanned files. kThis approach, does however increase the chances of missclassification as the amount of noise increases drastically and as previously outlined the gross accuracy is the most important performance measure. The implementation of the functionality is beyond the scope of this thesis, however, carefully implemented it could potentially increase the net accuracy while hopefully leaving the gross accuracy at the desired level of 100\%.
+Now that the accuracy for both approaches is measured, the error sources have to be discussed. In the test sample of 20 KIDs, the 4 documents for which \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_rec.R}{\textcolor{teal}{SRRI\_ext\_rec()}} failed the readout of the SRRI are all scanned pdfs. Consequently, \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}} fails to identify the position of the SRRI graph. Since \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_loc.R}{\textcolor{teal}{SRRI\_ext\_loc()}} utilizes the same helper function, this also explains 20\% of the failed SRRI extractions of the clustering approach. The remaining 10\% are caused by varying colors across different document, meaning that even though the color of the SRRI shade looks very similar in the documents for the same KAG, the HEX code is actually different. Accordingly, when slicing the bitmap in the extraction proccess the resulting subset is empty. Hence, the required color input is the biggest drawback of the clustering based approach. The reader may rightfully ask, whether this renders the clustering approach obsolete. To an extend it does, for all KIDS that are not scanned pdfs the naive approach performs better. However, the clustering approach could in theory allow for the extraction of scanned cases, the idea would be to skip slicing the bitmap above and below the SRRI graph, since localization in scanned pdfs via \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}} is built on functionalities of the pdftools package that are not available for scanned files. This approach, does however increase the chances of missclassification as the amount of noise increases drastically and as previously outlined the gross accuracy is the most important performance measure. The implementation of this functionality is beyond the scope of this thesis, however, carefully implemented it could potentially increase the net accuracy while hopefully leaving the gross accuracy at the desired level of 100\%.
 
-\newpage
+
 %========= Appendix ==========
 
 \appendix
 
 
-\section{Code}
-\label{sec:app}
+%\section{Code}
+%\label{sec:app}
 
-Appendix for code and additional illustrations
+%Appendix for code and additional illustrations
 
-\subsection{Functions}
+%\subsection{Functions}
 
 
 
 
 %====== References ========
-
-
 \newpage
 \printbibliography
 
