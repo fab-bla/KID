@@ -23,6 +23,7 @@ style = apa]
 \usepackage{bm}
 \usepackage{mathtools}
 \usepackage{amsmath}
+\usepackage{listings}
 %\usepackage{algorithm}
 %\usepackage{algpseudocode}
 %\usepackage{ngerman}
@@ -280,18 +281,348 @@ Both the naive- as well as the clustering approach, manage to achieve a gross ac
 \section{Diagnostics and Conclusion}
 Now that the accuracy for both approaches is measured, the error sources have to be discussed. In the test sample of 20 KIDs, the 4 documents for which \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_rec.R}{\textcolor{teal}{SRRI\_ext\_rec()}} failed the readout of the SRRI, are all scanned pdfs. Consequently, \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}} fails to identify the position of the SRRI graph. Since \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/SRRI_ext_loc.R}{\textcolor{teal}{SRRI\_ext\_loc()}} utilizes the same helper function, this also explains 20\% of the failed SRRI extractions of the clustering approach. The remaining 10\% are caused by varying colors across different documents, meaning that even though the color of the SRRI shade looks very similar in the documents for the same KAG, the Hex code is actually different. Accordingly, when slicing the bitmap in the extraction proccess the resulting subset is empty. Hence, the required color input is the biggest drawback of the clustering based approach. The reader may rightfully ask, whether this renders the clustering approach obsolete. To an extend it does, for all KIDS that are not scanned the naive approach performs better. However, the clustering approach could in theory allow for the extraction of scanned cases, the idea would be to skip slicing the bitmap above and below the SRRI graph, since localization in scanned pdfs via \href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Package/KIDs/R/coord_id.R}{\textcolor{teal}{coord\_id()}} is built on functionalities of the pdftools package that are not available for scanned files. This approach, does however increase the chances of missclassification as the amount of noise increases drastically and for reasons previously outlined the gross accuracy is the most important performance measure. The implementation of this functionality is beyond the scope of this thesis, however, carefully implemented it could potentially increase the net accuracy while hopefully leaving the gross accuracy at the desired level of 100\%.
 
-
+\newpage
 %========= Appendix ==========
 
 \appendix
 
-
-%\section{Code}
-%\label{sec:app}
+\section{Code}
+\label{sec:app}
 
 %Appendix for code and additional illustrations
 
-%\subsection{Functions}
+\subsection{Functions}
+If possible, the reader is referred to the links of the individual functions provided in the text, as the code is subject to change. The links to GitHub will always link to the most recent versions.
+
+\begin{lstlisting}[language = R, basicstyle = \tiny]
+	
+	# extracts the background color of pdf files
+	
+	# doc...input .pdf file
+	# dpi...desired input res
+	# page...set page
+	# pass...assuming the bg-color is white this skips the extraction process
+	
+	#' @export
+	bg_col <- function(doc, dpi = dpi, page = page, pass = FALSE){
+		
+		# input bitmap
+		btmp <- pdftools::pdf_render_page(doc, dpi = dpi, page = page)
+		
+		# if the bg-color is assumed to be white without extraction
+		if(pass){
+			
+			# return white as bg and bitmap
+			list("bitmap" = btmp,
+			"bgCol" = c("ff", "ff", "ff", "ff"))
+			
+		}
+		
+		else{
+			
+			# flatten array to matrix
+			colm <- apply(btmp, 2:3, \(x) paste(x, collapse = ""))
+			
+			# identify background color
+			colm <- names(which.max(table(colm)))
+			
+			# split
+			col_split <- gsub("(.{2})", "\\1 ", colm) |> strsplit("\\s+") |> unlist()
+			
+			# return most common color and bitmap
+			list("bitmap" = btmp,
+			"bgCol" = col_split)
+			
+		}
+		
+	}
+
+	# function that pulls all potential candidates for scale identification of SRRI
+	# given a KID PDF file
+	
+	#' @export
+	scale_cand_coord <- function(file, page = 1){
+		
+		# import
+		pdf.dat <- pdftools::pdf_data(file)[[page]]
+		
+		# filter for 1 to 7 
+		pdf.dat <- within(pdf.dat, 
+		ind <- nchar(gsub("\\s", "", text)) == 1 & grepl("[1-7]", text))
+		
+		# location
+		loc <- with(pdf.dat, pdf.dat[ind, c("x", "y", "text")])
+		
+		# return 
+		return(list(loc, pdf.dat))
+		
+	}
+	
+	# helper function for coord.id that calculates the pairwise absolute distance of 
+	# all vector elements
+	
+	#' @export
+	abs_dis_vec <- function(x, set.diag = 999){
+		
+		# pairwise distance
+		dis <- abs(outer(x, x, "-"))
+		
+		# set diag
+		diag(dis) <- set.diag
+		
+		# return
+		return(dis)
+		
+	}
+	
+	# given a n x 3 matrix of x, y coordinates and the corresponding text this 
+	# finds the coordinates of the scale of the SRRI no matter if it is horizontal 
+	# or vertical 
+	
+	# loc is the output obtained from scale_cand_coord
+	
+	# tol ... is the tolerance that is used to match the vertical/horizontal components 
+	# of the scale. The default tolerance is set to three pixels
+	
+	#' @export
+	coord_id <- function(loc, tol = 3){
+		
+		# all abs diff of horizontal and vertical coords
+		lapply(loc[, c("x", "y")], function(x){
+			# dis
+			tmp <- KIDs::abs_dis_vec(x)
+			
+			# name and text
+			rownames(tmp) <- loc$text
+			
+			# return 
+			tmp
+		}) -> dis
+		
+		
+		# identify whether the scale is vertical or horizontal
+		lapply(dis, function(x){
+			
+			# find all rows which absolute distance is less than three pixels
+			apply(x, 1, function(y){
+				sum(y <= tol) == 6
+			}) 
+			
+		}) -> ind.int
+		
+		# vert or horz
+		vh <- which.max(sapply(ind.int, sum))
+		ind.fin <- ind.int[[vh]]
+		
+		# det vert or horz
+		if(vh == 1){dir <- "v"} 
+		else{dir <- "h"}
+		
+		# subset
+		scale <- as.data.frame(loc[ind.fin, ])
+		
+		# return
+		list("Scale" = scale,
+		"Alignment" = dir)
+	}
+
+	# as "%in%" does not preserve dimensions we have to write a helper function
+	# that allows us to use which and obtain the desired array index
+	
+	#' @export
+	match_keep_dim <- function(x, y){
+		
+		# match
+		tmp <- x %in% y
+		
+		# reassign dim
+		dim(tmp) <- dim(x)
+		
+		# return
+		return(tmp)
+		
+	}
+	
+	# operator
+	`%IN%` <- function(x,  y){
+		
+		# match
+		tmp <- x %in% y
+		
+		# reassign dim
+		dim(tmp) <- dim(x)
+		
+		# return
+		return(tmp)
+		
+	}
+
+	# doc ... path to file
+	# col ... HEX code of color shade
+	# dpi... pixel density 
+	# tol... tolerance when subsetting the bitmap containing the SRRI graph
+	# p... final number of clusters
+	# method... linking method forwarded to fastcluster::hclust()
+	# co... cutoff value for the minimum amount of pixels in SRRI cloud ident.
+	
+	
+	#' @export
+	SRRI_ext_loc <- function(doc, col, dpi = 71.5, tol = 50, p = 5, method = "average", co = 0.2){
+		
+		## DATA ##
+		pdf.data  <- KIDs::scale_cand_coord(doc)
+		scale.data <- pdf.data[[1]]
+		
+		# extract scale
+		ext.loc <- KIDs::coord_id(scale.data)
+		
+		# horz or vert
+		if(ext.loc[[2]] == "h"){dir <- 1} else{dir <- 2}
+		
+		# location vertically / horizontally
+		cut.off.point <- which.min(sapply(ext.loc[[1]][, c(1, 2)], var))
+		
+		# generate bitmap
+		bit.map <- pdftools::pdf_render_page(doc, page = 1, dpi = dpi)
+		
+		# midpoint of scale
+		mid.point <- median(ext.loc[[1]][, cut.off.point])
+		
+		# subset bitmap using scale
+		bit.map <- bit.map[ , , (mid.point - tol) : (mid.point + tol)]
+		
+		## COLOR ##
+		lapply(col, function(x){
+			
+			# split HEX
+			col.split <- unlist(strsplit(gsub("(.{2})", "\\1 ",
+			unlist(strsplit(x, "#"))[[2]]), " "))
+			
+			# convert to lower case
+			col.split <- tolower(col.split)
+			
+			# return
+			col.split
+			
+		}) -> prep.col.list
+		
+		# transpose list
+		prep.col.list.t <- data.table::transpose(prep.col.list)
+		
+		## COORDINATES ##
+		
+		# Shade
+		coo <- which(KIDs::match_keep_dim(bit.map[1, , ], prep.col.list.t[[1]]) &
+		KIDs::match_keep_dim(bit.map[2, , ], prep.col.list.t[[2]]) &
+		KIDs::match_keep_dim(bit.map[3, , ], prep.col.list.t[[3]]),
+		arr.ind = TRUE)
+		
+		# stopif no pixels of desired color detected
+		if(nrow(coo) < 1) stop("Error: No pixels of given color detected.")
+		
+		## CLASSIFICATIONs ##
+		
+		# hierarchical clustering #
+		
+		# get grouping
+		grps <- fastcluster::hclust(dist(coo, method = "euclidean"), method = method)
+		
+		# restrict amnt of groups
+		grps <- cutree(grps, k = p)
+		
+		# bind
+		dat.grps <- as.data.frame(cbind(coo, grps))
+		
+		## IDENTIFY CLUSTER ##
+		
+		# find percentage of total points in group
+		tbl.rel <- table(dat.grps$grps) / length(dat.grps$grps)
+		
+		# grps with less than 20% of all pixels
+		excl.nom <- as.numeric(names(tbl.rel[tbl.rel > co]))
+		
+		# match and subset
+		dat.grps <- dat.grps[dat.grps$grps %in% excl.nom, ]
+		
+		# horizontal variance
+		which.min(tapply(dat.grps[, 1], dat.grps[, 3], var)) -> rect.grp
+		
+		# median
+		med.rect.grp <- median(dat.grps[which(dat.grps[, 3] == names(rect.grp)), 1])
+		
+		# minimum absolute difference
+		dif <- abs(med.rect.grp - ext.loc[[1]][, dir])
+		
+		# find minimum
+		SRRI <- which.min(dif)
+		
+		# return
+		list(dif,
+		SRRI,
+		dat.grps,
+		med.rect.grp,
+		ext.loc[[1]][, dir])
+	}
+	
+	# doc ... path to file
+	# dpi ... resolution of the input
+	# page ... page location of the SRRi shade
+	# tolh ... horizontal tolerance when extracting the rectangles from the SRRI scale
+	# tolv ... vertical tolerance when extracting the rectangles from the SRRI scale
+	# pass ... forwarded to bg_col(), skips bg-color identification
+	
+	# SRRI extraction based on the relative amount of non-background colored pixels
+	# in close proximity to the respective SRRI
+	
+	#' @export
+	SRRI_ext_rec <- function(doc, dpi = 71.5, page = 1, tolh = 35, tolv = 10.5, pass = FALSE){
+		
+		## load ##
+		
+		# bitmap
+		btmp_n_bg_col <- KIDs::bg_col(doc, dpi = dpi, page = page, pass = pass)
+		
+		# scale cand
+		pdf.data  <- KIDs::scale_cand_coord(doc)
+		
+		# extract scale
+		scale <- KIDs::coord_id(pdf.data[[1]])$Scale
+		
+		## calculate rel. amount of non white pixels in proximity of all scale entries ##
+		
+		# build index to cut out respective rectangles around each scale point
+		Map(function(x, y){
+			
+			# build ranges
+			rbind("lower" = floor(x - y),
+			"upper" = ceiling(x + y)) |> as.data.frame()
+			
+			
+		}, scale[, c("x", "y")], c(tolh, tolv)) |> setNames(c("Horizontal", "Vertical")) -> Sub_ind
+		
+		# subset and calculate rel. amount of non-white pixels
+		mapply(function(x, y){
+			
+			# subset bitmap
+			btmp_n_bg_col[["bitmap"]][ , x[1]:x[2], y[1]:y[2]] -> sub.bit
+			
+			# calculate percentage of points that are not the background color
+			(sub.bit[1, , ] %in% btmp_n_bg_col[["bgCol"]][1] &
+			sub.bit[2, , ] %in% btmp_n_bg_col[["bgCol"]][2] &
+			sub.bit[3, , ] %in% btmp_n_bg_col[["bgCol"]][3] &
+			sub.bit[4, , ] %in% btmp_n_bg_col[["bgCol"]][4]) -> logi
+			
+			# rel. amount of non white pixels
+			1 - mean(logi)
+			
+		}, Sub_ind[[1]], Sub_ind[[2]]) -> p_share
+		
+		# return predicted SRRI
+		unname(which.max(p_share))
+		
+	}
+
+\end{lstlisting}
 
 
 
