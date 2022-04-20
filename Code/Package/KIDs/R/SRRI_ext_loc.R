@@ -1,7 +1,11 @@
 # doc ... path to file
 # col ... HEX code of color shade
-# off ... vertical offset when cutting the bitmap right under the predicted
-#         position of the SRRI graph
+# dpi... pixel density 
+# tol... tolerance when subsetting the bitmap containing the SRRI graph
+# p... final number of clusters
+# method... linking method forwarded to fastcluster::hclust()
+# co... cutoff value for the minimum amount of pixels in SRRI cloud ident.
+
 
 #' @export
 SRRI_ext_loc <- function(doc, col, dpi = 71.5, tol = 50, p = 5, method = "average", co = 0.2){
