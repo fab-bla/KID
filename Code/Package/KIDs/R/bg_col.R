@@ -1,7 +1,8 @@
-# extracts the background color of a pdf files
+# extracts the background color of pdf files
 
 # doc...input .pdf file
 # dpi...desired input res
+# page...set page
 # pass...assuming the bg-color is white this skips the extraction process
 
 #' @export
