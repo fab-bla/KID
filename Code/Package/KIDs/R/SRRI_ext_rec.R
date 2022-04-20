@@ -3,6 +3,7 @@
 # page ... page location of the SRRi shade
 # tolh ... horizontal tolerance when extracting the rectangles from the SRRI scale
 # tolv ... vertical tolerance when extracting the rectangles from the SRRI scale
+# pass ... forwarded to bg_col(), skips bg-color identification
 
 # SRRI extraction based on the relative amount of non-background colored pixels
 # in close proximity to the respective SRRI
