@@ -57,11 +57,11 @@ style = apa]
 \runtitle{Scraping Key Information Documents}
 
 \begin{aug}
-\author{\fnms{Fabian} \snm{Blasch}\ead[label=e1]{blasch57@gmail.com}}
+\author{\fnms{Anonymous} \snm{}\ead[label=e1]{blasch57@gmail.com}}
 
 
 
-\runauthor{Fabian Blasch}
+\runauthor{Anonymized for Review}
 
 \affiliation{University of Vienna}
 
@@ -140,7 +140,7 @@ The KIDs are available to download from the respective fund managing firm's webs
 
 \begin{figure}[H]
 	\includegraphics[width = 12cm]{data_overview.pdf}
-	\caption{Number of KIDs per KAG and distribution of the SRRI}
+	\caption{\href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Tests/Test_ext_Function.pdf}{\textcolor{teal}{Number of KIDs per KAG and distribution of the SRRI}}}
 \end{figure}
 
 The two depicted plots provide a good summary of the sample at hand. We can immediately observe that for all fund managing firms, 11 KIDs are available in the sample. Regarding the distribution of the SRRI, the graph depicted on the right enables us to notice that the sample seems to contain very little funds that are associated with an SRRI of 1 or 7. The low number of funds classified into the first class may be due to the way the standard deviation of returns is converted into the SRRI. The intervals which are used to determin the SRRI differ in length quite significantly. The first interval for which $0\% \leq\sigma_f<0.5\%$ spans a range of half a percent, while the intervall for the classification into the 6th class $15\%\leq\sigma_f<25\%$ spans 10\%. The other end, namely the SRRI of 7, could be underrepresented because of a lack in demand for such high risk/return products. Of course, this is just mere speculation but interesting nonetheless.
@@ -172,7 +172,7 @@ The second approach is based on agglomerative hierarchical clustering. Before go
 
 \begin{figure}[H]
 	\includegraphics[width = 12cm]{highnoiselownoise.pdf}
-	\caption{Pixels in the color of the SRRI shade}
+	\caption{\href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Tests/Shade_ext.pdf}{\textcolor{teal}{Pixels in the color of the SRRI shade}}}
 \end{figure}
 
 Above we observe the subset of pixels in the color of the SRRI shade for two different documents. Further, the mean of the horizontal coordinates of the pixels is represented by the green line while the median is represented by the red line. Unfortunately, this makes it painfully obvious that neither the median nor the mean of the horizontal coordinates will suffice as a representative of the cloud of pixels in the color of the SRRI shade. To be precise, the median is not a good representative, in a high noise enviroment as displayed on the right. Thus if we manage to reduce said noise to obtain a situation somewhat similar to the one on the left, we may be able to succesfully use the median as a good representative of the horizontal position of the SRRI pixel cloud. This noise reduction may be achieved via unsupervised classification into groups based on agglomerative hierarchical clustering.
@@ -218,7 +218,7 @@ At a later stage the link will be chosen based on prediction accuracy. For illus
 %methodsclust.pdf
 \begin{figure}[H]
 	\includegraphics[width = 12cm]{methodsclust.pdf}
-	\caption{Example: Different values for P and varying linking methods}
+	\caption{\href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Tests/Shade_ext.pdf}{\textcolor{teal}{Example: Different values for P and varying linking methods}}}
 	\label{fig5}
 \end{figure}
 
@@ -229,7 +229,7 @@ The function that executes the clustering approach is called \href{https://githu
 
 \begin{figure}[H]
 	\includegraphics[width = 12cm]{Ersteextr.pdf}
-	\caption{SRRI extraction via SRRI\_ext\_loc() using average linkage and $P = 5$}
+	\caption{\href{https://github.com/Base-R-Best-R/KID/blob/main/Code/Tests/Test_ext_Function.pdf}{\textcolor{teal}{SRRI extraction via SRRI\_ext\_loc() using average linkage and $P = 5$}}}
 	\label{fig6}
 \end{figure}
 

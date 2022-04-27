@@ -3,7 +3,7 @@ title: |
     | KID
     | Function
       
-author: "Fabian Blasch"
+author: "Anonymized for Review"
 date: "`r format(Sys.Date(), format = '%d.%m.%Y')`"
 header-includes:
    - \usepackage{amsmath}
@@ -511,6 +511,10 @@ tgrid <- expand.grid("tol" = 20, "p" = seq(4, 8, 2),
 # save
 # saveRDS(lst_store, "./../../KIDs/Auxiliary/SRRI_ext_loc_perf.rds")
 
+# read
+lst_store <- readRDS("./../../KIDs/Auxiliary/SRRI_ext_loc_perf.rds") 
+
+# loop over params
 sapply(lst_store, \(x){
   
   # use coercion to remove Error messages

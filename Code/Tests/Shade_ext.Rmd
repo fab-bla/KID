@@ -3,7 +3,7 @@ title: |
     | KID
     | Shade Extraction
       
-author: "Fabian Blasch"
+author: "Anonymized for Review"
 date: "`r format(Sys.Date(), format = '%d.%m.%Y')`"
 output: pdf_document
 ---
@@ -249,7 +249,7 @@ invis.Map(function(x, y){
 
 ### Classify utilizing hierarchical clustering
 
-```{r, fig.height = 10}
+```{r, fig.height = 8, fig.width = 10}
 # methods
 meth <- c("single", "average", "complete")
 
